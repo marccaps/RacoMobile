@@ -1,4 +1,4 @@
-package com.example.mcabezas.racomobile;
+package com.example.mcabezas.racomobile.OauthDance;
 
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
@@ -10,6 +10,8 @@ import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.example.mcabezas.racomobile.OAuthFlowApp;
 
 public class RetrieveAccessTokenTask extends AsyncTask<Uri, Void, Void> {
 

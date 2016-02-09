@@ -1,6 +1,4 @@
-package com.example.mcabezas.racomobile;
-
-import java.net.URLEncoder;
+package com.example.mcabezas.racomobile.OauthDance;
 
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
@@ -13,6 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
+import com.example.mcabezas.racomobile.Constants;
 
 /**
  * Prepares a OAuthConsumer and OAuthProvider 

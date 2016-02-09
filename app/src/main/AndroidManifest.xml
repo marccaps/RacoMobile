@@ -21,23 +21,18 @@
             </intent-filter>
         </activity>
 
-        <!--<activity-->
-            <!--android:name=".UserLogin" android:launchMode="singleTask">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.VIEW"></action>-->
-                <!--<category android:name="android.intent.category.DEFAULT"></category>-->
-                <!--<category android:name="android.intent.category.BROWSABLE"></category>-->
-                <!--<data android:host="raco" android:scheme="raco"></data>-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
 
-        <activity android:name=".PrepareRequestTokenActivity" android:launchMode="singleTask">>
+        <activity android:name=".OauthDance.PrepareRequestTokenActivity" android:launchMode="singleTask">>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:scheme="raco" android:host="raco"/>
             </intent-filter>
+        </activity>
+
+        <activity android:name=".MainActivity">
+
         </activity>
     </application>
 

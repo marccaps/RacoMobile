@@ -3,8 +3,6 @@ package com.example.mcabezas.racomobile;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
@@ -15,9 +13,6 @@ import shem.com.materiallogin.MaterialLoginViewListener;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -35,8 +30,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.TextView;
+
+import com.example.mcabezas.racomobile.OauthDance.PrepareRequestTokenActivity;
 
 
 /**
@@ -90,7 +85,9 @@ public class OAuthFlowApp extends Activity {
         try {
         	jsonOutput = doGet(Constants.API_REQUEST,getConsumer(this.prefs));
         	System.out.println("jsonOutput : " + jsonOutput);
-        	Log.i(TAG,jsonOutput);
+        	Log.i(TAG, jsonOutput);
+			Intent i = new Intent(this,MainActivity.class);
+			startActivity(i);
 		} catch (Exception e) {
 			Log.e(TAG, "Error executing request",e);
 		}

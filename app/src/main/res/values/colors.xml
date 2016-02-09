@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#0cbcfc</color>
+    <color name="colorPrimaryDark">#0cbcfc</color>
     <color name="colorAccent">#FFFFFF</color>
+
+
+
+
+
+    <color name="counter_text_color">#0cbcfc</color>
+    <color name="list_divider">#FFFFFF</color>
+    <color name="list_background">#FFFFFF</color>
+    <color name="list_background_pressed">#0cbcfc</color>
+    <color name="list_item_title">#FFFFFF</color>
+    <color name="counter_text_bg">#0cbcfc</color>
+
+
+
+
 
     <color name="material_login_login_color">#0cbcfc</color>
     <color name="material_login_register_color">#FFFFFF</color>

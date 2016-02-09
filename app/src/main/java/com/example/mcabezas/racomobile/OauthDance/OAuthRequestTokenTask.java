@@ -1,4 +1,4 @@
-package com.example.mcabezas.racomobile;
+package com.example.mcabezas.racomobile.OauthDance;
 
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.example.mcabezas.racomobile.Constants;
 
 /**
  * An asynchronous task that communicates with Google to 
