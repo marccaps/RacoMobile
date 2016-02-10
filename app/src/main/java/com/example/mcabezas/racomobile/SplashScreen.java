@@ -4,20 +4,21 @@ package com.example.mcabezas.racomobile;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 
 public class SplashScreen extends Activity {
 
     /** Duration of wait **/
-    private final int SPLASH_DISPLAY_LENGTH = 1000;
+    private final int SPLASH_DISPLAY_LENGTH = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+         /* New Handler to start the Menu-Activity
+         * and close this Splash-Screen after some seconds.*/
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
