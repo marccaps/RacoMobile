@@ -30,4 +30,8 @@ dependencies {
     compile 'oauth.signpost:signpost-commonshttp4:1.2.1.2'
     compile 'org.apache.httpcomponents:httpclient:4.5.1'
     compile 'com.github.shem8:MaterialLogin:v1.3.0'
+    compile 'ical4j:ical4j:0.9.20'
+//    compile 'org.wildfly.swarm:jackson:1.0.0.Alpha8'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.1.4'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.1.4'
 }

@@ -12,7 +12,7 @@
     <color name="list_divider">#FFFFFF</color>
     <color name="list_background">#FFFFFF</color>
     <color name="list_background_pressed">#0cbcfc</color>
-    <color name="list_item_title">#FFFFFF</color>
+    <color name="list_item_title">#0cbcfc</color>
     <color name="counter_text_bg">#0cbcfc</color>
 
 

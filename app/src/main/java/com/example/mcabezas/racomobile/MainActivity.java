@@ -8,6 +8,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.mcabezas.racomobile.Adapter.NavDrawerListAdapter;
 import com.example.mcabezas.racomobile.Model.NavDrawerItem;
@@ -66,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
         // adding nav drawer items to array
         // Home
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1],navMenuIcons.getResourceId(1,-1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2],navMenuIcons.getResourceId(2,-1)));
+
 
         // Recycle the typed array
         navMenuIcons.recycle();
@@ -168,6 +173,12 @@ public class MainActivity extends AppCompatActivity {
         switch (position) {
             case 0:
                 fragment = new HomeFragment();
+                break;
+            case 1:
+                fragment = new NoticiesFib();
+                break;
+            case 2:
+                fragment = new Horario();
                 break;
             default:
                 break;
