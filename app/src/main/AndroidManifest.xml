@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".OAuthFlowApp">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,6 +21,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".OAuthFlowApp">
+            
+        </activity>
 
         <activity android:name=".OauthDance.PrepareRequestTokenActivity" android:launchMode="singleTask">>
             <intent-filter>
