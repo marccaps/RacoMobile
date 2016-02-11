@@ -1,4 +1,4 @@
-package com.example.mcabezas.racomobile;
+package com.example.mcabezas.racomobile.Model;
 
 import java.util.Date;
 

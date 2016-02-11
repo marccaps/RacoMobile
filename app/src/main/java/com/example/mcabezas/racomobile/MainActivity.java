@@ -25,11 +25,14 @@ import android.widget.TextView;
 
 import com.example.mcabezas.racomobile.Adapter.NavDrawerListAdapter;
 import com.example.mcabezas.racomobile.Model.NavDrawerItem;
+import com.example.mcabezas.racomobile.Model.PostData;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+
+    PostData[] postDatas = null;
 
     private static final String TAG = "MainActivity";
 
