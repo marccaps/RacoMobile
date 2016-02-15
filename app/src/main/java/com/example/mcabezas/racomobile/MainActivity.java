@@ -24,6 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.mcabezas.racomobile.Adapter.NavDrawerListAdapter;
+import com.example.mcabezas.racomobile.Model.BaseDadesManager;
 import com.example.mcabezas.racomobile.Model.NavDrawerItem;
 import com.example.mcabezas.racomobile.Model.PostData;
 
@@ -31,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-
-    PostData[] postDatas = null;
 
     private static final String TAG = "MainActivity";
 
@@ -49,10 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+
+    private void init() {
 
         mTitle = mDrawerTitle = getTitle();
 
@@ -115,6 +112,14 @@ public class MainActivity extends AppCompatActivity {
         };
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_activity);
+
+        init();
 
         if (savedInstanceState == null) {
             // on first time display view for first nav item
@@ -178,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new HomeFragment();
                 break;
             case 1:
-                fragment = new NoticiesFib();
+                fragment = new ControladorVistaNoticiesFib();
                 break;
             case 2:
                 fragment = new Horario();

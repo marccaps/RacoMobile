@@ -1,8 +1,11 @@
 package com.example.mcabezas.racomobile.Connect;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -15,12 +18,14 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.mcabezas.racomobile.LlistesItems;
+import com.example.mcabezas.racomobile.Model.BaseDadesManager;
+import com.example.mcabezas.racomobile.R;
 
 
-public abstract class GestioActualitzaLlistesActivity extends Activity {
+public abstract class GestioActualitzaLlistesActivity extends Fragment {
 
     protected static Context context;
-//    protected BaseDadesManager mBdm;
+    protected BaseDadesManager mBdm;
     protected ProgressBar mPd;
     protected RelativeLayout mRLayout;
     protected LinearLayout mLLayout;
@@ -33,9 +38,13 @@ public abstract class GestioActualitzaLlistesActivity extends Activity {
     protected int[] mContingut = new int[3];
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        GestioActualitzaLlistesActivity.context = this.getApplicationContext();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.noticies_fib, container, false);
+        GestioActualitzaLlistesActivity.context = getActivity();
+
+        return rootView;
     }
 
     /**Funció que implementa cada classe que necessita actualitzar la llista i la Base de dades*/
@@ -82,7 +91,7 @@ public abstract class GestioActualitzaLlistesActivity extends Activity {
 
 
     protected boolean hihaInternet() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager
                 .getActiveNetworkInfo();
         return activeNetworkInfo != null;

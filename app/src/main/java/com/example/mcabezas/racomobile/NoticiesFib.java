@@ -17,14 +17,15 @@ import android.widget.TextView;
 
 import com.example.mcabezas.racomobile.Adapter.PostItemAdapter;
 import com.example.mcabezas.racomobile.Connect.GestioActualitzaLlistesActivity;
+import com.example.mcabezas.racomobile.Model.ItemGeneric;
 import com.example.mcabezas.racomobile.Model.PostData;
+
+import java.util.ArrayList;
 
 /**
  * Created by mcabezas on 10/02/16.
  */
 public class NoticiesFib extends Fragment {
-
-    private PostData[] listData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,8 +34,6 @@ public class NoticiesFib extends Fragment {
         View rootView = inflater.inflate(R.layout.noticies_fib, container, false);
 
 //        this.generateDummyData();
-        Intent intent = new Intent(getActivity(),ControladorVistaNoticiesFib.class);
-        startActivity(intent);
 
 
         return rootView;

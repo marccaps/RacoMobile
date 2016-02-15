@@ -12,10 +12,12 @@ import java.util.Date;
 import android.content.Intent;
 import android.database.SQLException;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
@@ -45,22 +47,28 @@ public class ControladorVistaNoticiesFib extends GestioActualitzaLlistesActivity
     public ListView sLlistaVista;
     public PostItemAdapter sAdaptadorLlista;
     public static ItemGeneric sItemSeleccionat = null;
-    BaseDadesManager mBdm = new BaseDadesManager(this);
+    BaseDadesManager mBdm = null;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        setContentView(R.layout.noticies_fib);
-        sLlistaVista = (ListView) findViewById(R.id.postListView);
+        View rootView = inflater.inflate(R.layout.noticies_fib, container, false);
+
+        mBdm = new BaseDadesManager(getActivity());
+        
+
+        sLlistaVista = (ListView) rootView.findViewById(R.id.postListView);
 //        mRLayout = (RelativeLayout) findViewById(R.id.layoutCarregantDadesGenerals);
 //        mPd = (ProgressBar) findViewById(R.id.carregantDadesGenerals);
-        mLLayout = (LinearLayout) findViewById(R.id.linearNoticiesLayout);
+        mLLayout = (LinearLayout) rootView.findViewById(R.id.linearNoticiesLayout);
 
         obtenirDadesWeb();
         resetLlistes();
         mostrarLlistes();
+        return rootView;
+
     }
 
     protected void resetLlistes() {
@@ -88,7 +96,7 @@ public class ControladorVistaNoticiesFib extends GestioActualitzaLlistesActivity
         } catch (Exception e) {
 //            amagarProgressBarPantalla(mPd, mRLayout);
             mostrarVistaNoInformacio(mLLayout);
-            Toast.makeText(getApplicationContext(), "Error noticies",
+            Toast.makeText(getActivity(), "Error noticies",
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -117,7 +125,7 @@ public class ControladorVistaNoticiesFib extends GestioActualitzaLlistesActivity
     }
 
     protected void obtenirDadesWeb() {
-        GestioConnexions gc = new GestioConnexions(this);
+        GestioConnexions gc = new GestioConnexions(getActivity());
         AndroidUtils au = AndroidUtils.getInstance();
 
         // Preparem les URL i les connexions per obtenir les dades
@@ -141,12 +149,12 @@ public class ControladorVistaNoticiesFib extends GestioActualitzaLlistesActivity
 //        amagarProgressBarPantalla(mPd, mRLayout);
 
         if (sListNoticies.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "No hi ha noticies",
+            Toast.makeText(getActivity(), "No hi ha noticies",
                     Toast.LENGTH_LONG).show();
             mostrarVistaNoInformacio(mLLayout);
         } else {
             // Gestionar les llistes
-            sAdaptadorLlista = new PostItemAdapter(this,
+            sAdaptadorLlista = new PostItemAdapter(getActivity(),
                     tractarImatges(), sListNoticies);
             sLlistaVista.setAdapter(sAdaptadorLlista);
 
