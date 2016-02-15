@@ -1,4 +1,4 @@
-package com.example.mcabezas.racomobile;
+package com.example.mcabezas.racomobile.Fragments;
 
 /**
  * Created by mcabezas on 9/02/16.
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.mcabezas.racomobile.R;
 
 public class HomeFragment extends Fragment {
 

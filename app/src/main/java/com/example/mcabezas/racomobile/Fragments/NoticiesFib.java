@@ -1,4 +1,4 @@
-package com.example.mcabezas.racomobile;
+package com.example.mcabezas.racomobile.Fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -19,6 +19,7 @@ import com.example.mcabezas.racomobile.Adapter.PostItemAdapter;
 import com.example.mcabezas.racomobile.Connect.GestioActualitzaLlistesActivity;
 import com.example.mcabezas.racomobile.Model.ItemGeneric;
 import com.example.mcabezas.racomobile.Model.PostData;
+import com.example.mcabezas.racomobile.R;
 
 import java.util.ArrayList;
 

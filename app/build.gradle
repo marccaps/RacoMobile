@@ -34,4 +34,5 @@ dependencies {
 //    compile 'org.wildfly.swarm:jackson:1.0.0.Alpha8'
     compile 'com.fasterxml.jackson.core:jackson-core:2.1.4'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.1.4'
+    compile 'com.github.alamkanak:Android-Week-View:parent-1.2.6'
 }

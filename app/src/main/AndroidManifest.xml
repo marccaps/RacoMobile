@@ -39,9 +39,6 @@
 
         </activity>
 
-        <activity android:name=".ControladorVistaNoticiesFib">
-
-        </activity>
     </application>
 
 </manifest>

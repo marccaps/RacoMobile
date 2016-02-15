@@ -27,12 +27,15 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.mcabezas.racomobile.Adapter.PostItemAdapter;
+import com.example.mcabezas.racomobile.AndroidUtils;
 import com.example.mcabezas.racomobile.Connect.GestioActualitzaLlistesActivity;
 import com.example.mcabezas.racomobile.Connect.GestioConnexions;
 import com.example.mcabezas.racomobile.Connect.ParserAndUrl;
+import com.example.mcabezas.racomobile.LlistesItems;
 import com.example.mcabezas.racomobile.Model.BaseDadesManager;
 import com.example.mcabezas.racomobile.Model.ItemGeneric;
 import com.example.mcabezas.racomobile.Model.Noticia;
+import com.example.mcabezas.racomobile.R;
 
 
 public class ControladorVistaNoticiesFib extends GestioActualitzaLlistesActivity {
@@ -57,7 +60,8 @@ public class ControladorVistaNoticiesFib extends GestioActualitzaLlistesActivity
         View rootView = inflater.inflate(R.layout.noticies_fib, container, false);
 
         mBdm = new BaseDadesManager(getActivity());
-        
+
+
 
         sLlistaVista = (ListView) rootView.findViewById(R.id.postListView);
 //        mRLayout = (RelativeLayout) findViewById(R.id.layoutCarregantDadesGenerals);

@@ -2,31 +2,24 @@ package com.example.mcabezas.racomobile;
 
 import java.util.ArrayList;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.mcabezas.racomobile.Adapter.NavDrawerListAdapter;
-import com.example.mcabezas.racomobile.Model.BaseDadesManager;
+import com.example.mcabezas.racomobile.Fragments.HomeFragment;
+import com.example.mcabezas.racomobile.Fragments.Horario;
 import com.example.mcabezas.racomobile.Model.NavDrawerItem;
-import com.example.mcabezas.racomobile.Model.PostData;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
