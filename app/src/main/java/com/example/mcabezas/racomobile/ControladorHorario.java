@@ -136,6 +136,8 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
 
         mWeekView = (WeekView) rootView.findViewById(R.id.weekView);
 
+        mWeekView.setNumberOfVisibleDays(1);
+
         // Show a toast message about the touched event.
         mWeekView.setOnEventClickListener(this);
 
@@ -223,22 +225,38 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
         // Populate the week view with some events.
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
-
-        if(entrada == 0) {
-            entrada = 1;
-
-            Calendar startTime = Calendar.getInstance();
-            startTime.set(Calendar.HOUR_OF_DAY, 3);
-            startTime.set(Calendar.MINUTE, 0);
-            startTime.set(Calendar.MONTH, newMonth - 1);
-            startTime.set(Calendar.YEAR, newYear);
-            Calendar endTime = (Calendar) startTime.clone();
-            endTime.add(Calendar.HOUR, 1);
-            endTime.set(Calendar.MONTH, newMonth - 1);
-            WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime), startTime, endTime);
-            event.setColor(getResources().getColor(R.color.event_color_01));
-            events.add(event);
+        boolean mfinal = false;
+        if(newYear == mHorari.get(0).getmAny() || newYear == mHorari.get(mHorari.size()-1).getmAny()) {
+            for (int i = 0; i < mHorari.size() || mfinal; ++i) {
+                if(mHorari.get(i).getmMes() == newMonth -1) {
+                    //TODO:Implementar una busqueda optima
+                    //TODO:Conversor de las horas
+                    Calendar startTime = Calendar.getInstance();
+                    startTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(mHorari.get(i).getmHoraInici().toString().substring(0,2)));
+                    startTime.set(Calendar.MINUTE, 0);
+                    startTime.set(Calendar.MONTH, newMonth - 1);
+                    startTime.set(Calendar.YEAR, mHorari.get(i).getmAny());
+                    Calendar endTime = (Calendar) startTime.clone();
+                    endTime.add(Calendar.HOUR, Integer.parseInt(mHorari.get(i).getmHoraFi().toString().substring(0,2)));
+                    endTime.set(Calendar.MONTH, newMonth - 1);
+                    WeekViewEvent event = new WeekViewEvent(i,mHorari.get(i).getmAssignatura().toString(),startTime,endTime);
+                    event.setColor(getResources().getColor(R.color.event_color_01));
+                    events.add(event);
+                }
+            }
         }
+
+        Calendar startTime = Calendar.getInstance();
+        startTime.set(Calendar.HOUR_OF_DAY, 3);
+        startTime.set(Calendar.MINUTE, 0);
+        startTime.set(Calendar.MONTH, newMonth - 1);
+        startTime.set(Calendar.YEAR, newYear);
+        Calendar endTime = (Calendar) startTime.clone();
+        endTime.add(Calendar.HOUR, 1);
+        endTime.set(Calendar.MONTH, newMonth - 1);
+        WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime), startTime, endTime);
+        event.setColor(getResources().getColor(R.color.event_color_01));
+        events.add(event);
 
 //        startTime = Calendar.getInstance();
 //        startTime.set(Calendar.HOUR_OF_DAY, 3);
@@ -588,11 +606,13 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
             for (int j = i + 1; j < n; j++) {
                 rig = mHorari.get(j);
                 rag = mHorari.get(minIndex);
-                horaEventIniciRig = rig.getmHoraInici().split(":");
-                horaEventIniciRag = rag.getmHoraInici().split(":");
-                if (Integer.parseInt(horaEventIniciRig[0]) < (Integer
-                        .parseInt(horaEventIniciRag[0]))) {
+                if (rig.getmMes() < rag.getmMes()) {
                     minIndex = j;
+                }
+                else if(rig.getmMes() == rag.getmMes()) {
+                    if(rig.getmDia() < rag.getmDia()) {
+                        minIndex = j;
+                    }
                 }
             }
             if (minIndex != i) {
