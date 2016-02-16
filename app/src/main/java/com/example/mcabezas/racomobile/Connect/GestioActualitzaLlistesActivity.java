@@ -41,7 +41,8 @@ public abstract class GestioActualitzaLlistesActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.noticies_fib, container, false);
+        View rootView = null;
+//        View rootView = inflater.inflate(R.layout.noticies_fib, container, false);
         GestioActualitzaLlistesActivity.context = getActivity();
 
         return rootView;

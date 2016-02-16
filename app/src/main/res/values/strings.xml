@@ -22,4 +22,12 @@
 
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
+
+    <string name="diumenge">Diumenge</string>
+    <string name="dilluns">Dilluns</string>
+    <string name="dimarts">Dimarts</string>
+    <string name="dimecres">Dimecres</string>
+    <string name="dijous">Dijous</string>
+    <string name="divendres">Divendres</string>
+    <string name="dissabte">Dissabte</string>
 </resources>

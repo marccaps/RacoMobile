@@ -18,7 +18,7 @@ import android.widget.ListView;
 
 import com.example.mcabezas.racomobile.Adapter.NavDrawerListAdapter;
 import com.example.mcabezas.racomobile.Fragments.HomeFragment;
-import com.example.mcabezas.racomobile.Fragments.Horario;
+//import com.example.mcabezas.racomobile.Fragments.Horario;
 import com.example.mcabezas.racomobile.Model.NavDrawerItem;
 
 public class MainActivity extends AppCompatActivity {
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new ControladorVistaNoticiesFib();
                 break;
             case 2:
-                fragment = new Horario();
+                fragment = new ControladorHorario();
                 break;
             default:
                 break;
