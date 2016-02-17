@@ -18,6 +18,7 @@
         <item>@drawable/ic_home</item>
         <item>@mipmap/news</item>
         <item>@mipmap/calendar</item>
+        <item>@mipmap/mail</item>
     </array>
 
     <!-- Content Description -->
@@ -30,4 +31,11 @@
     <string name="dijous">Dijous</string>
     <string name="divendres">Divendres</string>
     <string name="dissabte">Dissabte</string>
+
+
+    <string name="action_today">Today</string>
+    <string name="action_day_view">Day view</string>
+    <string name="action_three_day_view">3 day view</string>
+    <string name="action_week_view">Week view</string>
+
 </resources>

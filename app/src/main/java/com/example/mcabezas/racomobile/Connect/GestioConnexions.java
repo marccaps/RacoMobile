@@ -36,9 +36,9 @@ public class GestioConnexions extends AsyncTask<ParserAndUrl, Integer, LlistesIt
                 LlistesItems lli = new LlistesItems();
                 LlistesItems tmp = new LlistesItems();
 
-//                JsonParser json = JsonParser.getInstance();
+                JsonParser json = JsonParser.getInstance();
                 XmlParser xml = XmlParser.getInstance();
-//                IcalParser ics = IcalParser.getInstance();
+                IcalParser ics = IcalParser.getInstance();
 
                 // Donem accés als certificats de la FIB
                 GestorCertificats.allowAllSSL();
@@ -54,40 +54,40 @@ public class GestioConnexions extends AsyncTask<ParserAndUrl, Integer, LlistesIt
                             insertarItemsGenerics(lli, tmp);
                             break;
 
-//                        case AndroidUtils.TIPUS_CORREU: // Correu
-//                            tmp = json.parserData(urls[i].getTipus(), urls[i].getUrl(),
-//                                    urls[i].getUsername(), urls[i].getPassword());
-//                            insertarItemsGenerics(lli, tmp);
-//                            break;
-//
-//                        case AndroidUtils.TIPUS_AVISOS: // Avisos
-//                            tmp = xml.parserData(urls[i].getTipus(), urls[i].getUrl());
-//                            insertarItemsGenerics(lli, tmp);
-//                            break;
-//
-//                        case AndroidUtils.TIPUS_ASSIG: // Assignatures
-//                            lli = json.parserData(urls[i].getTipus(), urls[i].getUrl(),
-//                                    null, null);
-//                            break;
-//
-//                        case AndroidUtils.TIPUS_AGENDA_RACO: // Agenda
-//                            //lli = xml.parserData(urls[i].getTipus(), urls[i].getUrl());
-//                            lli = ics.parserData(urls[i].getTipus(), urls[i].getUrl(), null);
-//                            break;
-//
-//                        case AndroidUtils.TIPUS_AULES_I_OCUPACIO_RACO:
-//                            tmp = json.parserData(urls[i].getTipus(), urls[i].getUrl(),
-//                                    null, null);
-//                            insertarItemsAulaOcupacio(lli, tmp);
-//                            break;
-//
-//                        case AndroidUtils.TIPUS_CLASSES_DIA_RACO:
-//                            tmp = ics.parserData(urls[i].getTipus(), urls[i].getUrl(), lli);
-//                            break;
-//
-//                        case AndroidUtils.TIPUS_HORARI_RACO:
-//                            lli = ics.parserData(urls[i].getTipus(), urls[i].getUrl(), null);
-//                            break;
+                        case AndroidUtils.TIPUS_CORREU: // Correu
+                            tmp = json.parserData(urls[i].getTipus(), urls[i].getUrl(),
+                                    urls[i].getUsername(), urls[i].getPassword());
+                            insertarItemsGenerics(lli, tmp);
+                            break;
+
+                        case AndroidUtils.TIPUS_AVISOS: // Avisos
+                            tmp = xml.parserData(urls[i].getTipus(), urls[i].getUrl());
+                            insertarItemsGenerics(lli, tmp);
+                            break;
+
+                        case AndroidUtils.TIPUS_ASSIG: // Assignatures
+                            lli = json.parserData(urls[i].getTipus(), urls[i].getUrl(),
+                                    null, null);
+                            break;
+
+                        case AndroidUtils.TIPUS_AGENDA_RACO: // Agenda
+                            //lli = xml.parserData(urls[i].getTipus(), urls[i].getUrl());
+                            lli = ics.parserData(urls[i].getTipus(), urls[i].getUrl(), null);
+                            break;
+
+                        case AndroidUtils.TIPUS_AULES_I_OCUPACIO_RACO:
+                            tmp = json.parserData(urls[i].getTipus(), urls[i].getUrl(),
+                                    null, null);
+                            insertarItemsAulaOcupacio(lli, tmp);
+                            break;
+
+                        case AndroidUtils.TIPUS_CLASSES_DIA_RACO:
+                            tmp = ics.parserData(urls[i].getTipus(), urls[i].getUrl(), lli);
+                            break;
+
+                        case AndroidUtils.TIPUS_HORARI_RACO:
+                            lli = ics.parserData(urls[i].getTipus(), urls[i].getUrl(), null);
+                            break;
                         default:
                             break;
                     }

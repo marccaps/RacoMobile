@@ -17,6 +17,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.mcabezas.racomobile.Adapter.NavDrawerListAdapter;
+import com.example.mcabezas.racomobile.Fragments.ControladorCorreo;
+import com.example.mcabezas.racomobile.Fragments.ControladorHorario;
+import com.example.mcabezas.racomobile.Fragments.ControladorVistaNoticiesFib;
 import com.example.mcabezas.racomobile.Fragments.HomeFragment;
 //import com.example.mcabezas.racomobile.Fragments.Horario;
 import com.example.mcabezas.racomobile.Model.NavDrawerItem;
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1],navMenuIcons.getResourceId(1,-1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[2],navMenuIcons.getResourceId(2,-1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3],navMenuIcons.getResourceId(3,-1)));
 
 
         // Recycle the typed array
@@ -180,6 +184,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 2:
                 fragment = new ControladorHorario();
+                break;
+            case 3:
+                fragment = new ControladorCorreo();
                 break;
             default:
                 break;

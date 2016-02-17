@@ -1,4 +1,4 @@
-package com.example.mcabezas.racomobile;
+package com.example.mcabezas.racomobile.Fragments;
 
 /**
  * Created by mcabezas on 11/02/16.
