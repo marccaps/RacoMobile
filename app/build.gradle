@@ -35,6 +35,7 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-core:2.1.4'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.1.4'
     compile 'com.github.alamkanak:Android-Week-View:parent-1.2.6'
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 //    compile 'org.codehaus.jackson:jackson-lgpl:0.9.5'
 //    compile 'org.codehaus.jackson:jackson-asl:0.9.5'
 }

@@ -21,6 +21,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -68,16 +69,28 @@ public class OAuthFlowApp extends Activity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+		if (android.os.Build.VERSION.SDK_INT > 9) {
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+			StrictMode.setThreadPolicy(policy);
+		}
+		prefs = getSharedPreferences(
+				PreferenciesUsuari.getPreferenciesUsuari(), Context.MODE_PRIVATE);
+		String username = prefs.getString(AndroidUtils.USERNAME, "");
+		String password = prefs.getString(AndroidUtils.PASSWORD, "");
+		if(!username.equals("")) {
+			if(check_user(username,password)) {
+				Intent i = new Intent(this, MainActivity.class);
+				startActivity(i);
+			}
+		}
+
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.user_login);
         this.prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-		if (android.os.Build.VERSION.SDK_INT > 9) {
-			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-			StrictMode.setThreadPolicy(policy);
-		}
+
 
 		FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.register_fab);
 		floatingActionButton.setVisibility(View.GONE);

@@ -99,7 +99,7 @@ public class AndroidUtils {
     // UTILS
     public final static int DIES_HORARI_SEGUENT = 10;
     public final static int DIES_HORARI_ANTERIOR = -10;
-    public final int MAX_CORREUS = 8;
+    public final int MAX_CORREUS = 16;
     public final static long MILLSECS_PER_DIA = 24 * 60 * 60 * 1000;
     public final int TEMPS_REFRESC = 5; // minuts
 

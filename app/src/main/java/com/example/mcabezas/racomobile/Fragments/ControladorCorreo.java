@@ -5,30 +5,20 @@ package com.example.mcabezas.racomobile.Fragments;
  */
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.os.Bundle;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.mcabezas.racomobile.AdaptadorCorreusRaco;
+import com.example.mcabezas.racomobile.Adapter.AdaptadorCorreusRaco;
 import com.example.mcabezas.racomobile.AndroidUtils;
 import com.example.mcabezas.racomobile.Connect.GestioActualitzaLlistesActivity;
 import com.example.mcabezas.racomobile.Connect.GestioConnexions;
@@ -103,7 +93,7 @@ public class ControladorCorreo extends GestioActualitzaLlistesActivity {
                 sCorreus.clear();
                 // Actualitzem la Base de dades
                 actualitzarTaula(correu);
-                mLLayout.setBackgroundColor(AndroidUtils.REMOVE_BACKGROUND);
+//                mLLayout.setBackgroundColor(AndroidUtils.REMOVE_BACKGROUND);
             } else {
 //                amagarProgressBarBanner();
 //                amagarProgressBarPantalla(mPd, mRLayout);

@@ -1,21 +1,22 @@
-<LinearLayout
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:padding="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/item_correo_imagen"/>
+
     <TextView
-        android:id="@+id/nom_event"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:padding="15dp"
+        android:id="@+id/item_correo_titulo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:layout_marginLeft="10dp"
-        android:textColor="@color/list_background_pressed"/>
-    <TextView android:id="@+id/descripcio_event"
-        android:textSize="12sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center|center_vertical"
-        android:textColor="@color/list_background_pressed"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/item_correo_imagen"
+        android:layout_toRightOf="@+id/item_correo_imagen"
+        android:layout_toEndOf="@+id/item_correo_imagen" />
+
+</RelativeLayout>

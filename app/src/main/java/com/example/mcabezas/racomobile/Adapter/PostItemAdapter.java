@@ -5,6 +5,7 @@ package com.example.mcabezas.racomobile.Adapter;
  */
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,8 +81,6 @@ public class PostItemAdapter extends BaseAdapter {
     public static class VistaH {
         public TextView titol;
         public ImageView image;
-        public ImageView barra;
-        public ImageView fletxa;
         public TextView data;
     }
 
@@ -118,45 +117,13 @@ public class PostItemAdapter extends BaseAdapter {
             vh.titol = (TextView) vi.findViewById(R.id.postTitleLabel);
             vh.image = (ImageView) vi.findViewById(R.id.postThumb);
             vh.data = (TextView) vi.findViewById(R.id.postDateLabel);
+            vh.titol.setTextColor(Color.rgb(12,188,252));
             vi.setTag(vh);
+            vi.setBackgroundColor(Color.WHITE);
+
             vh.data.setText(data);
         }
-//        // Correu
-//        if (mLItems.get(position).getTipus() == 1) {
-//            vi = mInflater.inflate(R.layout.llista_events_resum, null);
-//            vh = new VistaH();
-//            vh.titol = (TextView) vi.findViewById(R.id.titol);
-//            vh.image = (ImageView) vi.findViewById(R.id.image);
-//            vh.barra = (ImageView) vi.findViewById(R.id.barra);
-//            vh.barra.setImageResource(R.drawable.barra_lila);
-//            vh.data = (TextView) vi.findViewById(R.id.dataIni);
-//            vh.fletxa = (ImageView) vi.findViewById(R.id.fletxa);
-//            vh.fletxa.setImageResource(R.drawable.fletxa_celda);
-//            vi.setTag(vh);
-//            vh.data.setText(data);
-//        }
-//        // Avisos
-//        if (mLItems.get(position).getTipus() == 2) {
-//            vi = mInflater.inflate(R.layout.llista_events_resum, null);
-//            vh = new VistaH();
-//            vh.titol = (TextView) vi.findViewById(R.id.titol);
-//            vh.image = (ImageView) vi.findViewById(R.id.image);
-//            vh.barra = (ImageView) vi.findViewById(R.id.barra);
-//            vh.barra.setImageResource(R.drawable.barra_vermella);
-//            vh.data = (TextView) vi.findViewById(R.id.dataIni);
-//            vh.fletxa = (ImageView) vi.findViewById(R.id.fletxa);
-//            vh.fletxa.setImageResource(R.drawable.fletxa_celda);
-//            vi.setTag(vh);
-//            vh.data.setText(data);
-//        }
-//        // Configuracio
-//        if (mLItems.get(position).getTipus() == 3) {
-//            vi = mInflater.inflate(R.layout.llista_events_resum, null);
-//            vh = new VistaH();
-//            vh.titol = (TextView) vi.findViewById(R.id.titol);
-//            vh.image = (ImageView) vi.findViewById(R.id.image);
-//            vi.setTag(vh);
-//        }
+
 
         vh.titol.setText(mLItems.get(position).getTitol().replaceAll("\"", ""));
         vh.image.setTag(mLUrlImatges[position]);
