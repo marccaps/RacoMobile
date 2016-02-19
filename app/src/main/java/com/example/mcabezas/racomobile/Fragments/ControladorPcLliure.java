@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 
-
+import com.example.mcabezas.racomobile.Connect.AndroidUtils;
 import com.example.mcabezas.racomobile.Connect.GestioActualitzaLlistesActivity;
 ;
 import com.example.mcabezas.racomobile.LlistesItems;
@@ -44,7 +44,7 @@ public class ControladorPcLliure extends GestioActualitzaLlistesActivity {
             @Override
             public void onClick(View v) {
                 Picasso.with(getActivity())
-                        .load("https://raco.fib.upc.edu/mapa_ocupades.php?mod=a5")
+                        .load(AndroidUtils.getInstance().URL_AULA_A5)
                         .into(mAulaImage);
             }
         });
@@ -52,7 +52,7 @@ public class ControladorPcLliure extends GestioActualitzaLlistesActivity {
             @Override
             public void onClick(View v) {
                 Picasso.with(getActivity())
-                        .load("https://raco.fib.upc.edu/mapa_ocupades.php?mod=b5")
+                        .load(AndroidUtils.getInstance().URL_AULA_B5)
                         .into(mAulaImage);
             }
         });
@@ -60,7 +60,7 @@ public class ControladorPcLliure extends GestioActualitzaLlistesActivity {
             @Override
             public void onClick(View v) {
                 Picasso.with(getActivity())
-                        .load("https://raco.fib.upc.edu/mapa_ocupades.php?mod=c6")
+                        .load(AndroidUtils.getInstance().URL_AULA_C6)
                         .into(mAulaImage);
             }
         });

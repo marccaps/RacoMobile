@@ -9,6 +9,7 @@ package com.example.mcabezas.racomobile.Connect;
     import android.os.AsyncTask;
 
     import com.example.mcabezas.racomobile.LlistesItems;
+    import com.example.mcabezas.racomobile.Model.Avis;
     import com.example.mcabezas.racomobile.Model.BaseDadesManager;
     import com.example.mcabezas.racomobile.Model.Correu;
     import com.example.mcabezas.racomobile.Model.Noticia;
@@ -86,11 +87,23 @@ public class GestioConnexions extends AsyncTask<ParserAndUrl, Integer, LlistesIt
                         mBd.close();
                         break;
 
-//                        case AndroidUtils.TIPUS_AVISOS: // Avisos
-//                            tmp = xml.parserData(urls[i].getTipus(), urls[i].getUrl());
-//                            insertarItemsGenerics(lli, tmp);
-//                            break;
-//
+                        case AndroidUtils.TIPUS_AVISOS: // Avisos
+                            tmp = xml.parserData(urls[i].getTipus(), urls[i].getUrl());
+                            insertarItemsGenerics(lli, tmp);
+
+                            Avis avis;
+
+                            mBd.open();
+                            mBd.deleteTableAvisos();
+                            mBd.deleteTableAssigRaco();
+                            mBd.deleteTableAssigFib();
+                            for (int j = 0; j < tmp.getLitemsGenerics().size(); j++) {
+                                avis = (Avis) tmp.getLitemsGenerics().get(j);
+                                mBd.insertItemAvis(avis.getTitol(),avis.getDescripcio(),avis.getImatge(),avis.getDataPub().toString()+ " ",avis.getTipus(),avis.getNomAssig());
+                            }
+                            mBd.close();
+                            break;
+
 //                        case AndroidUtils.TIPUS_ASSIG: // Assignatures
 //                            lli = json.parserData(urls[i].getTipus(), urls[i].getUrl(),
 //                                    null, null);
