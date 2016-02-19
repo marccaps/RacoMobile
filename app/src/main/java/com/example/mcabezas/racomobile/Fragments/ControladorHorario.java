@@ -30,7 +30,7 @@ import com.alamkanak.weekview.DateTimeInterpreter;
 import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
-import com.example.mcabezas.racomobile.AndroidUtils;
+import com.example.mcabezas.racomobile.Connect.AndroidUtils;
 import com.example.mcabezas.racomobile.Connect.GestioActualitzaLlistesActivity;
 import com.example.mcabezas.racomobile.Connect.IcalParser;
 import com.example.mcabezas.racomobile.LlistesItems;

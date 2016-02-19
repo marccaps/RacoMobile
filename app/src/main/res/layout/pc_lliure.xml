@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <ImageView
+        android:id="@+id/aula_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true" />
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/aula_a5"
+        android:text="A5"
+        android:textColor="@color/colorAccent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        fbutton:buttonColor="@color/fbutton_color_sun_flower"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        />
+    <info.hoang8f.widget.FButton
+        android:id="@+id/aula_c6"
+        android:text="C6"
+        android:textColor="@color/colorAccent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        fbutton:buttonColor="@color/fbutton_color_sun_flower"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <info.hoang8f.widget.FButton
+        android:id="@+id/aula_b5"
+        android:text="B5"
+        android:textColor="@color/colorAccent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        fbutton:buttonColor="@color/fbutton_color_sun_flower"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

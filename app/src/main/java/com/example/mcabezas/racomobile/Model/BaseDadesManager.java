@@ -15,7 +15,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.mcabezas.racomobile.AndroidUtils;
+import com.example.mcabezas.racomobile.Connect.AndroidUtils;
 
 /** Classe Controlador: Creates, opens, closes, and uses a SQLite database */
 public class BaseDadesManager {

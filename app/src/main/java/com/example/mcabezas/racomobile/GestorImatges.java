@@ -22,6 +22,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
+import com.example.mcabezas.racomobile.Connect.AndroidUtils;
+
 public class GestorImatges {
 
     MemoriaCache memoryCache = new MemoriaCache();

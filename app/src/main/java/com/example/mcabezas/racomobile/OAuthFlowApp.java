@@ -1,9 +1,7 @@
 package com.example.mcabezas.racomobile;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
@@ -14,17 +12,14 @@ import shem.com.materiallogin.MaterialLoginViewListener;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.ProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,19 +32,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
+import com.example.mcabezas.racomobile.Connect.AndroidUtils;
+import com.example.mcabezas.racomobile.Connect.Constants;
 import com.example.mcabezas.racomobile.Connect.GestorCertificats;
 import com.example.mcabezas.racomobile.Model.PreferenciesUsuari;
-import com.example.mcabezas.racomobile.OauthDance.PrepareRequestTokenActivity;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

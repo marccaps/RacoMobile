@@ -19,7 +19,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.mcabezas.racomobile.Adapter.AdaptadorCorreusRaco;
-import com.example.mcabezas.racomobile.AndroidUtils;
+import com.example.mcabezas.racomobile.Connect.AndroidUtils;
 import com.example.mcabezas.racomobile.Connect.GestioActualitzaLlistesActivity;
 import com.example.mcabezas.racomobile.Connect.GestioConnexions;
 import com.example.mcabezas.racomobile.Connect.ParserAndUrl;

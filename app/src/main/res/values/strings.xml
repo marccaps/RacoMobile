@@ -19,6 +19,7 @@
         <item>@mipmap/news</item>
         <item>@mipmap/calendar</item>
         <item>@mipmap/mail</item>
+        <item>@mipmap/pc_lliure</item>
     </array>
 
     <!-- Content Description -->

@@ -8,7 +8,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.mcabezas.racomobile.Constants;
+import com.example.mcabezas.racomobile.Connect.Constants;
 
 /**
  * An asynchronous task that communicates with Google to 

@@ -7,9 +7,7 @@ package com.example.mcabezas.racomobile.Connect;
 
     import android.app.Activity;
     import android.os.AsyncTask;
-    import android.util.Log;
 
-    import com.example.mcabezas.racomobile.AndroidUtils;
     import com.example.mcabezas.racomobile.LlistesItems;
     import com.example.mcabezas.racomobile.Model.BaseDadesManager;
     import com.example.mcabezas.racomobile.Model.Correu;

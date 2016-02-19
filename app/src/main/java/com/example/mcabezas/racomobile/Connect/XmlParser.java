@@ -1,6 +1,5 @@
 package com.example.mcabezas.racomobile.Connect;
 
-import com.example.mcabezas.racomobile.AndroidUtils;
 import com.example.mcabezas.racomobile.Model.Avis;
 import com.example.mcabezas.racomobile.LlistesItems;
 import com.example.mcabezas.racomobile.Model.ItemGeneric;

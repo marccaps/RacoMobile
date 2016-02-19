@@ -3,7 +3,6 @@ package com.example.mcabezas.racomobile.Connect;
 /**
  * Created by mcabezas on 17/02/16.
  */
-import com.example.mcabezas.racomobile.AndroidUtils;
 import com.example.mcabezas.racomobile.LlistesItems;
 import com.example.mcabezas.racomobile.Model.Assignatura;
 import com.example.mcabezas.racomobile.Model.Aula;

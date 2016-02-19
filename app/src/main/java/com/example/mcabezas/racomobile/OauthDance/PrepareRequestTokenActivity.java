@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.example.mcabezas.racomobile.Constants;
+import com.example.mcabezas.racomobile.Connect.Constants;
 
 /**
  * Prepares a OAuthConsumer and OAuthProvider 
