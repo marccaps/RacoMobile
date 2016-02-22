@@ -22,7 +22,7 @@
         android:layout_toRightOf="@id/icon"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="@color/list_item_title"
+        android:textColor="@color/fbutton_color_sun_flower"
         android:gravity="center_vertical"
         android:paddingRight="40dp"/>
 
@@ -33,6 +33,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="8dp"
-        android:textColor="@color/counter_text_color"/>
+        android:textColor="@color/fbutton_color_sun_flower"/>
 
 </RelativeLayout>

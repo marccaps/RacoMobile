@@ -83,19 +83,9 @@ public class AdaptadorCorreusRaco extends BaseAdapter {
         }
         else vh.item_titol.setText(mLitems.get(position).getTitol().replace("\"", ""));
         vh.item_titol.setTextColor(Color.rgb(12,188,252));
-//        vh.titol = (TextView) vi.findViewById(R.id.nom_event);
-//        vh.descripcio = (TextView) vi.findViewById(R.id.descripcio_event);
+
         vi.setTag(vh);
-//
         vi.setBackgroundColor(Color.WHITE);
-//        if (position % 2 == 0) {
-//            vi.setBackgroundResource(R.color.list_background);
-//        }
-//
-//        vh.titol.setText(mLitems.get(position).getTitol().replaceAll("\"", ""));
-//        String enviatPer ="Enviat per";
-//        vh.descripcio.setText(enviatPer + " "
-//                + mLitems.get(position).getDescripcio().replaceAll("\"", ""));
 
         return vi;
     }

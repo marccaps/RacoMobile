@@ -56,8 +56,6 @@ public class ControladorVistaNoticiesFib extends GestioActualitzaLlistesActivity
 
 
         sLlistaVista = (ListView) rootView.findViewById(R.id.postListView);
-//        mRLayout = (RelativeLayout) findViewById(R.id.layoutCarregantDadesGenerals);
-//        mPd = (ProgressBar) findViewById(R.id.carregantDadesGenerals);
         mLLayout = (LinearLayout) rootView.findViewById(R.id.linearNoticiesLayout);
 
         obtenirDadesWeb();
@@ -87,10 +85,8 @@ public class ControladorVistaNoticiesFib extends GestioActualitzaLlistesActivity
                 ActualitzarTaula();
 
             } else {
-//                amagarProgressBarPantalla(mPd, mRLayout);
             }
         } catch (Exception e) {
-//            amagarProgressBarPantalla(mPd, mRLayout);
             mostrarVistaNoInformacio(mLLayout);
             Toast.makeText(getActivity(), "Error noticies",
                     Toast.LENGTH_LONG).show();
@@ -142,8 +138,6 @@ public class ControladorVistaNoticiesFib extends GestioActualitzaLlistesActivity
         resetLlistes();
         obtenirDadesBd();
 
-//        amagarProgressBarPantalla(mPd, mRLayout);
-
         if (sListNoticies.isEmpty()) {
             Toast.makeText(getActivity(), "No hi ha noticies",
                     Toast.LENGTH_LONG).show();
@@ -184,30 +178,4 @@ public class ControladorVistaNoticiesFib extends GestioActualitzaLlistesActivity
         mBdm.close();
 
     }
-
-    /** Gestió del Menú */
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.actualitza_vista, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.actualitza:
-//                if (hihaInternet()) {
-//                    mostrarProgressBarPantalla(mPd, mRLayout);
-//                    obtenirDadesWeb();
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "Hi ha Internet",
-//                            Toast.LENGTH_LONG).show();
-//                }
-//                break;
-//        }
-//        return true;
-//    }
-
 }

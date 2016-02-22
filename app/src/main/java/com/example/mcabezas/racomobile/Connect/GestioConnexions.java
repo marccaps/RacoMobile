@@ -82,7 +82,8 @@ public class GestioConnexions extends AsyncTask<ParserAndUrl, Integer, LlistesIt
                         mBd.deleteTableCorreus();
                         for (int j = 0; j < tmp.getLitemsGenerics().size(); j++) {
                             correu = (Correu) tmp.getLitemsGenerics().get(j);
-                            mBd.insertItemCorreu(correu.getTitol(),correu.getDescripcio(),correu.getImatge(),correu.getFrom()+ " ",correu.getTipus(),correu.getLlegits(),correu.getNo_llegits());
+                            mBd.insertItemCorreu(correu.getTitol(),correu.getDescripcio(),correu.getImatge(),
+                                    correu.getDataPub().toString(),correu.getTipus(),correu.getLlegits(),correu.getNo_llegits());
                         }
                         mBd.close();
                         break;
@@ -103,30 +104,6 @@ public class GestioConnexions extends AsyncTask<ParserAndUrl, Integer, LlistesIt
                             }
                             mBd.close();
                             break;
-
-//                        case AndroidUtils.TIPUS_ASSIG: // Assignatures
-//                            lli = json.parserData(urls[i].getTipus(), urls[i].getUrl(),
-//                                    null, null);
-//                            break;
-//
-//                        case AndroidUtils.TIPUS_AGENDA_RACO: // Agenda
-//                            //lli = xml.parserData(urls[i].getTipus(), urls[i].getUrl());
-//                            lli = ics.parserData(urls[i].getTipus(), urls[i].getUrl(), null);
-//                            break;
-//
-//                        case AndroidUtils.TIPUS_AULES_I_OCUPACIO_RACO:
-//                            tmp = json.parserData(urls[i].getTipus(), urls[i].getUrl(),
-//                                    null, null);
-//                            insertarItemsAulaOcupacio(lli, tmp);
-//                            break;
-//
-//                        case AndroidUtils.TIPUS_CLASSES_DIA_RACO:
-//                            tmp = ics.parserData(urls[i].getTipus(), urls[i].getUrl(), lli);
-//                            break;
-//
-//                        case AndroidUtils.TIPUS_HORARI_RACO:
-//                            lli = ics.parserData(urls[i].getTipus(), urls[i].getUrl(), null);
-//                            break;
                     default:
                         break;
                 }

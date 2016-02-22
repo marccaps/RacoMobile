@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by mcabezas on 10/02/16.
  */
-public abstract class ItemGeneric {
+public class ItemGeneric {
 
     protected String mId; // Aquest es crea a la Base de dades quan s'incerten
     // els avisos, però no es fan servir mai, és la clau

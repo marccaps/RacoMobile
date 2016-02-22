@@ -5,9 +5,12 @@ package com.example.mcabezas.racomobile.Adapter;
  */
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +49,7 @@ public class AdaptadorAssignaturesRaco extends BaseAdapter {
         public TextView data;
     }
 
+
     @Override
     public Object getItem(int position) {
         return position;
@@ -64,7 +68,12 @@ public class AdaptadorAssignaturesRaco extends BaseAdapter {
             vi = mInflater.inflate(R.layout.llista_assignatures_raco, null);
             vh = new VistaH();
             vh.titol = (TextView) vi.findViewById(R.id.nomAssigRaco);
-            vh.titol.setText(mLitems.get(position).getTitol());
+            if(mLitems.get(position).getDescripcio().equals("NomAssignatura")) {
+                vh.titol.setText(mLitems.get(position).getTitol());
+                vh.titol.setTextColor(parent.getResources().getColor(R.color.list_background_pressed));
+                vi.setBackgroundColor(parent.getResources().getColor(R.color.list_background));
+            }
+            else vh.titol.setText(mLitems.get(position).getTitol());
             vi.setTag(vh);
             return vi;
         } catch (Exception e) {

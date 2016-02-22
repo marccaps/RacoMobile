@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.mcabezas.racomobile.Adapter.NavDrawerListAdapter;
+import com.example.mcabezas.racomobile.Fragments.About;
 import com.example.mcabezas.racomobile.Fragments.ControladorCorreo;
 import com.example.mcabezas.racomobile.Fragments.ControladorHorario;
 import com.example.mcabezas.racomobile.Fragments.ControladorPcLliure;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[2],navMenuIcons.getResourceId(2,-1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[3],navMenuIcons.getResourceId(3,-1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[4],navMenuIcons.getResourceId(4,-1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[5],navMenuIcons.getResourceId(5,-1)));
 
 
 
@@ -193,6 +195,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 4:
                 fragment = new ControladorPcLliure();
+                break;
+            case 5:
+                fragment = new About();
+                break;
             default:
                 break;
         }

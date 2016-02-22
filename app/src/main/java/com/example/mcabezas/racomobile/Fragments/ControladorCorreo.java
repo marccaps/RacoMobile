@@ -49,12 +49,9 @@ public class ControladorCorreo extends GestioActualitzaLlistesActivity {
         sPrefs = getActivity().getSharedPreferences(
                 PreferenciesUsuari.getPreferenciesUsuari(), Context.MODE_PRIVATE);
 
-//        mRLayout = (RelativeLayout) findViewById(R.id.layoutCarregantDades);
-//        mPd = (ProgressBar) findViewById(R.id.carregantDades);
         mListAgenda = (ListView) rootView.findViewById(R.id.vista_llista_raco);
         mLLayout = (LinearLayout) rootView.findViewById(R.id.vistes_generals_raco);
 
-//        mostrarProgressBarBanner();
 
         sCorreus.clear();
         // Gestionar Base de dades
@@ -64,14 +61,12 @@ public class ControladorCorreo extends GestioActualitzaLlistesActivity {
 
         if (sCorreus.isEmpty()) {
             if (hihaInternet()) {
-//                mostrarProgressBarPantalla(mPd, mRLayout);
-//                amagarProgressBarBanner();
+
                 obtenirDadesWeb();
             } else {
                 Toast.makeText(getActivity(), "Hi ha internet",
                         Toast.LENGTH_LONG).show();
-//                amagarProgressBarBanner();
-//                setContentView(R.layout.vista_no_mail);
+
             }
         }
         obtenirDadesWeb();
@@ -93,20 +88,10 @@ public class ControladorCorreo extends GestioActualitzaLlistesActivity {
                 sCorreus.clear();
                 // Actualitzem la Base de dades
                 actualitzarTaula(correu);
-//                mLLayout.setBackgroundColor(AndroidUtils.REMOVE_BACKGROUND);
-            } else {
-//                amagarProgressBarBanner();
-//                amagarProgressBarPantalla(mPd, mRLayout);
-//                setContentView(R.layout.vista_no_mail);
             }
         } catch (Exception e) {
-//            amagarProgressBarBanner();
-//            amagarProgressBarPantalla(mPd, mRLayout);
             Toast.makeText(getActivity(), "Error Correu",
                     Toast.LENGTH_LONG).show();
-            if (sCorreus.isEmpty()) {
-//                setContentView(R.layout.vista_no_mail);
-            }
         }
 
     }
@@ -116,11 +101,7 @@ public class ControladorCorreo extends GestioActualitzaLlistesActivity {
         sCorreus.clear();
         obtenirDadesBd();
 
-//        amagarProgressBarBanner();
-//        amagarProgressBarPantalla(mPd, mRLayout);
-
         if (sCorreus.isEmpty()) {
-//            setContentView(R.layout.vista_no_mail);
         } else {
             // Gestionar les llistes
             mAdaptadorLlista = new AdaptadorCorreusRaco(getActivity(), sCorreus);
@@ -174,38 +155,4 @@ public class ControladorCorreo extends GestioActualitzaLlistesActivity {
         mBdm.close();
     }
 
-//    /** Gestió del Menú */
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.zona_raco, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.actualitza:
-//                if (hihaInternet()) {
-//                    mostrarProgressBarPantalla(mPd, mRLayout);
-//                    obtenirDadesWeb();
-//                } else {
-//                    Toast.makeText(getApplicationContext(), R.string.hiha_internet,
-//                            Toast.LENGTH_LONG).show();
-//                }
-//                break;
-//            case R.id.logout:
-//                sPrefs.edit().clear().commit();
-//                Toast.makeText(getApplicationContext(), R.string.logout_correcte,
-//                        Toast.LENGTH_SHORT).show();
-//                mBdm.open();
-//                mBdm.deleteTablesLogout();
-//                mBdm.close();
-//                startActivity(new Intent(ControladorVistaCorreuRaco.this,
-//                        ControladorTabIniApp.class));
-//                break;
-//
-//        }
-//        return true;
-//    }
 }

@@ -110,7 +110,7 @@ public class AndroidUtils {
     private static AndroidUtils sInstancia = null;
 
     // Formatters
-    public final static SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yy", Locale.US);
+    public final static SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss",Locale.ENGLISH);
 
     // creador sincronizado para protegerse de posibles problemas multi-hilo
     // otra prueba para evitar instanciación múltiple
@@ -227,8 +227,11 @@ public class AndroidUtils {
     public static Date dateXMLStringToDateControlador(SimpleDateFormat formatter, String sDate) {
         Date date = null;
         try {
-
-            date = formatter.parse(sDate);
+            if(sDate.length() > 10) {
+                sDate = sDate.substring(0, sDate.length() - 10);
+                date = formatter.parse(sDate);
+            }
+            else date = formatter.parse(sDate);
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -10,6 +10,7 @@
         <item>Horari</item>
         <item>Correu</item>
         <item>PC Lliures</item>
+        <item>About</item>
     </string-array>
 
     <!-- Nav Drawer List Item Icons -->
@@ -20,6 +21,7 @@
         <item>@mipmap/calendar</item>
         <item>@mipmap/mail</item>
         <item>@mipmap/pc_lliure</item>
+        <item>@mipmap/about</item>
     </array>
 
     <!-- Content Description -->

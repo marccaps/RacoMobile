@@ -20,11 +20,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.mcabezas.racomobile.Connect.AndroidUtils;
 
 public class GestorImatges {
+
+    private final static String TAG = "GestorImatges";
 
     MemoriaCache memoryCache = new MemoriaCache();
     FileCache fileCache;
@@ -37,7 +40,7 @@ public class GestorImatges {
         executorService = Executors.newFixedThreadPool(5);
     }
 
-    final int stub_id = R.mipmap.ic_launcher;
+    final int stub_id = R.mipmap.error;
 
     public void MostrarImatge(String url, ImageView imageView) {
         imageViews.put(imageView, url);
@@ -79,7 +82,7 @@ public class GestorImatges {
             bitmap = decodeFile(f);
             return bitmap;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Log.d(TAG,"Error al cargar la imagen. Puede que sea un gif?");
             return null;
         }
     }

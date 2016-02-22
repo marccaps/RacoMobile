@@ -74,8 +74,6 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
 
         sLlistaVista = (ListView) rootView.findViewById(R.id.avisos);
         mRLayout = (RelativeLayout) rootView.findViewById(R.id.relative_avisos);
-//        mPd = (ProgressBar) findViewById(R.id.carregantDadesGenerals);
-//        mLLayout = (LinearLayout) findViewById(R.id.vista_llistes_generals);
 
         // Base de dades
         mBdm = new BaseDadesManager(getActivity());
@@ -104,16 +102,11 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
             if (!hihaInternet()) {
                 Toast.makeText(getActivity(), "Hi ha internet",
                         Toast.LENGTH_LONG).show();
-//                amagarProgressBarPantalla(mPd, mRLayout);
                 if (sListItems.isEmpty()) {
                     mostrarVistaNoInformacio(mLLayout);
                 }
             } else {
                 if (sListItems.isEmpty()) {
-//                    mostrarProgressBarPantalla(mPd, mRLayout);
-                } else {
-                    // es pot posar progressbarBanner també és igual
-//                    mostrarProgressBarPantalla(mPd, mRLayout);
                 }
                 obtenirDadesWeb();
                 mostrarLlistes();
@@ -145,23 +138,15 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
                         Toast.LENGTH_LONG).show();
                 mostrarProgressBarBanner();
                 mostrarLlistes();
-//                amagarProgressBarBanner();
-//                amagarProgressBarPantalla(mPd, mRLayout);
             } else {
                 if (sListItems.isEmpty()) {
-//                    mostrarProgressBarPantalla(mPd, mRLayout);
                 } else {
-//                    mostrarProgressBarPantalla(mPd, mRLayout);
-                    // mostrarProgressBarBanner();
                 }
                 obtenirDadesWeb();
             }
             sEsLogin = false;
             // Activem la variable
             updateTime = Calendar.getInstance().getTime().getMinutes();
-        } else {
-            // mostrarProgressBarPantalla(mPd, mRLayout);
-            // mostrarLlistes();
         }
     }
 
@@ -216,8 +201,51 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
     protected void mostrarLlistes() {
         sListItems.clear();
         obtenirDadesBd();
+        AssignaturesAnalyzer();
         AdaptadorAssignaturesRaco adaptadorAssignaturesRaco = new AdaptadorAssignaturesRaco(getActivity(),sListItems);
         sLlistaVista.setAdapter(adaptadorAssignaturesRaco);
+    }
+
+    private void AssignaturesAnalyzer() {
+        String ultima_assig = "";
+        for(int i = 0; i < sListItems.size();++i) {
+            if(i == 0) {
+                String mNomAssig = sListItems.get(i).getTitol().replace("GRAU-", "");
+                mNomAssig = agafaAssig(mNomAssig);
+                sListItems.get(i).setTitol(sListItems.get(i).getTitol().replace("GRAU-"+mNomAssig+"-",""));
+                ultima_assig = mNomAssig;
+                ItemGeneric itemGeneric = new ItemGeneric(sListItems.get(i).getTitol(),sListItems.get(i).getDescripcio(),sListItems.get(i).getImatge(),sListItems.get(i).getDataPub(),sListItems.get(i).getTipus());
+                itemGeneric.setTitol(mNomAssig);
+                itemGeneric.setDescripcio("NomAssignatura");
+                sListItems.add(i, itemGeneric);
+                ++i;
+            }
+            else {
+                String mNomAssig = sListItems.get(i).getTitol().replace("GRAU-", "");
+                mNomAssig = agafaAssig(mNomAssig);
+                if(!ultima_assig.equals(mNomAssig)) {
+                    ultima_assig = mNomAssig;
+                    ItemGeneric itemGeneric = new ItemGeneric(sListItems.get(i).getTitol(),sListItems.get(i).getDescripcio(),sListItems.get(i).getImatge(),sListItems.get(i).getDataPub(),sListItems.get(i).getTipus());
+                    itemGeneric.setTitol(mNomAssig);
+                    itemGeneric.setDescripcio("NomAssignatura");
+                    sListItems.add(i, itemGeneric);
+                    ++i;
+                }
+                sListItems.get(i).setTitol(sListItems.get(i).getTitol().replace("GRAU-"+mNomAssig+"-",""));
+            }
+        }
+    }
+
+    private String agafaAssig(String mNomAssig) {
+        boolean trobat = false;
+        String assig = "";
+        for(int i = 0; i < mNomAssig.length() && !trobat;++i) {
+            if(mNomAssig.charAt(i) != '-') {
+                assig = assig+ mNomAssig.charAt(i);
+            }
+            else trobat = true;
+        }
+        return assig;
     }
 
     // Actualitzem al base de dades
