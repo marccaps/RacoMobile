@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -25,6 +26,7 @@ import com.example.mcabezas.racomobile.Fragments.ControladorVistaNoticiesFib;
 import com.example.mcabezas.racomobile.Fragments.HomeFragment;
 //import com.example.mcabezas.racomobile.Fragments.Horario;
 import com.example.mcabezas.racomobile.Model.NavDrawerItem;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
@@ -142,38 +144,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // toggle nav drawer on selecting action bar app icon/title
-//        if (mDrawerToggle.onOptionsItemSelected(item)) {
-//            return true;
-//        }
-//        // Handle action bar actions click
-//        switch (item.getItemId()) {
-//            case R.id.action_settings:
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-
-    /***
-     * Called when invalidateOptionsMenu() is triggered
-     */
-//    @Override
-//    public boolean onPrepareOptionsMenu(Menu menu) {
-//        // if nav drawer is opened, hide the action items
-//        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-//        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
-//        return super.onPrepareOptionsMenu(menu);
-//    }
-
     /**
      * Diplaying fragment view for selected nav drawer list item
      * */
@@ -242,6 +212,53 @@ public class MainActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    /**
+     *Disable back button
+     */
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Log.d(this.getClass().getName(), "back button pressed");
+            final NiftyDialogBuilder dialogBuilder= NiftyDialogBuilder.getInstance(this);
+
+            dialogBuilder
+                    .withTitle("Vols tancar l'aplicació?")
+                    .withButton1Text("Sí")
+                    .setButton1Click(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    })
+                    .withButton2Text("No")
+                    .setButton2Click(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogBuilder.cancel();
+                        }
+                    })
+                    .show();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onBackPressed() {
+    // do something on back.
+        return;
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+
+        int id= android.os.Process.myPid();
+        android.os.Process.killProcess(id);
     }
 
 }

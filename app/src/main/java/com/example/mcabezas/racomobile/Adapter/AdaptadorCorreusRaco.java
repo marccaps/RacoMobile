@@ -95,9 +95,5 @@ public class AdaptadorCorreusRaco extends BaseAdapter {
         return mLitems.size();
     }
 
-    @Override
-    public boolean isEnabled(int position) {
-        return false;
-    }
 
 }

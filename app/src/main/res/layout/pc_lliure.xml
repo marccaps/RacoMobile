@@ -9,10 +9,11 @@
 
 
     <ImageView
+        android:padding="10dp"
         android:id="@+id/aula_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@+id/aula_a5" />
 
     <info.hoang8f.widget.FButton
         android:id="@+id/aula_a5"

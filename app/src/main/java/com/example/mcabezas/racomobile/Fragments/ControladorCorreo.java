@@ -33,11 +33,11 @@ import com.example.mcabezas.racomobile.R;
 
 public class ControladorCorreo extends GestioActualitzaLlistesActivity {
 
-    private final String mTAG = "CorreuRaco";
+    private final String TAG = "CorreuRaco";
 
-    private static ArrayList<Correu> sCorreus = new ArrayList<Correu>();
-    private AdaptadorCorreusRaco mAdaptadorLlista;
-    private ListView mListAgenda;
+    public static ArrayList<Correu> sCorreus = new ArrayList<Correu>();
+    public AdaptadorCorreusRaco mAdaptadorLlista;
+    public ListView mListAgenda;
     private SharedPreferences sPrefs;
 
     @Override
@@ -52,23 +52,10 @@ public class ControladorCorreo extends GestioActualitzaLlistesActivity {
         mListAgenda = (ListView) rootView.findViewById(R.id.vista_llista_raco);
         mLLayout = (LinearLayout) rootView.findViewById(R.id.vistes_generals_raco);
 
-
-        sCorreus.clear();
         // Gestionar Base de dades
         mBdm = new BaseDadesManager(getActivity());
 
 
-
-        if (sCorreus.isEmpty()) {
-            if (hihaInternet()) {
-
-                obtenirDadesWeb();
-            } else {
-                Toast.makeText(getActivity(), "Hi ha internet",
-                        Toast.LENGTH_LONG).show();
-
-            }
-        }
         obtenirDadesWeb();
 
         obtenirDadesBd();
@@ -101,11 +88,11 @@ public class ControladorCorreo extends GestioActualitzaLlistesActivity {
         sCorreus.clear();
         obtenirDadesBd();
 
-        if (sCorreus.isEmpty()) {
-        } else {
+        if (!sCorreus.isEmpty()) {
             // Gestionar les llistes
             mAdaptadorLlista = new AdaptadorCorreusRaco(getActivity(), sCorreus);
             mListAgenda.setAdapter(mAdaptadorLlista);
+
         }
     }
 

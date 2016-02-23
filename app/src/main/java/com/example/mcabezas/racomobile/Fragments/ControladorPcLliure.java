@@ -2,6 +2,7 @@ package com.example.mcabezas.racomobile.Fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,7 +68,6 @@ public class ControladorPcLliure extends GestioActualitzaLlistesActivity {
 
         sPrefs = getActivity().getSharedPreferences(
                 PreferenciesUsuari.getPreferenciesUsuari(), Context.MODE_PRIVATE);
-
 
 
         return rootView;

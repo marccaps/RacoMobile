@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import com.example.mcabezas.racomobile.Connect.AndroidUtils;
 import com.example.mcabezas.racomobile.Connect.GestioActualitzaLlistesActivity;
 import com.example.mcabezas.racomobile.Connect.GestioConnexions;
 import com.example.mcabezas.racomobile.Connect.ParserAndUrl;
+import com.example.mcabezas.racomobile.Model.CuerpoNoticia;
 import com.example.mcabezas.racomobile.LlistesItems;
 import com.example.mcabezas.racomobile.Model.BaseDadesManager;
 import com.example.mcabezas.racomobile.Model.ItemGeneric;
@@ -157,6 +159,13 @@ public class ControladorVistaNoticiesFib extends GestioActualitzaLlistesActivity
 
                     sItemSeleccionat = sListNoticies.get(index);
                     //TODO:La noticia con todos los datos
+
+                    Intent i = new Intent(getActivity() , CuerpoNoticia.class);
+                    i.putExtra("DESCRIPCION",sItemSeleccionat.getDescripcio());
+                    i.putExtra("TITULO",sItemSeleccionat.getTitol());
+                    startActivity(i);
+
+
                 }
             });
 

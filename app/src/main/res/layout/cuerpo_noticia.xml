@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fbutton_color_sun_flower">
+
+    <in.workarounds.typography.TextView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:maxLines="1000"
+        android:scrollbars="vertical"
+        android:id="@+id/titulo_noticia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        app:font_name="Roboto"
+        app:font_variant="Bold"
+        android:textSize="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <in.workarounds.typography.TextView
+        android:id="@+id/descripcion_noticia"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1000"
+        android:scrollbars="vertical"
+        android:text="Hello World"
+        android:textColor="#FFFFFF"
+        app:font_name="Roboto"
+        app:font_variant="Condensed"
+        android:textSize="25sp"
+        android:layout_below="@+id/titulo_noticia"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>
