@@ -61,7 +61,7 @@ public class AdaptadorCorreusRaco extends BaseAdapter {
         VistaH vh;
 
         ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
-// generate random color
+        // generate random color
         int color1 = generator.getRandomColor();
         vi = mInflater.inflate(R.layout.llista_correu, null);
         vh = new VistaH();
@@ -79,9 +79,11 @@ public class AdaptadorCorreusRaco extends BaseAdapter {
         vh.item_image.setImageDrawable(textDrawable);
 
         if(mLitems.get(position).getTitol().equals(" ")) {
-            vh.item_titol.setText("Sense assumpte");
+            vh.item_titol.setText("Sense assumpte"+"\n"+mLitems.get(position).getDescripcio().replace("&","").replace("&lt","").replace(":","").replace("gt",""));
         }
-        else vh.item_titol.setText(mLitems.get(position).getTitol().replace("\"", ""));
+        else {
+            vh.item_titol.setText(mLitems.get(position).getTitol().replace("\"", "") +"\n" +mLitems.get(position).getDescripcio().replace("&","").replace("&lt","").replace(";"," ").replace("gt",""));
+        }
         vh.item_titol.setTextColor(Color.rgb(12,188,252));
 
         vi.setTag(vh);

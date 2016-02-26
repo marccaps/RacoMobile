@@ -15,6 +15,7 @@ public class ItemGeneric {
     protected Date mDataPub;
     protected String mImatge;
     protected int mTipus;
+    protected String url;
 
     /** 0 - noticia , 1 - mail, 2 - avis */
 
@@ -26,6 +27,17 @@ public class ItemGeneric {
         this.setDataPub(pubDate);
         this.setTipus(tipus);
     }
+
+    public ItemGeneric(String titol, String descripcio, String imatge,
+                       Date pubDate, int tipus,String url) {
+        this.setTitol(titol);
+        this.setDescripcio(descripcio);
+        this.setImatge(imatge);
+        this.setDataPub(pubDate);
+        this.setTipus(tipus);
+        this.setUrl(url);
+    }
+
 
     public String getId() {
         return mId;
@@ -73,6 +85,14 @@ public class ItemGeneric {
 
     public void setTipus(int tipus) {
         this.mTipus = tipus;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
 }

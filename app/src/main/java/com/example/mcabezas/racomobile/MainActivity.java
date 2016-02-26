@@ -226,6 +226,8 @@ public class MainActivity extends AppCompatActivity {
             final NiftyDialogBuilder dialogBuilder= NiftyDialogBuilder.getInstance(this);
 
             dialogBuilder
+                    .withDialogColor(R.color.list_background_pressed)
+                    .withMessageColor(R.color.list_background)
                     .withTitle("Vols tancar l'aplicació?")
                     .withButton1Text("Sí")
                     .setButton1Click(new View.OnClickListener() {

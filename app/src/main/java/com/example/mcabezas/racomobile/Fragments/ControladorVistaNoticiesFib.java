@@ -163,9 +163,8 @@ public class ControladorVistaNoticiesFib extends GestioActualitzaLlistesActivity
                     Intent i = new Intent(getActivity() , CuerpoNoticia.class);
                     i.putExtra("DESCRIPCION",sItemSeleccionat.getDescripcio());
                     i.putExtra("TITULO",sItemSeleccionat.getTitol());
+                    i.putExtra("URL_NOTICIA",((Noticia)sItemSeleccionat).getmLink());
                     startActivity(i);
-
-
                 }
             });
 

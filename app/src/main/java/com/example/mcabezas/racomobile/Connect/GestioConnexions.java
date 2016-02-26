@@ -100,7 +100,7 @@ public class GestioConnexions extends AsyncTask<ParserAndUrl, Integer, LlistesIt
                             mBd.deleteTableAssigFib();
                             for (int j = 0; j < tmp.getLitemsGenerics().size(); j++) {
                                 avis = (Avis) tmp.getLitemsGenerics().get(j);
-                                mBd.insertItemAvis(avis.getTitol(),avis.getDescripcio(),avis.getImatge(),avis.getDataPub().toString()+ " ",avis.getTipus(),avis.getNomAssig());
+                                mBd.insertItemAvis(avis.getTitol(),avis.getDescripcio(),avis.getImatge(),avis.getDataPub().toString()+ " ",avis.getTipus(),avis.getNomAssig(),avis.getUrl());
                             }
                             mBd.close();
                             break;

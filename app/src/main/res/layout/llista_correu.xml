@@ -14,6 +14,8 @@
 
     <TextView
         android:padding="15dp"
+        android:text="Hola"
+        android:textSize="10dp"
         android:id="@+id/item_correo_titulo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

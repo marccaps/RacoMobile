@@ -87,25 +87,9 @@ public class AndroidUtils {
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
 
-    // Localització
-    public final Long INTERVAL_TIME = new Long(5 * 1000);
-    public final float METERS_MOVED_VALUE = 500.0f;
-    public final int LATITUDE_FIB = (int) (41.38926983970336 * 1E6);
-    public final int LONGITUDE_FIB = (int) (2.113073766231537 * 1E6);
-    public final float RADI = (float) 2.0;
-
     // UTILS
-    public final static int DIES_HORARI_SEGUENT = 10;
-    public final static int DIES_HORARI_ANTERIOR = -10;
     public final int MAX_CORREUS = 16;
-    public final static long MILLSECS_PER_DIA = 24 * 60 * 60 * 1000;
     public final int TEMPS_REFRESC = 5; // minuts
-
-    // VISIBILITAT DELS ELEMENTS
-    public final static int INVISIBLE = 4;
-    public final static int VISIBLE = 0;
-    public final static int REMOVE_BACKGROUND = 0;
-    public static final int DATE_DIALOG_ID = 0;
 
     private static AndroidUtils sInstancia = null;
 

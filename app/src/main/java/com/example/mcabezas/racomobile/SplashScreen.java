@@ -10,7 +10,7 @@ import android.view.Menu;
 public class SplashScreen extends Activity {
 
     /** Duration of wait **/
-    private final int SPLASH_DISPLAY_LENGTH = 3000;
+    private final int SPLASH_DISPLAY_LENGTH = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

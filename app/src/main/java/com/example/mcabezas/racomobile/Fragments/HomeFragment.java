@@ -39,6 +39,7 @@ import com.example.mcabezas.racomobile.Connect.ParserAndUrl;
 import com.example.mcabezas.racomobile.LlistesItems;
 import com.example.mcabezas.racomobile.Model.BaseDadesManager;
 import com.example.mcabezas.racomobile.Model.Correu;
+import com.example.mcabezas.racomobile.Model.CuerpoAvisos;
 import com.example.mcabezas.racomobile.Model.ItemGeneric;
 import com.example.mcabezas.racomobile.Model.Noticia;
 import com.example.mcabezas.racomobile.Model.PreferenciesUsuari;
@@ -205,6 +206,17 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
         AssignaturesAnalyzer();
         AdaptadorAssignaturesRaco adaptadorAssignaturesRaco = new AdaptadorAssignaturesRaco(getActivity(),sListItems);
         sLlistaVista.setAdapter(adaptadorAssignaturesRaco);
+
+        sLlistaVista.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getActivity(), CuerpoAvisos.class);
+                i.putExtra("DESCRIPCION_AVISO",sListItems.get(position).getDescripcio());
+                i.putExtra("TITULO_AVISO",sListItems.get(position).getTitol());
+                i.putExtra("URL_AVISOS",sListItems.get(position).getUrl());
+                startActivity(i);
+            }
+        });
     }
 
     private void AssignaturesAnalyzer() {
@@ -273,7 +285,7 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
                 }
                 mBdm.insertItemAvis(ig.getTitol(), ig.getDescripcio(),
                         sListImatges.get(i), ig.getDataPub().toString(),
-                        ig.getTipus(), idAssigFinal);
+                        ig.getTipus(), idAssigFinal,ig.getUrl());
                 mTotalAvisos++;
             }
         }
@@ -308,8 +320,8 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
                 URL avisos = au.crearURL(au.URL_AVISOS + "" + keyURL);
                 ParserAndUrl pauA = new ParserAndUrl();
 
-                pauA = pauA.ParserAndUrl(avisos, AndroidUtils.TIPUS_AVISOS, null,
-                        null);
+                pauA = pauA.ParserAndUrl(avisos, AndroidUtils.TIPUS_AVISOS, mUsername,
+                        mPassword);
 
                 gc.execute(pauA);
             }
@@ -427,52 +439,6 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
         }
         return false;
     }
-
-//    /** Gestió del Menú */
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.resum_events, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.actualitzaResumEvents:
-//                if (hihaInternet()) {
-//                    mostrarProgressBarPantalla(mPd, mRLayout);
-//                    obtenirDadesWeb(au);
-//                } else {
-//                    Toast.makeText(getApplicationContext(), R.string.hiha_internet,
-//                            Toast.LENGTH_LONG).show();
-//                }
-//                break;
-//            case R.id.about:
-//                Intent intentAbout = new Intent(this, ControladorVistaAbout.class);
-//                startActivity(intentAbout);
-//                break;
-//            case R.id.preferencies:
-//                if (!"".equals(mUsername)) {
-//                    Intent intentPreferencies = new Intent(this,
-//                            PreferenciesUsuari.class);
-//                    intentPreferencies.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    intentPreferencies.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    startActivity(intentPreferencies);
-//                } else {
-//                    Toast.makeText(getApplicationContext(),
-//                            R.string.necessita_username, Toast.LENGTH_LONG).show();
-//                }
-//
-//                break;
-//            case R.id.sortir:
-//                tancarApp();
-//                break;
-//        }
-//        return true;
-//    }
-
 
     public void onBackPressed() {
         getActivity().finish();

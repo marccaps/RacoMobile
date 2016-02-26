@@ -30,6 +30,7 @@ public class BaseDadesManager {
     public static final String COL_IMATGE = "imatge";
     public static final String COL_DATAPUB = "dataPub"; // agenda
     public static final String COL_TIPUS = "tipus";
+    public static final String COL_URL = "url";
 
     /** taula:NOTICIES PARTICULAR */
     public static final String COL_LINK = "link";
@@ -81,7 +82,7 @@ public class BaseDadesManager {
 
     /** SQL PER CREAR LES TAULES */
     private static final String DATABASE_CREATE_TABLE_NOTICIES = "create table if not exists noticies (_id integer primary key autoincrement, titol text not null, descripcio text not null, imatge text not null, dataPub text not null, tipus text integer not null, link text);";
-    private static final String DATABASE_CREATE_TABLE_AVISOS = "create table if not exists avisos (_id integer primary key autoincrement, titol text not null, descripcio text, imatge text not null, dataPub text not null, tipus text integer not null, idAssig text);";
+    private static final String DATABASE_CREATE_TABLE_AVISOS = "create table if not exists avisos (_id integer primary key autoincrement, titol text not null, descripcio text, imatge text not null, dataPub text not null, tipus text integer not null, idAssig text, url text not null);";
     private static final String DATABASE_CREATE_TABLE_CORREUS = "create table if not exists correus (_id integer primary key autoincrement, titol text not null, descripcio text not null, imatge text not null, dataPub text not null, tipus text integer not null, llegits text integer, no_llegits text integer);";
     private static final String DATABASE_CREATE_TABLE_ASSIGNATURES_FIB = "create table assigFib (_id integer primary key autoincrement, codi text integer not null , nomAssig text not null, idAssig text not null, credits text integer);";
     private static final String DATABASE_CREATE_TABLE_ASSIGNATURES_RACO = "create table assigRaco (_id integer primary key autoincrement, codi text integer not null , nomAssig text not null, idAssig text not null);";
@@ -127,7 +128,7 @@ public class BaseDadesManager {
     }
 
     public long insertItemAvis(String titol, String descripcio, String imatge,
-                               String dataPub, int tipus, String nomAssig) throws SQLException {
+                               String dataPub, int tipus, String nomAssig,String url) throws SQLException {
         ContentValues initialValues = new ContentValues();
         initialValues.put(COL_TITOL, titol);
         initialValues.put(COL_DESCRIP, descripcio);
@@ -135,6 +136,7 @@ public class BaseDadesManager {
         initialValues.put(COL_DATAPUB, dataPub);
         initialValues.put(COL_TIPUS, tipus);
         initialValues.put(COL_ID_ASSIG, nomAssig);
+        initialValues.put(COL_URL,url);
         return mDb.insert(DATABASE_TABLE_AVISOS, null, initialValues);
     }
 
@@ -317,7 +319,7 @@ public class BaseDadesManager {
             mDb.execSQL(DATABASE_CREATE_TABLE_AVISOS);
             Cursor mCursor = mDb.query(DATABASE_TABLE_AVISOS, new String[] {
                     COL_ID, COL_TITOL, COL_DESCRIP, COL_IMATGE, COL_DATAPUB,
-                    COL_TIPUS, COL_ID_ASSIG }, null, null, null, null, null);
+                    COL_TIPUS, COL_ID_ASSIG ,COL_URL},null, null, null, null, null);
 
             ArrayList<ItemGeneric> list = new ArrayList<ItemGeneric>();
             if (mCursor != null && mCursor.moveToFirst()) {
@@ -328,7 +330,7 @@ public class BaseDadesManager {
                             formatter, mCursor.getString(4));
                     Avis a = new Avis(mCursor.getString(1),
                             mCursor.getString(2), mCursor.getString(3), date,
-                            mCursor.getInt(5), mCursor.getString(6));
+                            mCursor.getInt(5), mCursor.getString(6),mCursor.getString(7));
                     list.add(a);
                 } while (mCursor.moveToNext());
             }
@@ -661,7 +663,7 @@ public class BaseDadesManager {
         String[] args = new String[] { nom };
         Cursor mCursor = mDb.rawQuery("SELECT " + COL_TITOL + ", "
                 + COL_DESCRIP + ", " + COL_DATAPUB + " , " + COL_ID_ASSIG
-                + ", " + COL_IMATGE + " FROM " + DATABASE_TABLE_AVISOS
+                + ", " + COL_IMATGE + COL_URL + ", " + " FROM " + DATABASE_TABLE_AVISOS
                 + " WHERE " + COL_ID_ASSIG + "=?", args);
 
         ArrayList<AssignaturesAvisos> list = new ArrayList<AssignaturesAvisos>();

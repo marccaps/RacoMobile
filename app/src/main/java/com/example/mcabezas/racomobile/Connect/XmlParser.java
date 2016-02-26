@@ -5,6 +5,7 @@ import com.example.mcabezas.racomobile.LlistesItems;
 import com.example.mcabezas.racomobile.Model.ItemGeneric;
 import com.example.mcabezas.racomobile.Model.Noticia;
 
+import org.apache.http.HttpConnection;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -101,8 +102,8 @@ public class XmlParser {
 
                     nomAssig = title.trim().split("-");
                     lli.afegirItemGeneric((ItemGeneric) new Avis(title,
-                            description + link, urlImatge, pubDate,
-                            AndroidUtils.TIPUS_AVISOS, nomAssig[0]));
+                            description, urlImatge, pubDate,
+                            AndroidUtils.TIPUS_AVISOS, nomAssig[0] ,link));
                     lli.afegirImatge(urlImatge);
 
                 }

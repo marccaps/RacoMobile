@@ -16,6 +16,12 @@ public class Avis extends ItemGeneric {
         this.mNomAssig = nomAssig;
     }
 
+    public Avis(String titol , String descripcio , String imatge , Date pubDate ,int tipus , String nomAssig , String url) {
+        super(titol , descripcio,imatge,pubDate,tipus,url);
+        this.mNomAssig = nomAssig;
+
+    }
+
     public String getNomAssig() {
         return mNomAssig;
     }
