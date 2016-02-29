@@ -50,14 +50,12 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
 
     // Variable que fem servir per saber cada quan s'ha de refrescar, ara per
     // ara, seran 5 minuts (android utils hi ha la variable)
-    private static int updateTime = -1;
 
     private final String mTAG = "VistaInici";
     private String mUsername;
     private String mPassword;
     private static SharedPreferences sPrefs;
     private int mTotalAvisos;
-    private static boolean sEsLogin;
     AndroidUtils au = AndroidUtils.getInstance();
     // Llistes que tindran les dades
     private ArrayList<ItemGeneric> sListItems = new ArrayList<ItemGeneric>();
@@ -92,27 +90,19 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
         editor.putInt(au.NOTIFICATION_COUNTER, 0);
         editor.commit();
 
-        mostrarLlistes();
-
         // per la primera vegada posem el updateTime = -1 i per la resta juguem
         // amb la funcio que ens dirà si toca o no
-        if (updateTime == -1 || enableActualitzarVista()) {
-            // Obtenir de la web
-            if (!hihaInternet()) {
-                Toast.makeText(getActivity(), "Hi ha internet",
-                        Toast.LENGTH_LONG).show();
-                if (sListItems.isEmpty()) {
-                    mostrarVistaNoInformacio(mLLayout);
-                }
-            } else {
-                if (sListItems.isEmpty()) {
-                }
-                obtenirDadesWeb();
-                mostrarLlistes();
-            }
+
+        // Obtenir de la web
+        obtenirDadesWeb();
+        sListItems.clear();
+        while(sListItems.isEmpty()) {
+            obtenirDadesBd();
+        }
+        sListItems.clear();
+        mostrarLlistes();
 
             // Activem la variable
-        }
         return rootView;
     }
 
@@ -129,24 +119,7 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
         editor.putInt(au.NOTIFICATION_COUNTER, 0);
         editor.commit();
 
-        // si vinc del login també hem d'actualitzar forçadament
-        if (sEsLogin || enableActualitzarVista()) {
-            // Obtenir de la web
-            if (!hihaInternet()) {
-                Toast.makeText(getActivity(), "Hi ha internet",
-                        Toast.LENGTH_LONG).show();
-                mostrarProgressBarBanner();
-                mostrarLlistes();
-            } else {
-                if (sListItems.isEmpty()) {
-                } else {
-                }
-                obtenirDadesWeb();
-            }
-            sEsLogin = false;
-            // Activem la variable
-            updateTime = Calendar.getInstance().getTime().getMinutes();
-        }
+        obtenirDadesWeb();
     }
 
     @Override
@@ -158,8 +131,6 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
                 sListImatges = (ArrayList<String>) lli.getLimatges();
                 /** Actualitzem la Base de dades */
                 actualitzarTaula();
-            } else {
-                mostrarVistaNoInformacio(mLLayout);
             }
         } catch (Exception e) {
 
@@ -172,7 +143,6 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
 
     @Override
     protected void mostrarLlistes() {
-        sListItems.clear();
         obtenirDadesBd();
         AssignaturesAnalyzer();
         AdaptadorAssignaturesRaco adaptadorAssignaturesRaco = new AdaptadorAssignaturesRaco(getActivity(),sListItems);
@@ -237,8 +207,6 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
         ItemGeneric ig;
 
         mBdm.open();
-        mBdm.deleteTableNoticies();
-        mBdm.deleteTableCorreus();
         mBdm.deleteTableAvisos();
 
         // comptadors per saber els elements a mostrar amb les preferencies
@@ -297,114 +265,30 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
         }
     }
 
-    protected void tancarApp() {
-        super.onDestroy();
-        System.runFinalizersOnExit(true);
-        System.exit(0);
-    }
-
 
     private void obtenirAvisos() {
+        try {
+            mBdm.open();
+            ArrayList<ItemGeneric> list = mBdm.getAllAvisos();
+            for (ItemGeneric a : list) {
+                sListItems.add(a);
+                sListImatges.add(a.getImatge());
+            }
+            mTotalAvisos = list.size();
+            mBdm.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         mBdm.open();
-        ArrayList<ItemGeneric> list = mBdm.getAllAvisos();
-        for (ItemGeneric a : list) {
-            sListItems.add(a);
-            sListImatges.add(a.getImatge());
-        }
-        mTotalAvisos = list.size();
+        mBdm.deleteTableAssigFib();
+        mBdm.deleteTableAvisos();
+        mBdm.deleteTableAssigRaco();
         mBdm.close();
-    }
-
-    private void ordenarPerData() {
-        try {
-            int minIndex;
-            ItemGeneric rig, rag;
-            int n = sListItems.size();
-            for (int i = 0; i < n - 1; i++) {
-                minIndex = i;
-                for (int j = i + 1; j < n; j++) {
-                    rig = sListItems.get(j);
-                    rag = sListItems.get(minIndex);
-                    if (rig.getDataPub().after(rag.getDataPub())) {
-                        minIndex = j;
-                    }
-                }
-                if (minIndex != i) {
-                    Collections.swap(sListImatges, i, minIndex);
-                    Collections.swap(sListItems, i, minIndex);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String[] tractarImatges() {
-        String link[] = null;
-        try {
-            link = (String[]) sListImatges.toArray(new String[sListImatges
-                    .size()]);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return link;
-    }
-
-    private void tractarPreferencies() {
-        String ressaltat = sPrefs.getString("ListPreferenceElement", "0");
-        Boolean checkboxSeleccionat = sPrefs.getBoolean(
-                "Active_box_preference", false);
-
-        if (checkboxSeleccionat) {
-            if (ressaltat.equals("2")) { // vol correus
-                eliminarNoticiesAvisos();
-            }
-        }
-    }
-
-    private void eliminarCorreuAvisos() {
-        ItemGeneric ig;
-        for (int i = sListItems.size() - 1; i > 0; i--) {
-            ig = sListItems.get(i);
-            if (ig.getTipus() == 2) {
-                if (mTotalAvisos <= 2) {
-                    // no fem res
-                } else {
-                    sListItems.remove(i);
-                    sListImatges.remove(i);
-                    i = sListItems.size();
-                    mTotalAvisos--;
-                }
-            }
-        }
-    }
-
-    private void eliminarNoticiesAvisos() {
-        ItemGeneric ig;
-        for (int i = sListItems.size() - 1; i > 0; i--) {
-            ig = sListItems.get(i);
-            if (ig.getTipus() == 2) {
-                if (mTotalAvisos <= 2) {
-                    // no fem res
-                } else {
-                    sListItems.remove(i);
-                    sListImatges.remove(i);
-                    i = sListItems.size();
-                    mTotalAvisos--;
-                }
-            }
-        }
-    }
-
-
-    private boolean enableActualitzarVista() {
-        if (updateTime != -1) {
-            if (Math.abs(updateTime
-                    - Calendar.getInstance().getTime().getMinutes()) >= au.TEMPS_REFRESC) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public void onBackPressed() {

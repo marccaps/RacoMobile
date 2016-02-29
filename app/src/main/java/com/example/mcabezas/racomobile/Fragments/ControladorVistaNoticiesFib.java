@@ -141,9 +141,7 @@ public class ControladorVistaNoticiesFib extends GestioActualitzaLlistesActivity
         obtenirDadesBd();
 
         if (sListNoticies.isEmpty()) {
-            Toast.makeText(getActivity(), "No hi ha noticies",
-                    Toast.LENGTH_LONG).show();
-            mostrarVistaNoInformacio(mLLayout);
+
         } else {
             // Gestionar les llistes
             sAdaptadorLlista = new PostItemAdapter(getActivity(),

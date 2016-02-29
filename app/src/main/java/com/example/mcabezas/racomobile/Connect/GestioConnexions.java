@@ -6,9 +6,11 @@ package com.example.mcabezas.racomobile.Connect;
     import java.lang.ref.WeakReference;
 
     import android.app.Activity;
+    import android.content.Intent;
     import android.os.AsyncTask;
 
     import com.example.mcabezas.racomobile.LlistesItems;
+    import com.example.mcabezas.racomobile.MainActivity;
     import com.example.mcabezas.racomobile.Model.Avis;
     import com.example.mcabezas.racomobile.Model.BaseDadesManager;
     import com.example.mcabezas.racomobile.Model.Correu;

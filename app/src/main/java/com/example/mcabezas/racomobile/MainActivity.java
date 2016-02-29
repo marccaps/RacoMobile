@@ -24,7 +24,6 @@ import com.example.mcabezas.racomobile.Fragments.ControladorHorario;
 import com.example.mcabezas.racomobile.Fragments.ControladorPcLliure;
 import com.example.mcabezas.racomobile.Fragments.ControladorVistaNoticiesFib;
 import com.example.mcabezas.racomobile.Fragments.HomeFragment;
-//import com.example.mcabezas.racomobile.Fragments.Horario;
 import com.example.mcabezas.racomobile.Model.NavDrawerItem;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
@@ -124,11 +123,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
 
         init();
-
-        if (savedInstanceState == null) {
-            // on first time display view for first nav item
-            displayView(0);
-        }
+        displayView(1);
+        displayView(3);
+        displayView(0);
     }
 
     /**
