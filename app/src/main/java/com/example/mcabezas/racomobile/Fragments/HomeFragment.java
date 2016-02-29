@@ -59,14 +59,12 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
     private int mTotalAvisos;
     private static boolean sEsLogin;
     AndroidUtils au = AndroidUtils.getInstance();
-    private static boolean errorAlCarregar;
     // Llistes que tindran les dades
     private ArrayList<ItemGeneric> sListItems = new ArrayList<ItemGeneric>();
     private ArrayList<String> sListImatges = new ArrayList<String>();
 
     // Llista de la vista
     public ListView sLlistaVista;
-    public static ItemGeneric itemSeleccionat = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,7 +80,6 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
 
         // Per si hi ha error i no té usuari no es mostri l'opció username i
         // password
-        errorAlCarregar = false;
 
         sPrefs = getActivity().getSharedPreferences(
                 PreferenciesUsuari.getPreferenciesUsuari(), Context.MODE_PRIVATE);
@@ -152,22 +149,6 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
         }
     }
 
-    public ArrayList<ItemGeneric> getLlistaItems() {
-        return sListItems;
-    }
-
-    public void setLlistaItems(ArrayList<ItemGeneric> llistaItems) {
-        this.sListItems = llistaItems;
-    }
-
-    public ArrayList<String> getLlistaUrlImatges() {
-        return sListImatges;
-    }
-
-    public void setLlistaUrlImatges(ArrayList<String> llistaUrlImatges) {
-        this.sListImatges = llistaUrlImatges;
-    }
-
     @Override
     public void actualitzarLlistaBaseDades(LlistesItems lli) {
         try {
@@ -177,27 +158,17 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
                 sListImatges = (ArrayList<String>) lli.getLimatges();
                 /** Actualitzem la Base de dades */
                 actualitzarTaula();
-//                amagarProgressBarBanner();
-//                amagarProgressBarPantalla(mPd, mRLayout);
             } else {
-//                amagarProgressBarBanner();
-//                amagarProgressBarPantalla(mPd, mRLayout);
                 mostrarVistaNoInformacio(mLLayout);
             }
         } catch (Exception e) {
-//            amagarProgressBarBanner();
-//            amagarProgressBarPantalla(mPd, mRLayout);
+
             mostrarVistaNoInformacio(mLLayout);
-            errorAlCarregar = true;
             Toast.makeText(getActivity(), "Error",
                     Toast.LENGTH_LONG).show();
         }
     }
 
-    protected void ResetLlistes() {
-        sListItems.clear();
-        sListImatges.clear();
-    }
 
     @Override
     protected void mostrarLlistes() {
@@ -295,10 +266,6 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
     @Override
     protected void obtenirDadesBd() {
         obtenirAvisos();
-        if (sListItems.isEmpty()) {
-            // Toast.makeText(getApplicationContext(), R.string.noBaseDades,
-            // Toast.LENGTH_LONG).show();
-        }
     }
 
     @Override

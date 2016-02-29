@@ -158,50 +158,6 @@ public class JsonParser {
         }
     }
 
-    public Assignatura parserInfoAssig(URL url) {
-        HttpURLConnection con = null;
-        try {
-            con = (HttpURLConnection) url.openConnection();
-            con.setConnectTimeout(1000);
-            InputStream is = ((HttpURLConnection) con).getInputStream();
-            ObjectMapper m = new ObjectMapper();
-            JsonNode rootNode = m.readValue(is, JsonNode.class);
-            int status = rootNode.path("status").intValue();
-            if (status == 0) {
-                String idAssig = rootNode.path("idAssig").textValue()
-                        .toString();
-                String nomA = rootNode.path("nom").textValue().toString();
-                ArrayList<String> objectius = new ArrayList<String>();
-                String objectiu;
-                for (JsonNode nodeObj : rootNode.path("descripcio")) {
-                    objectiu = nodeObj.textValue().toString();
-                    objectius.add(objectiu);
-                }
-                int credits = Integer.valueOf(rootNode.path("credits").textValue()
-                        .toString());
-                String email = null;
-                String nom = null;
-                ArrayList<Professors> prof = new ArrayList<Professors>();
-                for (JsonNode nodeProf : rootNode.path("professors")) {
-                    email = nodeProf.path("email").textValue().toString();
-                    nom = nodeProf.path("nom").textValue().toString();
-                    Professors p = new Professors(nom, email, 0);
-                    prof.add(p);
-                }
-                Assignatura a = new Assignatura(0, nomA, idAssig, credits,
-                        prof, objectius);
-                con.disconnect();
-                return a;
-            } else {
-                return null;
-            }
-
-        } catch (Exception e) {
-            con.disconnect();
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     protected LlistesItems parseAulesOcupacio(URL url) {
         LlistesItems lli = new LlistesItems();

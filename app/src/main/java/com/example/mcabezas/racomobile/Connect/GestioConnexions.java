@@ -122,33 +122,12 @@ public class GestioConnexions extends AsyncTask<ParserAndUrl, Integer, LlistesIt
             }
         }
 
-        /** Captura les dades parsejades en el doInBackground per a les aules */
-        private void insertarItemsAulaOcupacio(LlistesItems lli, LlistesItems tmp) {
-            if (tmp != null) {
-                for (int i = 0; i < tmp.getLaula().size(); i++) {
-                    lli.afegirItemAula(tmp.getLaula().get(i));
-                }
-            }
-        }
-
         @Override
         protected void onProgressUpdate(Integer... progres) {
         }
 
         @Override
         protected void onPostExecute(LlistesItems result) {
-//            try {
-//                Activity activity = mContext.get();
-//
-//                //Actualitzem les base de dades
-//                ((GestioActualitzaLlistesActivity) activity)
-//                        .actualitzarLlistaBaseDades(result);
-//                if (activity != null && !activity.isFinishing()) {
-//                    //mostrem la informació si la pantalla està activa
-//                    ((GestioActualitzaLlistesActivity) activity).mostrarLlistes();
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
+
         }
 }

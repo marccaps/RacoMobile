@@ -70,8 +70,8 @@ public class AdaptadorAssignaturesRaco extends BaseAdapter {
             vh.titol = (TextView) vi.findViewById(R.id.nomAssigRaco);
             if(mLitems.get(position).getDescripcio().equals("NomAssignatura")) {
                 vh.titol.setText(mLitems.get(position).getTitol());
-                vh.titol.setTextColor(parent.getResources().getColor(R.color.list_background_pressed));
-                vi.setBackgroundColor(parent.getResources().getColor(R.color.list_background));
+                vh.titol.setTextColor(parent.getResources().getColor(R.color.colorPrimary));
+                vi.setBackgroundColor(parent.getResources().getColor(R.color.colorAccent));
             }
             else vh.titol.setText(mLitems.get(position).getTitol());
             vi.setTag(vh);

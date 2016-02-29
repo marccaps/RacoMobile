@@ -93,9 +93,6 @@ public class OAuthFlowApp extends Activity {
 			@Override
 			public void onLogin(TextInputLayout loginUser, TextInputLayout loginPass) {
 				//Handle login
-//				startActivity(new Intent().setClass(getApplicationContext(), PrepareRequestTokenActivity.class));
-//				Intent i = new Intent(getApplicationContext(),MainActivity.class);
-//				startActivity(i);
 				boolean isAllOk = check_user(loginUser.getEditText().getText().toString(),loginPass.getEditText().getText().toString());
 				if(isAllOk) {
 					SharedPreferences sp = getSharedPreferences(
@@ -110,23 +107,8 @@ public class OAuthFlowApp extends Activity {
 
 			}
 		});
+	}
 
-//        performApiCall();
-    }
-
-//	private void performApiCall() {
-//
-//		String jsonOutput = "";
-//        try {
-//        	jsonOutput = doGet(Constants.API_REQUEST,getConsumer(this.prefs));
-//        	System.out.println("jsonOutput : " + jsonOutput);
-//        	Log.i(TAG, jsonOutput);
-//			Intent i = new Intent(this,MainActivity.class);
-//			startActivity(i);
-//		} catch (Exception e) {
-//			Log.e(TAG, "Error executing request",e);
-//		}
-//	}
 	
 	public void onActivityResult(int reqCode, int resultCode, Intent data) {
 		  super.onActivityResult(reqCode, resultCode, data);
@@ -244,15 +226,6 @@ public class OAuthFlowApp extends Activity {
 
 	}
 
-
-//    private void clearCredentials() {
-//		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-//		final Editor edit = prefs.edit();
-//		edit.remove(OAuth.OAUTH_TOKEN);
-//		edit.remove(OAuth.OAUTH_TOKEN_SECRET);
-//		edit.commit();
-//	}
-
 	
 	private OAuthConsumer getConsumer(SharedPreferences prefs) {
 		String token = prefs.getString(OAuth.OAUTH_TOKEN, "");
@@ -262,22 +235,4 @@ public class OAuthFlowApp extends Activity {
 		return consumer;
 	}
 
-//	private String doGet(String url,OAuthConsumer consumer) throws Exception {
-//
-//		DefaultHttpClient httpclient = new DefaultHttpClient();
-//		HttpGet request = new HttpGet(url);
-//		Log.i(TAG,"Requesting URL : " + url);
-//		consumer.sign(request);
-//		HttpResponse response = httpclient.execute(request);
-//		Log.i(TAG,"Statusline : " + response.getStatusLine());
-//		InputStream data = response.getEntity().getContent();
-//		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(data));
-//		String responeLine;
-//		StringBuilder responseBuilder = new StringBuilder();
-//		while ((responeLine = bufferedReader.readLine()) != null) {
-//			responseBuilder.append(responeLine);
-//		}
-//		Log.i(TAG,"Response : " + responseBuilder.toString());
-//		return responseBuilder.toString();
-//	}
 }

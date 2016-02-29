@@ -20,8 +20,4 @@ public class Noticia extends ItemGeneric {
     public String getmLink() {
         return mLink;
     }
-
-    public void setmLink(String mLink) {
-        this.mLink = mLink;
-    }
 }

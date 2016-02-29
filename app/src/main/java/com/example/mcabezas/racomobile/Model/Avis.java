@@ -26,7 +26,4 @@ public class Avis extends ItemGeneric {
         return mNomAssig;
     }
 
-    public void setNomAssig(String nomAssig) {
-        this.mNomAssig = nomAssig;
-    }
 }

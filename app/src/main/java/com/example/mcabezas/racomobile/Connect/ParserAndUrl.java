@@ -8,7 +8,7 @@ import java.net.URL;
 public class ParserAndUrl {
 
     private URL mUrl;
-    private int mTipus; // 0.- Noticia, 1.- Correu, 2.-Avis
+    private int mTipus;
     private String mUsername;
     private String mPassword;
 

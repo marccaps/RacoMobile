@@ -45,16 +45,12 @@ import com.example.mcabezas.racomobile.R;
 public class ControladorHorario extends GestioActualitzaLlistesActivity
         implements Runnable ,WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
 
-    private int contador = 0;
     private final String mTAG = "ControladorHorari";
     private static ArrayList<EventHorari> mHorari = new ArrayList<EventHorari>();
     private Calendar mDiaActual;
-    private int mDiesConsultats; // per saber si hem superat o no els dies que
     // volem carregar declarat a AndroidUtils
     private List<Integer> colors;
     private List<String> mAssignatures;
-
-    private List<HashMap<String, String>> mInformacio = new ArrayList<HashMap<String, String>>();
 
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
@@ -63,7 +59,6 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
     private WeekView mWeekView;
     private SharedPreferences sPrefs;
 
-    private int entrada = 0;
 
     //Fragment heredado
 
@@ -72,7 +67,6 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.horario, container, false);
-
 
         sPrefs = getActivity().getSharedPreferences(
                 PreferenciesUsuari.getPreferenciesUsuari(), Context.MODE_PRIVATE);
@@ -86,13 +80,11 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
         colors.add(getResources().getColor(R.color.event_color_04));
 
 
-        mDiesConsultats = 0;
         // Gestionar Base de dades
         mBdm = new BaseDadesManager(getActivity());
 
         // Creem la data Actual que apareix en la vista
         mDiaActual = Calendar.getInstance();
-        String diaSet = buscarNomDia(mDiaActual.get(Calendar.DAY_OF_WEEK));
 
         int mes = mDiaActual.get(Calendar.MONTH);
         mes++;
@@ -103,25 +95,10 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
             dia = String.valueOf(mDiaActual.get(Calendar.DAY_OF_MONTH));
         }
 
-//        mTdiaSetmana.setText(diaSet + " | " + dia + "/" + mes);
 
         mBdm.open();
-        //int res = mBdm.getAllHorari().getCount();
         int res = mBdm.getAllHorariSize();
         mBdm.close();
-//        if (res == 0) {
-//            if (hihaInternet()) {
-//                ControladorTabIniApp.mPd.show();
-//                Thread thread = new Thread(this);
-//                thread.start();
-//            } else {
-//                Toast.makeText(getApplicationContext(), R.string.hiha_internet,
-//                        Toast.LENGTH_LONG).show();
-//                ControladorTabIniApp.carregant.setVisibility(ProgressBar.GONE);
-//            }
-//        } else {
-//            mostrarLlistes();
-//        }
 
         mWeekView = (WeekView) rootView.findViewById(R.id.weekView);
 
@@ -147,18 +124,11 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
 
         if(mHorari.size() == 0) obtenirDadesWeb();
         ordenarPerData();
-//        crearHorari();
-//        addHorari();
         setHasOptionsMenu(true);
 
         return rootView;
     }
 
-//    private void addHorari() {
-//        for(int i = 0; i < mHorari.size();++i) {
-//            mWeekView.
-//        }
-//    }
 
     /**
      * Set up a date time interpreter which will show short date values when in week view and long
@@ -194,21 +164,14 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
 
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
-        Toast.makeText(getActivity(), "Clicked " + event.getName(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
-        Toast.makeText(getActivity(), "Long pressed event: " + event.getName(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onEmptyViewLongPress(Calendar time) {
-        Toast.makeText(getActivity(), "Empty view long pressed: " + getEventTitle(time), Toast.LENGTH_SHORT).show();
-    }
-
-    public WeekView getWeekView() {
-        return mWeekView;
     }
 
 
@@ -218,8 +181,7 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
         WeekViewEvent event = null;
         Calendar startTime = Calendar.getInstance();
         Calendar endTime = Calendar.getInstance();
-        boolean mfinal = false;
-        if(newYear == mHorari.get(0).getmAny() || newYear == mHorari.get(mHorari.size()-1).getmAny()) {
+        if(newYear == mHorari.get(0).getmAny() && newYear == mHorari.get(mHorari.size()-1).getmAny()) {
             for (int i = 0; (i < mHorari.size()); ++i) {
                 if(mHorari.get(i).getmMes() == newMonth) {
                     //TODO:Implementar una busqueda optima
@@ -265,7 +227,6 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
                         }
                     }
                 }
-                else mfinal = true;
             }
          }
         return events;
@@ -302,14 +263,11 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
                 // Actualitzem la Base de dades
                 actualitzarTaula();
             } else {
-//                ControladorTabIniApp.mPd.dismiss();
-//                ControladorTabIniApp.carregant.setVisibility(ProgressBar.GONE);
                 Toast.makeText(getActivity(), "Error al cargar horario",
                         Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
-//            ControladorTabIniApp.mPd.dismiss();
-//            ControladorTabIniApp.carregant.setVisibility(ProgressBar.GONE);
+
             Toast.makeText(getActivity(), "Error al cargar horario",
                     Toast.LENGTH_LONG).show();
         }
@@ -323,7 +281,6 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
         }
         obtenirDadesBd();
 
-        omplirEspaisHorari();
     }
 
     @Override
@@ -333,20 +290,12 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
         try {
             String keyURL = sPrefs.getString(au.KEY_HORARI_RACO, "");
             URL not;
-			/*if (sPrefs.getString(AndroidUtils.USERNAME, "")
-					.equals("roger.sala")) {
-				not = au.crearURL(au.URL_HORARI_RACO_ROGER);
-			} else {
-				not = au.crearURL(au.URL_HORARI_RACO + keyURL);
-			}*/
+
             not = au.crearURL(au.URL_HORARI_RACO + keyURL);
-            // URL not = au.crearURL(au.URL_HORARI_RACO);
             IcalParser ip = IcalParser.getInstance();
             mHorari = ip.parserHorariComplet(not);
 
         } catch (MalformedURLException e) {
-//            ControladorTabIniApp.mPd.dismiss();
-//            ControladorTabIniApp.carregant.setVisibility(ProgressBar.GONE);
             Toast.makeText(getActivity(), "Error al cargar horario",
                     Toast.LENGTH_LONG).show();
         }
@@ -388,57 +337,6 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
     }
 
 
-    private String buscarNomDia(int dia) {
-        switch (dia) {
-            case 1:
-                return getResources().getString(R.string.diumenge);
-            case 2:
-                return getResources().getString(R.string.dilluns);
-            case 3:
-                return getResources().getString(R.string.dimarts);
-            case 4:
-                return getResources().getString(R.string.dimecres);
-            case 5:
-                return getResources().getString(R.string.dijous);
-            case 6:
-                return getResources().getString(R.string.divendres);
-            case 7:
-                return getResources().getString(R.string.dissabte);
-            default:
-                return " ";
-        }
-    }
-
-
-    private ArrayList<EventHorari> obtenirElementsEnHora(int inici, int fi) {
-        ArrayList<EventHorari> eh = new ArrayList<EventHorari>();
-
-        EventHorari event;
-        String[] horaEventInici;
-        String[] horaEventFi;
-
-        for (int i = 0; i < mHorari.size(); i++) {
-            event = mHorari.get(i);
-            horaEventInici = event.getmHoraInici().split(":");
-            horaEventFi = event.getmHoraFi().split(":");
-            int horaIniciEvent = Integer.parseInt(horaEventInici[0]);
-            int horaFiEvent = Integer.parseInt(horaEventFi[0]);
-
-            if (inici >= horaIniciEvent && fi <= horaFiEvent) {
-                EventHorari evAux = new EventHorari();
-                evAux.setmAssignatura(mHorari.get(i).getmAssignatura());
-                evAux.setmAny(mHorari.get(i).getmAny());
-                evAux.setmAula(mHorari.get(i).getmAula());
-                evAux.setmDia(mHorari.get(i).getmDia());
-                evAux.setmHoraFi(mHorari.get(i).getmHoraFi());
-                evAux.setmHoraInici(mHorari.get(i).getmHoraInici());
-                evAux.setmMes(mHorari.get(i).getmMes());
-                eh.add(evAux);
-            }
-        }
-        return eh;
-    }
-
     private void ordenarPerData() {
         int minIndex;
         EventHorari rig, rag;
@@ -472,31 +370,6 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
             }
         }
     }
-
-    private void omplirEspaisHorari() {
-        int diferencia = 0;
-        if (mHorari != null) {
-            diferencia = Math.abs(mHorari.size() - sHores.length);
-        } else {
-            mHorari = new ArrayList<EventHorari>();
-            diferencia = Math.abs(0 - sHores.length);
-        }
-
-        Calendar cDataNoValida = Calendar.getInstance();
-        cDataNoValida.set(Calendar.YEAR, mDiaActual.get(Calendar.YEAR) + 1);
-        cDataNoValida.set(Calendar.MONTH, mDiaActual.get(Calendar.MONTH));
-        cDataNoValida.set(Calendar.DAY_OF_MONTH,
-                mDiaActual.get(Calendar.DAY_OF_MONTH));
-        Date dataNoValida = cDataNoValida.getTime();
-
-        for (int i = 0; i < diferencia; i++) {
-            EventHorari ehTemp = new EventHorari("23:00", "23:00", "", "",
-                    dataNoValida.getDay(), dataNoValida.getMonth(),
-                    dataNoValida.getYear());
-            mHorari.add(ehTemp);
-        }
-    }
-
 
 
     @Override

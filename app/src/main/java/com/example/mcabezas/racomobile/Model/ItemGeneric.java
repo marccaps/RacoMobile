@@ -17,8 +17,6 @@ public class ItemGeneric {
     protected int mTipus;
     protected String url;
 
-    /** 0 - noticia , 1 - mail, 2 - avis */
-
     public ItemGeneric(String titol, String descripcio, String imatge,
                        Date pubDate, int tipus) {
         this.setTitol(titol);

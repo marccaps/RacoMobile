@@ -27,49 +27,29 @@ public class AndroidUtils {
     public String URL_AVISOS_IMATGE = "http://www.fib.upc.edu/docroot/androidMobile/assignatures_foto.jpg";
     public String URL_CORREU_IMATGE = "http://www.fib.upc.edu/docroot/androidMobile/correo_foto.jpg";
     public String URL_IMATGE_DEFAULT = "http://www.fib.upc.edu/docroot/androidMobile/default.png";
-    public String URL_IMATGE_INFO = "http://www.fib.upc.edu/docroot/androidMobile/info.png";
 
     // URL'S comunes
     public String URL_LOGIN = "https://raco.fib.upc.edu/cas/login?service=https%3A%2F%2Fraco.fib.upc.edu%2Fservlet%2Fraco.webservices.InitKeys&loginDirecte=true&";
     public String URL_NOTICIES = "http://www.fib.upc.edu/fib/rss.rss";
     public String URL_CORREU = "https://webmail.fib.upc.edu/horde/imp/check_mail/resum_mail_json.php";
     public String URL_AVISOS = "https://raco.fib.upc.edu/extern/rss_avisos.jsp?KEY=";
-    public String URL_ASSIGS_FIB = "https://raco.fib.upc.edu/api/assigListFIB?KEY=public";
-    public String URL_INFO_ASSIG = "https://raco.fib.upc.edu/api/InfoAssigFIB?KEY=public";
-    // public String URL_AGENDA_RACO =
-    // "https://raco.fib.upc.edu/ical/portada.rss?KEY=";
-    public String URL_AGENDA_RACO = "https://raco.fib.upc.edu/ical/portada.ics?KEY=";
-    public String URL_ASSIGS_RACO = "https://raco.fib.upc.edu/api/assigList?KEY=";
-    public String URL_AULES_I_OCUPACIO_RACO = "https://raco.fib.upc.edu/api/aules/places-lliures.json";
-    public String URL_CLASSES_DIA_RACO = "https://raco.fib.upc.edu/ReservesWebApp/icsAvui.ics";
+
     public String URL_AULA_A5 = "http://www.fib.upc.edu/mapa.php?mod=a5";
     public String URL_AULA_B5 = "http://www.fib.upc.edu/mapa.php?mod=b5";
     public String URL_AULA_C6 = "http://www.fib.upc.edu/mapa.php?mod=c6";
     public String URL_HORARI_RACO = "https://raco.fib.upc.edu/ical/horari.ics?KEY=";
 
-    // Notificacions
-    public String URL_NOTIFICACIO_REGISTRAR = "https://raco.fib.upc.edu/api/subscribeNotificationSystem?system=android";
-    public String URL_NOTIFICACIO_DESREGISTRAR = "https://raco.fib.upc.edu/api/unsubscribeNotificationSystem?system=android";
-    public String REGISTRE_ID = "REGISTRE_ID";
     // Per saber si en tenim de pendents o no
     public String NOTIFICATION_COUNTER = "NUMERO_NOTIFICACIONS";
-    // Constant per les notificacions
-    public int NOTIFICATION_ID_ACTIVACIO = 1;
-    public int NOTIFICATION_ID_AVISOS = 2;
-
     // Constants
     public static final int TIPUS_NOTICIA = 0;
     public static final int TIPUS_CORREU = 1;
     public static final int TIPUS_AVISOS = 2;
-    public static final int TIPUS_INI_CONFIG = 3; // USERNAME I PASSWORS LLISTA
     // INICIAL
     public static final int TIPUS_ASSIG = 4;
     public static final int TIPUS_AGENDA_RACO = 5; // AGENDA
     public static final int TIPUS_AULES_I_OCUPACIO_RACO = 6;
     public static final int TIPUS_CLASSES_DIA_RACO = 7; // ASSIGNATURES A LA
-    // LLISTA OCUPACIO
-    public static final int TIPUS_HORARI_RACO = 8; // HORARI
-    public final static String CONTACTAR_LCFIB = "http://suport.fib.upc.edu";
 
     public final String KEY_AVISOS = "KEY_AVISOS";
     public final String KEY_ASSIG_FIB = "KEY_ASSIG_FIB";
@@ -81,9 +61,6 @@ public class AndroidUtils {
     public final String KEY_NOTIFICACIONS_DESREGISTRAR = "KEY_NOTIFICACIONS_DESREGISTRAR";
 
     // SharedPreferences
-    public static final String PREFERENCE_NOTIFICACIONS = "notificacionsEnabled";
-    public static final String PREFERENCE_LISTCONFIG = "listconfig";
-    public static final String PREFERENCE_CHECKBOX_FILTER = "Active_box_preference";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
 
@@ -123,8 +100,7 @@ public class AndroidUtils {
     public VEvent crearVEventAvui() {
         java.util.Calendar startDate = Calendar.getInstance();
         startDate.setTimeZone(java.util.TimeZone.getDefault());
-        // java.util.Calendar startDate = Calendar.getInstance();
-        // startDate.set(2011, 8, 8);
+
         DateTime start = new DateTime(startDate.getTime());
         start.setUtc(true);
         VEvent Eavui = new VEvent(start, start, "avui");
@@ -132,8 +108,7 @@ public class AndroidUtils {
     }
 
     public VEvent crearVEvent(Date data) {
-        // java.util.Calendar startDate =
-        // Calendar.getInstance(java.util.TimeZone.getTimeZone("Europe/Madrid"));
+
         java.util.Calendar startDate = Calendar.getInstance();
         startDate.set(data.getYear(), data.getMonth() + 1, data.getDate());
         DateTime start = new DateTime(startDate.getTime());
@@ -164,19 +139,6 @@ public class AndroidUtils {
         }
     }
 
-    public boolean compararDates(net.fortuna.ical4j.model.Date avui,
-                                 net.fortuna.ical4j.model.Date data) {
-        if (avui.getYear() != data.getYear()) {
-            return false;
-        }
-        if (avui.getMonth() != data.getMonth()) {
-            return false;
-        }
-        if (avui.getDate() != data.getDate()) {
-            return false;
-        }
-        return true;
-    }
 
     public String htmlToString(String html) {
         // Remove HTML tag from java String
@@ -249,28 +211,9 @@ public class AndroidUtils {
         return date;
     }
 
-    public static String dateToStringAssigRaco(Date date){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM - hh:mm a");
-        String sDate = sdf.format(date);
-        return sDate;
-    }
-
-    public static String dateToStringAgenda(Date date){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM - hh:mm a");
-        String sDate = sdf.format(date);
-        return sDate;
-    }
-
     public static String dateToStringVistaInici(Date date){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
         String sDate = sdf.format(date);
         return sDate;
     }
-
-    public static String dateToStringMostraItemInfo (Date date){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM - hh:mm");
-        String sDate = sdf.format(date);
-        return sDate;
-    }
-
 }
