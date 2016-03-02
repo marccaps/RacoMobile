@@ -17,6 +17,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.mcabezas.racomobile.Adapter.PostItemAdapter;
@@ -59,10 +61,15 @@ public class ControladorVistaNoticiesFib extends GestioActualitzaLlistesActivity
 
         sLlistaVista = (ListView) rootView.findViewById(R.id.postListView);
         mLLayout = (LinearLayout) rootView.findViewById(R.id.linearNoticiesLayout);
+        mRLayout = (RelativeLayout) rootView.findViewById(R.id.layout_progress_horari);
+        mPd = (ProgressBar) rootView.findViewById(R.id.progressBar_horari);
+
+        mostrarProgressBarPantalla(mPd,mRLayout);
 
         obtenirDadesWeb();
         resetLlistes();
         mostrarLlistes();
+        amagarProgressBarPantalla(mPd,mRLayout);
         return rootView;
 
     }

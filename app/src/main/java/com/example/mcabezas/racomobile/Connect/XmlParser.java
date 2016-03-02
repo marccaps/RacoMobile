@@ -65,7 +65,7 @@ public class XmlParser {
         HttpURLConnection con = null;
         try {
             con = (HttpURLConnection) url.openConnection();
-            con.setConnectTimeout(1000);
+            con.setConnectTimeout(10000);
             InputStream is = con.getInputStream();
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();

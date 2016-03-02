@@ -1,6 +1,7 @@
 package com.example.mcabezas.racomobile.Model;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -25,7 +26,7 @@ public class CuerpoAvisos extends AppCompatActivity {
 
         TextView mTituloAviso = (TextView) findViewById(R.id.titulo_aviso);
         TextView mDescripcionAviso = (TextView) findViewById(R.id.descripcion_aviso);
-        Button button = (Button) findViewById(R.id.web_avisos);
+        com.melnykov.fab.FloatingActionButton button = (com.melnykov.fab.FloatingActionButton) findViewById(R.id.web_avisos);
 
         mTituloAviso.setMovementMethod(new ScrollingMovementMethod());
         mDescripcionAviso.setMovementMethod(new ScrollingMovementMethod());
@@ -44,7 +45,6 @@ public class CuerpoAvisos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new FinestWebView.Builder(CuerpoAvisos.this).show(getIntent().getStringExtra("URL_AVISOS"));
-
             }
         });
 

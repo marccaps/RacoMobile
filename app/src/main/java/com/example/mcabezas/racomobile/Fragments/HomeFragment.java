@@ -55,7 +55,6 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
     private String mUsername;
     private String mPassword;
     private static SharedPreferences sPrefs;
-    private int mTotalAvisos;
     AndroidUtils au = AndroidUtils.getInstance();
     // Llistes que tindran les dades
     private ArrayList<ItemGeneric> sListItems = new ArrayList<ItemGeneric>();
@@ -71,7 +70,7 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         sLlistaVista = (ListView) rootView.findViewById(R.id.avisos);
-        mRLayout = (RelativeLayout) rootView.findViewById(R.id.relative_avisos);
+
 
         // Base de dades
         mBdm = new BaseDadesManager(getActivity());
@@ -97,6 +96,7 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
         obtenirDadesWeb();
         sListItems.clear();
         while(sListItems.isEmpty()) {
+
             obtenirDadesBd();
         }
         sListItems.clear();
@@ -210,7 +210,6 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
         mBdm.deleteTableAvisos();
 
         // comptadors per saber els elements a mostrar amb les preferencies
-        mTotalAvisos = 0;
         String[] idAssig;
         for (int i = 0; i < sListItems.size(); i++) {
             ig = sListItems.get(i);
@@ -225,7 +224,6 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
                 mBdm.insertItemAvis(ig.getTitol(), ig.getDescripcio(),
                         sListImatges.get(i), ig.getDataPub().toString(),
                         ig.getTipus(), idAssigFinal,ig.getUrl());
-                mTotalAvisos++;
             }
         }
         mBdm.close();
@@ -274,7 +272,6 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
                 sListItems.add(a);
                 sListImatges.add(a.getImatge());
             }
-            mTotalAvisos = list.size();
             mBdm.close();
         }catch (Exception e) {
             e.printStackTrace();

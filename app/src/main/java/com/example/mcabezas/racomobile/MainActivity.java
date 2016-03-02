@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +17,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.example.mcabezas.racomobile.Adapter.NavDrawerListAdapter;
 import com.example.mcabezas.racomobile.Fragments.About;
@@ -123,9 +126,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
 
         init();
+
         displayView(1);
         displayView(3);
         displayView(0);
+
     }
 
     /**
@@ -223,8 +228,8 @@ public class MainActivity extends AppCompatActivity {
             final NiftyDialogBuilder dialogBuilder= NiftyDialogBuilder.getInstance(this);
 
             dialogBuilder
-                    .withDialogColor(R.color.colorPrimary)
-                    .withMessageColor(R.color.colorAccent)
+                    .withDialogColor(Color.rgb(12,188,252))
+                    .withMessageColor(Color.WHITE)
                     .withTitle("Vols tancar l'aplicació?")
                     .withButton1Text("Sí")
                     .setButton1Click(new View.OnClickListener() {

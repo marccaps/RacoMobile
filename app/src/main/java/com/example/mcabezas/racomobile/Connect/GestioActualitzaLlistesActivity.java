@@ -28,6 +28,7 @@ public abstract class GestioActualitzaLlistesActivity extends Fragment {
     protected BaseDadesManager mBdm;
     protected RelativeLayout mRLayout;
     protected LinearLayout mLLayout;
+    protected ProgressBar mPd;
 
 
     @Override
@@ -35,7 +36,7 @@ public abstract class GestioActualitzaLlistesActivity extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = null;
-        GestioActualitzaLlistesActivity.context = getActivity();
+        GestioActualitzaLlistesActivity.context = this.getActivity();
 
         return rootView;
     }
@@ -54,6 +55,17 @@ public abstract class GestioActualitzaLlistesActivity extends Fragment {
 
 
     protected void mostrarProgressBarBanner(){
+
+    }
+
+    protected void mostrarProgressBarPantalla(ProgressBar mPd, RelativeLayout mRLayout) {
+        mPd.setVisibility(View.VISIBLE);
+        mRLayout.setVisibility(View.VISIBLE);
+    }
+
+    protected void amagarProgressBarPantalla(ProgressBar mPd, RelativeLayout mRLayout) {
+        mPd.setVisibility(View.GONE);
+        mRLayout.setVisibility(View.GONE);
     }
 
     protected void mostrarVistaNoInformacio(LinearLayout mLLayout) {

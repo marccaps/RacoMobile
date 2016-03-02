@@ -24,7 +24,7 @@ public class CuerpoNoticia extends AppCompatActivity{
         TextView titulo = (TextView) findViewById(R.id.titulo_noticia);
         TextView descripcion = (TextView) findViewById(R.id.descripcion_noticia);
 
-        Button button = (Button) findViewById(R.id.web_noticia);
+        com.melnykov.fab.FloatingActionButton button = (com.melnykov.fab.FloatingActionButton) findViewById(R.id.web_noticia);
 
         titulo.setMovementMethod(new ScrollingMovementMethod());
         descripcion.setMovementMethod(new ScrollingMovementMethod());

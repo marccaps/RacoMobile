@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/fbutton_color_sun_flower">
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <in.workarounds.typography.TextView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,10 +12,10 @@
         android:id="@+id/titulo_aviso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
         app:font_name="Roboto"
         app:font_variant="Bold"
-        android:textSize="40dp"
+        android:textSize="30dp"
+        android:textColor="@color/finestBlack"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -26,20 +27,24 @@
         android:maxLines="1000"
         android:scrollbars="vertical"
         android:text="Hello World"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/finestBlack"
         app:font_name="Roboto"
         app:font_variant="Condensed"
-        android:textSize="25sp"
+        android:textSize="15sp"
         android:layout_below="@+id/titulo_aviso"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
+    <com.melnykov.fab.FloatingActionButton
         android:id="@+id/web_avisos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@mipmap/internet"
+        fab:fab_colorNormal="@color/colorPrimary"
+        android:layout_marginRight="21dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="26dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="Web" />
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
