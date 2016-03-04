@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:color_history_enabled="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.larswerkman.lobsterpicker.LobsterPicker
+        app:color_history_enabled="true"
+        android:id="@+id/lobsterpicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp" />
+
+    <com.larswerkman.lobsterpicker.sliders.LobsterShadeSlider
+        android:id="@+id/shadeslider"
+        app:color_history_enabled="true"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lobsterpicker"
+        android:layout_alignRight="@+id/lobsterpicker"
+        android:layout_alignEnd="@+id/lobsterpicker"
+        android:layout_marginTop="51dp" />
+
+    <com.larswerkman.lobsterpicker.sliders.LobsterOpacitySlider
+        android:id="@+id/opacityslider"
+        app:color_history_enabled="true"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shadeslider"
+        android:layout_alignLeft="@+id/shadeslider"
+        android:layout_alignStart="@+id/shadeslider"
+        android:layout_marginTop="47dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dacord"
+        android:id="@+id/dacord"
+        android:layout_below="@+id/opacityslider"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="#ffffff" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Principal"
+        android:id="@+id/switch1"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/dacord"
+        android:layout_alignEnd="@+id/dacord"
+        android:layout_marginTop="19dp"
+        android:checked="true" />
+
+</RelativeLayout>

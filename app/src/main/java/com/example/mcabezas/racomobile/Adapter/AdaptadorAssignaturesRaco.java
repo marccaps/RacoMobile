@@ -9,6 +9,7 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import com.example.mcabezas.racomobile.Connect.AndroidUtils;
 import com.example.mcabezas.racomobile.Model.AssignaturesAvisos;
 import com.example.mcabezas.racomobile.Model.ItemGeneric;
+import com.example.mcabezas.racomobile.Model.PreferenciesUsuari;
 import com.example.mcabezas.racomobile.R;
 
 
@@ -42,6 +44,7 @@ public class AdaptadorAssignaturesRaco extends BaseAdapter {
         mLitems = it;
         mInflater = (LayoutInflater) mActivity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
     }
 
     public static class VistaH {
@@ -73,7 +76,9 @@ public class AdaptadorAssignaturesRaco extends BaseAdapter {
                 vh.titol.setTextColor(parent.getResources().getColor(R.color.colorPrimary));
                 vi.setBackgroundColor(parent.getResources().getColor(R.color.colorAccent));
             }
-            else vh.titol.setText(mLitems.get(position).getTitol());
+            else {
+                vh.titol.setText(mLitems.get(position).getTitol());
+            }
             vi.setTag(vh);
             return vi;
         } catch (Exception e) {

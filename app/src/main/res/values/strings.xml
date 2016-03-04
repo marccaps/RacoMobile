@@ -11,29 +11,23 @@
         <item>Correu</item>
         <item>PC Lliures</item>
         <item>About</item>
+        <item>Settings</item>
     </string-array>
 
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
-        <item>@drawable/ic_home</item>
+        <item>@mipmap/ic_home</item>
         <item>@mipmap/news</item>
         <item>@mipmap/calendar</item>
         <item>@mipmap/mail</item>
         <item>@mipmap/pc_lliure</item>
         <item>@mipmap/about</item>
+        <item>@mipmap/settings</item>
     </array>
 
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
-
-    <string name="diumenge">Diumenge</string>
-    <string name="dilluns">Dilluns</string>
-    <string name="dimarts">Dimarts</string>
-    <string name="dimecres">Dimecres</string>
-    <string name="dijous">Dijous</string>
-    <string name="divendres">Divendres</string>
-    <string name="dissabte">Dissabte</string>
 
 
     <string name="action_today">Today</string>
