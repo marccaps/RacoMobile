@@ -78,6 +78,8 @@ public class AdaptadorAssignaturesRaco extends BaseAdapter {
             }
             else {
                 vh.titol.setText(mLitems.get(position).getTitol());
+                vh.titol.setTextColor(parent.getResources().getColor(R.color.colorAccent));
+                vi.setBackgroundColor(parent.getResources().getColor(R.color.fbutton_color_sun_flower));
             }
             vi.setTag(vh);
             return vi;

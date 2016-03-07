@@ -3,6 +3,7 @@ package com.example.mcabezas.racomobile.Fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.mcabezas.racomobile.LlistesItems;
 
 import com.example.mcabezas.racomobile.Model.PreferenciesUsuari;
 import com.example.mcabezas.racomobile.R;
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.squareup.picasso.Picasso;
 
 
@@ -41,28 +43,65 @@ public class ControladorPcLliure extends GestioActualitzaLlistesActivity {
         Button mAulaB5 = (Button) rootView.findViewById(R.id.aula_b5);
         Button mAulaC6 = (Button) rootView.findViewById(R.id.aula_c6);
 
+        final ProgressWheel wheel = (ProgressWheel) rootView.findViewById(R.id.progress_wheel);
+        wheel.setBarColor(Color.rgb(12,188,252));
+        wheel.setVisibility(View.GONE);
+
         mAulaA5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                wheel.setVisibility(View.VISIBLE);
                 Picasso.with(getActivity())
                         .load(AndroidUtils.getInstance().URL_AULA_A5)
-                        .into(mAulaImage);
+                        .into(mAulaImage, new com.squareup.picasso.Callback() {
+                            @Override
+                            public void onSuccess() {
+                                wheel.setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onError() {
+
+                            }
+                        });
             }
         });
         mAulaB5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                wheel.setVisibility(View.VISIBLE);
                 Picasso.with(getActivity())
                         .load(AndroidUtils.getInstance().URL_AULA_B5)
-                        .into(mAulaImage);
+                        .into(mAulaImage,new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        wheel.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+            });
             }
         });
         mAulaC6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                wheel.setVisibility(View.VISIBLE);
                 Picasso.with(getActivity())
                         .load(AndroidUtils.getInstance().URL_AULA_C6)
-                        .into(mAulaImage);
+                        .into(mAulaImage, new com.squareup.picasso.Callback() {
+                            @Override
+                            public void onSuccess() {
+                                wheel.setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onError() {
+
+                            }
+                        });
             }
         });
 

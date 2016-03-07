@@ -220,7 +220,7 @@ public class OAuthFlowApp extends Activity {
 
 		} catch (IOException e) {
 			Toast.makeText(getApplicationContext(),
-					"Fallo en el login , sorry bruh", Toast.LENGTH_LONG).show();
+					"Fallo en el login", Toast.LENGTH_LONG).show();
 			return false;
 		}
 

@@ -314,6 +314,11 @@ public class BaseDadesManager {
         }
     }
 
+    /*
+    Obtenir tot l'horari
+     */
+
+
     public ArrayList<ItemGeneric> getAllAvisos() {
         try {
             mDb.execSQL(DATABASE_CREATE_TABLE_AVISOS);
@@ -465,16 +470,22 @@ public class BaseDadesManager {
         return list;
     }
 
-	/*public Cursor getAllHorari() throws SQLException {
-		Cursor mCursor = mDb.query(DATABASE_TABLE_HORARI, new String[] {
-				COL_ID, COL_HORA_INICI, COL_HORA_FI, COL_NOM_ASSIG,
-				COL_NOM_AULA, COL_DIA, COL_MES, COL_ANY }, null, null, null,
-				null, null);
-		if (mCursor != null) {
-			mCursor.moveToFirst();
-		}
-		return mCursor;
-	}*/
+    public ArrayList<EventHorari> getAllHorari() throws SQLException {
+        Cursor mCursor = mDb.query(DATABASE_TABLE_HORARI, new String[] {
+                        COL_ID, COL_HORA_INICI, COL_HORA_FI, COL_NOM_ASSIG,
+                        COL_NOM_AULA, COL_DIA, COL_MES, COL_ANY }, null, null, null,
+                null, null);
+        ArrayList<EventHorari> mHorari = new ArrayList<EventHorari>();
+        if( mCursor != null && mCursor.moveToFirst()) {
+            do {
+                EventHorari eventHorari = new EventHorari(mCursor.getString(1), mCursor.getString(2), mCursor.getString(3), mCursor.getString(4),
+                        mCursor.getInt(5), mCursor.getInt(6), mCursor.getInt(7));
+                mHorari.add(eventHorari);
+            } while (mCursor.moveToNext());
+        }
+        mCursor.close();
+        return mHorari;
+    }
 
     public int getAllHorariSize() throws SQLException {
         Cursor mCursor = mDb.query(DATABASE_TABLE_HORARI, new String[] {

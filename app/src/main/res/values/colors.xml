@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#0cbcfc</color>
+    <color name="colorPrimary">#6A98E9</color>
     <color name="colorAccent">#FFFFFF</color>
+    <color name="Grey">#ecf0f1</color>
 
 
-    <color name="material_login_login_color">#0cbcfc</color>
+    <color name="material_login_login_color">#6A98E9</color>
     <color name="material_login_register_color">#FFFFFF</color>
     <color name="material_login_login_error_color">#c0392b</color>
     <color name="material_login_register_error_color">#c0392b</color>
@@ -34,7 +35,7 @@
     <color name="fbutton_color_wisteria">#8e44ad</color>
     <color name="fbutton_color_wet_asphalt">#34495e</color>
     <color name="fbutton_color_midnight_blue">#2c3e50</color>
-    <color name="fbutton_color_sun_flower">#f1c40f</color>
+    <color name="fbutton_color_sun_flower">#FCCF74</color>
     <color name="fbutton_color_orange">#f39c12</color>
     <color name="fbutton_color_carrot">#e67e22</color>
     <color name="fbutton_color_pumpkin">#d35400</color>

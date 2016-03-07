@@ -81,7 +81,6 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
         colors.add(getResources().getColor(R.color.event_color_03));
         colors.add(getResources().getColor(R.color.event_color_04));
 
-
         // Gestionar Base de dades
         mBdm = new BaseDadesManager(getActivity());
 
@@ -100,25 +99,16 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
 
         mBdm.open();
         int res = mBdm.getAllHorariSize();
+        mHorari = mBdm.getAllHorari();
         mBdm.close();
 
         mWeekView = (WeekView) rootView.findViewById(R.id.weekView);
 
         mWeekView.goToHour(8);
 
-        // Show a toast message about the touched event.
-        mWeekView.setOnEventClickListener(this);
-
         // The week view has infinite scrolling horizontally. We have to provide the events of a
         // month every time the month changes on the week view.
         mWeekView.setMonthChangeListener(this);
-
-        // Set long press listener for events.
-        mWeekView.setEventLongPressListener(this);
-
-        // Set long press listener for empty view
-        mWeekView.setEmptyViewLongPressListener(this);
-
 
         // Set up a date time interpreter to interpret how the date and time will be formatted in
         // the week view. This is optional.
@@ -126,6 +116,7 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
 
         if(mHorari.size() == 0) obtenirDadesWeb();
         ordenarPerData();
+        actualitzarTaula();
         setHasOptionsMenu(true);
 
         return rootView;
@@ -186,7 +177,6 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
         if(newYear == mHorari.get(0).getmAny() && newYear == mHorari.get(mHorari.size()-1).getmAny()) {
             for (int i = 0; (i < mHorari.size()); ++i) {
                 if(mHorari.get(i).getmMes() == newMonth) {
-                    //TODO:Implementar una busqueda optima
                     if(dosHoras(mHorari.get(i).getmHoraInici(),mHorari.get(i).getmHoraFi())) {
                         startTime = Calendar.getInstance();
                         startTime.set(Calendar.DAY_OF_MONTH, mHorari.get(i).getmDia());
@@ -296,6 +286,13 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
             not = au.crearURL(au.URL_HORARI_RACO + keyURL);
             IcalParser ip = IcalParser.getInstance();
             mHorari = ip.parserHorariComplet(not);
+            mBdm.open();
+            for(int i = 0; i < mHorari.size();++i) {
+                mBdm.insertItemHorari(mHorari.get(i).getmHoraInici(),mHorari.get(i).getmHoraFi(),mHorari.get(i).getmAssignatura(),
+                        mHorari.get(i).getmAula(),mHorari.get(i).getmDia(),mHorari.get(i).getmMes(),mHorari.get(i).getmAny());
+            }
+            mBdm.close();
+
 
         } catch (MalformedURLException e) {
             Toast.makeText(getActivity(), "Error al cargar horario",
