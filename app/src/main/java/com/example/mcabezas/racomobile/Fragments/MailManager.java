@@ -18,25 +18,25 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.mcabezas.racomobile.Adapter.AdaptadorCorreusRaco;
+import com.example.mcabezas.racomobile.Adapter.MailAdapterRaco;
 import com.example.mcabezas.racomobile.Connect.AndroidUtils;
-import com.example.mcabezas.racomobile.Connect.GestioActualitzaLlistesActivity;
-import com.example.mcabezas.racomobile.Connect.GestioConnexions;
+import com.example.mcabezas.racomobile.Connect.RefreshListActivity;
+import com.example.mcabezas.racomobile.Connect.ConnectionsManager;
 import com.example.mcabezas.racomobile.Connect.ParserAndUrl;
-import com.example.mcabezas.racomobile.LlistesItems;
+import com.example.mcabezas.racomobile.ItemList;
 import com.example.mcabezas.racomobile.Model.BaseDadesManager;
-import com.example.mcabezas.racomobile.Model.Correu;
+import com.example.mcabezas.racomobile.Model.Mail;
 import com.example.mcabezas.racomobile.Model.ItemGeneric;
-import com.example.mcabezas.racomobile.Model.PreferenciesUsuari;
+import com.example.mcabezas.racomobile.Model.UserPreferences;
 import com.example.mcabezas.racomobile.R;
 
 
-public class ControladorCorreo extends GestioActualitzaLlistesActivity {
+public class MailManager extends RefreshListActivity {
 
     private final String TAG = "CorreuRaco";
 
-    public static ArrayList<Correu> sCorreus = new ArrayList<Correu>();
-    public AdaptadorCorreusRaco mAdaptadorLlista;
+    public static ArrayList<Mail> sCorreus = new ArrayList<Mail>();
+    public MailAdapterRaco mAdaptadorLlista;
     public ListView mListAgenda;
     private SharedPreferences sPrefs;
 
@@ -44,10 +44,10 @@ public class ControladorCorreo extends GestioActualitzaLlistesActivity {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.correu, container, false);
+        View rootView = inflater.inflate(R.layout.mail, container, false);
 
         sPrefs = getActivity().getSharedPreferences(
-                PreferenciesUsuari.getPreferenciesUsuari(), Context.MODE_PRIVATE);
+                UserPreferences.getPreferenciesUsuari(), Context.MODE_PRIVATE);
 
         mListAgenda = (ListView) rootView.findViewById(R.id.vista_llista_raco);
         mLLayout = (LinearLayout) rootView.findViewById(R.id.vistes_generals_raco);
@@ -67,7 +67,7 @@ public class ControladorCorreo extends GestioActualitzaLlistesActivity {
     }
 
     @Override
-    public void actualitzarLlistaBaseDades(LlistesItems lli) {
+    public void actualitzarLlistaBaseDades(ItemList lli) {
         try {
             ArrayList<ItemGeneric> correu = new ArrayList<ItemGeneric>();
             correu = (ArrayList<ItemGeneric>) lli.getLitemsGenerics();
@@ -77,7 +77,7 @@ public class ControladorCorreo extends GestioActualitzaLlistesActivity {
                 actualitzarTaula(correu);
             }
         } catch (Exception e) {
-            Toast.makeText(getActivity(), "Error Correu",
+            Toast.makeText(getActivity(), "Error Mail",
                     Toast.LENGTH_LONG).show();
         }
 
@@ -90,7 +90,7 @@ public class ControladorCorreo extends GestioActualitzaLlistesActivity {
 
         if (!sCorreus.isEmpty()) {
             // Gestionar les llistes
-            mAdaptadorLlista = new AdaptadorCorreusRaco(getActivity(), sCorreus);
+            mAdaptadorLlista = new MailAdapterRaco(getActivity(), sCorreus);
             mListAgenda.setAdapter(mAdaptadorLlista);
 
         }
@@ -107,7 +107,7 @@ public class ControladorCorreo extends GestioActualitzaLlistesActivity {
     }
 
     protected void obtenirDadesWeb() {
-        GestioConnexions gc = new GestioConnexions(getActivity());
+        ConnectionsManager gc = new ConnectionsManager(getActivity());
         AndroidUtils au = AndroidUtils.getInstance();
 
         // Preparem les URL i les connexions per obtenir les dades
@@ -128,12 +128,12 @@ public class ControladorCorreo extends GestioActualitzaLlistesActivity {
     }
 
     protected void actualitzarTaula(ArrayList<ItemGeneric> lCorreu) {
-        Correu correu;
+        Mail correu;
         mBdm.open();
         mBdm.deleteTableCorreus();
 
         for (int i = 0; i < lCorreu.size(); i++) {
-            correu = (Correu) lCorreu.get(i);
+            correu = (Mail) lCorreu.get(i);
             mBdm.insertItemCorreu(correu.getTitol(), correu.getDescripcio(),
                     correu.getImatge(), correu.getDataPub().toString(),
                     correu.getTipus(), correu.getLlegits(),

@@ -3,10 +3,10 @@ package com.example.mcabezas.racomobile.Connect;
 /**
  * Created by mcabezas on 16/02/16.
  */
-import com.example.mcabezas.racomobile.LlistesItems;
-import com.example.mcabezas.racomobile.Model.Aula;
+import com.example.mcabezas.racomobile.ItemList;
+import com.example.mcabezas.racomobile.Model.ClassRoom;
 import com.example.mcabezas.racomobile.Model.EventAgenda;
-import com.example.mcabezas.racomobile.Model.EventHorari;
+import com.example.mcabezas.racomobile.Model.EventSchedule;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -43,8 +43,8 @@ public class IcalParser {
         return sInstancia;
     }
 
-    public LlistesItems parserData(int tipus, URL url, LlistesItems lli) {
-        LlistesItems lliAux = new LlistesItems();
+    public ItemList parserData(int tipus, URL url, ItemList lli) {
+        ItemList lliAux = new ItemList();
         switch (tipus) {
             case AndroidUtils.TIPUS_CLASSES_DIA_RACO:// OCUPACIO AULES SABER
                 // ASSIGNATURA
@@ -59,7 +59,7 @@ public class IcalParser {
         return lliAux;
     }
 
-    protected LlistesItems parserClassesDia(URL url, LlistesItems lli) {
+    protected ItemList parserClassesDia(URL url, ItemList lli) {
         HttpURLConnection con = null;
         AndroidUtils au = AndroidUtils.getInstance();
         try {
@@ -73,7 +73,7 @@ public class IcalParser {
             String assig, classe;
             Date dataInici, dataFi;
             int horaInici, horaFi;
-            Aula aula;
+            ClassRoom aula;
 
             for (Object event : calendar.getComponents(Component.VEVENT)) {
                 dataInici = ((VEvent) event).getStartDate().getDate();
@@ -103,8 +103,8 @@ public class IcalParser {
         }
     }
 
-    public ArrayList<EventHorari> parserHorariComplet(URL url) {
-        ArrayList<EventHorari> lli = new ArrayList<EventHorari>();
+    public ArrayList<EventSchedule> parserHorariComplet(URL url) {
+        ArrayList<EventSchedule> lli = new ArrayList<EventSchedule>();
         HttpURLConnection con = null;
 
         try {
@@ -134,7 +134,7 @@ public class IcalParser {
 
                 cal.setTimeInMillis(data.getTime());
 
-                EventHorari eh = new EventHorari(hora_i, hora_f, assig, aula,
+                EventSchedule eh = new EventSchedule(hora_i, hora_f, assig, aula,
                         cal.get(java.util.Calendar.DAY_OF_MONTH),
                         cal.get(java.util.Calendar.MONTH),
                         cal.get(java.util.Calendar.YEAR));
@@ -148,8 +148,8 @@ public class IcalParser {
         }
     }
 
-    protected LlistesItems parserAgenda(URL url) {
-        LlistesItems lli = new LlistesItems();
+    protected ItemList parserAgenda(URL url) {
+        ItemList lli = new ItemList();
         HttpURLConnection con = null;
         try {
             con = (HttpURLConnection) url.openConnection();

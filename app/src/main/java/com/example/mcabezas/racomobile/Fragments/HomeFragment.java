@@ -5,48 +5,34 @@ package com.example.mcabezas.racomobile.Fragments;
  */
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Locale;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.mcabezas.racomobile.Adapter.AdaptadorAssignaturesRaco;
+import com.example.mcabezas.racomobile.Adapter.SubjectAdapterRaco;
 import com.example.mcabezas.racomobile.Connect.AndroidUtils;
-import com.example.mcabezas.racomobile.Connect.GestioActualitzaLlistesActivity;
-import com.example.mcabezas.racomobile.Connect.GestioConnexions;
+import com.example.mcabezas.racomobile.Connect.RefreshListActivity;
+import com.example.mcabezas.racomobile.Connect.ConnectionsManager;
 import com.example.mcabezas.racomobile.Connect.ParserAndUrl;
-import com.example.mcabezas.racomobile.LlistesItems;
+import com.example.mcabezas.racomobile.ItemList;
 import com.example.mcabezas.racomobile.Model.BaseDadesManager;
-import com.example.mcabezas.racomobile.Model.Correu;
-import com.example.mcabezas.racomobile.Model.CuerpoAvisos;
+import com.example.mcabezas.racomobile.Model.BodySubject;
 import com.example.mcabezas.racomobile.Model.ItemGeneric;
-import com.example.mcabezas.racomobile.Model.Noticia;
-import com.example.mcabezas.racomobile.Model.PreferenciesUsuari;
+import com.example.mcabezas.racomobile.Model.UserPreferences;
 import com.example.mcabezas.racomobile.R;
 
 
-public class HomeFragment extends GestioActualitzaLlistesActivity {
+public class HomeFragment extends RefreshListActivity {
 
     // Variable que fem servir per saber cada quan s'ha de refrescar, ara per
     // ara, seran 5 minuts (android utils hi ha la variable)
@@ -79,7 +65,7 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
         // password
 
         sPrefs = getActivity().getSharedPreferences(
-                PreferenciesUsuari.getPreferenciesUsuari(), Context.MODE_PRIVATE);
+                UserPreferences.getPreferenciesUsuari(), Context.MODE_PRIVATE);
         // Inicialitzem les preferències
         mUsername = sPrefs.getString("username", "");
         mPassword = sPrefs.getString("password", "");
@@ -123,7 +109,7 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
     }
 
     @Override
-    public void actualitzarLlistaBaseDades(LlistesItems lli) {
+    public void actualitzarLlistaBaseDades(ItemList lli) {
         try {
 
             if (lli.getLitemsGenerics().size() > 0) {
@@ -145,17 +131,19 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
     protected void mostrarLlistes() {
         obtenirDadesBd();
         AssignaturesAnalyzer();
-        AdaptadorAssignaturesRaco adaptadorAssignaturesRaco = new AdaptadorAssignaturesRaco(getActivity(),sListItems);
+        SubjectAdapterRaco adaptadorAssignaturesRaco = new SubjectAdapterRaco(getActivity(),sListItems);
         sLlistaVista.setAdapter(adaptadorAssignaturesRaco);
 
         sLlistaVista.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getActivity(), CuerpoAvisos.class);
-                i.putExtra("DESCRIPCION_AVISO",sListItems.get(position).getDescripcio());
-                i.putExtra("TITULO_AVISO",sListItems.get(position).getTitol());
-                i.putExtra("URL_AVISOS",sListItems.get(position).getUrl());
-                startActivity(i);
+                if(!sListItems.get(position).getDescripcio().equals("NomAssignatura")) {
+                    Intent i = new Intent(getActivity(), BodySubject.class);
+                    i.putExtra("DESCRIPCION_AVISO", sListItems.get(position).getDescripcio());
+                    i.putExtra("TITULO_AVISO", sListItems.get(position).getTitol());
+                    i.putExtra("URL_AVISOS", sListItems.get(position).getUrl());
+                    startActivity(i);
+                }
             }
         });
     }
@@ -237,9 +225,9 @@ public class HomeFragment extends GestioActualitzaLlistesActivity {
     @Override
     protected void obtenirDadesWeb() {
 
-        GestioConnexions gc = new GestioConnexions(getActivity());
+        ConnectionsManager gc = new ConnectionsManager(getActivity());
         SharedPreferences prefs = getActivity().getSharedPreferences(
-                PreferenciesUsuari.getPreferenciesUsuari(), Context.MODE_PRIVATE);
+                UserPreferences.getPreferenciesUsuari(), Context.MODE_PRIVATE);
 
         /** Preparem les URL i les connexions per obtenir les dades */
         try {

@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
-import com.example.mcabezas.racomobile.Model.Correu;
+import com.example.mcabezas.racomobile.Model.Mail;
 import com.example.mcabezas.racomobile.R;
 
 import java.util.ArrayList;
@@ -27,13 +27,13 @@ import java.util.ArrayList;
  * Spinner (by implementing the specialized SpinnerAdapter interface
  */
 
-public class AdaptadorCorreusRaco extends BaseAdapter {
+public class MailAdapterRaco extends BaseAdapter {
 
     private Activity mActivity;
     private LayoutInflater mInflater;
-    private ArrayList<Correu> mLitems;
+    private ArrayList<Mail> mLitems;
 
-    public AdaptadorCorreusRaco(Activity a, ArrayList<Correu> it) {
+    public MailAdapterRaco(Activity a, ArrayList<Mail> it) {
         mActivity = a;
         mLitems = it;
         mInflater = (LayoutInflater) mActivity
@@ -63,7 +63,7 @@ public class AdaptadorCorreusRaco extends BaseAdapter {
         ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
         // generate random color
         int color1 = generator.getRandomColor();
-        vi = mInflater.inflate(R.layout.llista_correu, null);
+        vi = mInflater.inflate(R.layout.mail_list, null);
         vh = new VistaH();
         vh.item_image = (ImageView) vi.findViewById(R.id.item_correo_imagen);
         vh.item_titol = (TextView) vi.findViewById(R.id.item_correo_titulo);
@@ -84,7 +84,7 @@ public class AdaptadorCorreusRaco extends BaseAdapter {
         else {
             vh.item_titol.setText(mLitems.get(position).getTitol().replace("\"", "") +"\n" +mLitems.get(position).getDescripcio().replace("&","").replace("&lt","").replace(";"," ").replace("gt",""));
         }
-        vh.item_titol.setTextColor(Color.rgb(12,188,252));
+        vh.item_titol.setTextColor(Color.rgb(106,152,233));
 
         vi.setTag(vh);
         vi.setBackgroundColor(Color.WHITE);

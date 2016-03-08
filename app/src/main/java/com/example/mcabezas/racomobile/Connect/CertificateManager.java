@@ -16,7 +16,7 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-public class GestorCertificats implements X509TrustManager {
+public class CertificateManager implements X509TrustManager {
 
     private static TrustManager[] sTrustManagers;
     private static final X509Certificate[] sAcceptedIssuers = new X509Certificate[] {};
@@ -54,7 +54,7 @@ public class GestorCertificats implements X509TrustManager {
         });
         SSLContext context = null;
         if (sTrustManagers == null) {
-            sTrustManagers = new TrustManager[] { new GestorCertificats() };
+            sTrustManagers = new TrustManager[] { new CertificateManager() };
         }
         try {
             context = SSLContext.getInstance("TLS");

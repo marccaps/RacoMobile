@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by mcabezas on 11/02/16.
  */
-public class Aula {
+public class ClassRoom {
     private String mNom;
     private String mPlaces;
     private Date mActualitzacio;
@@ -15,7 +15,7 @@ public class Aula {
     private String mHihaClasse;
 
 
-    public Aula(String nom, String places, Date actualitzacio, Date dataInici, Date dataFi, String nomAssig, String hiha){
+    public ClassRoom(String nom, String places, Date actualitzacio, Date dataInici, Date dataFi, String nomAssig, String hiha){
         this.mNom = nom;
         this.mPlaces = places;
         this.mActualitzacio = actualitzacio;

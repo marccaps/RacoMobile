@@ -3,9 +3,7 @@ package com.example.mcabezas.racomobile.Model;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.mcabezas.racomobile.R;
@@ -14,12 +12,12 @@ import com.thefinestartist.finestwebview.FinestWebView;
 /**
  * Created by mcabezas on 23/02/16.
  */
-public class CuerpoNoticia extends AppCompatActivity{
+public class BodyNews extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cuerpo_noticia);
+        setContentView(R.layout.body_news);
 
         TextView titulo = (TextView) findViewById(R.id.titulo_noticia);
         TextView descripcion = (TextView) findViewById(R.id.descripcion_noticia);
@@ -38,7 +36,7 @@ public class CuerpoNoticia extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
-                new FinestWebView.Builder(CuerpoNoticia.this).show(getIntent().getStringExtra("URL_NOTICIA").toString());
+                new FinestWebView.Builder(BodyNews.this).show(getIntent().getStringExtra("URL_NOTICIA").toString());
 
             }
         });

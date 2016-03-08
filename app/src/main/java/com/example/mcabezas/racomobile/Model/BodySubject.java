@@ -1,28 +1,24 @@
 package com.example.mcabezas.racomobile.Model;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.mcabezas.racomobile.R;
 import com.thefinestartist.finestwebview.FinestWebView;
 
-import java.sql.BatchUpdateException;
-
 /**
  * Created by mcabezas on 25/02/16.
  */
 
-public class CuerpoAvisos extends AppCompatActivity {
+public class BodySubject extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cuerpo_avisos);
+        setContentView(R.layout.body_subject);
 
         TextView mTituloAviso = (TextView) findViewById(R.id.titulo_aviso);
         TextView mDescripcionAviso = (TextView) findViewById(R.id.descripcion_aviso);
@@ -44,7 +40,7 @@ public class CuerpoAvisos extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new FinestWebView.Builder(CuerpoAvisos.this).show(getIntent().getStringExtra("URL_AVISOS"));
+                new FinestWebView.Builder(BodySubject.this).show(getIntent().getStringExtra("URL_AVISOS"));
             }
         });
 

@@ -36,8 +36,8 @@ import android.widget.Toast;
 
 import com.example.mcabezas.racomobile.Connect.AndroidUtils;
 import com.example.mcabezas.racomobile.Connect.Constants;
-import com.example.mcabezas.racomobile.Connect.GestorCertificats;
-import com.example.mcabezas.racomobile.Model.PreferenciesUsuari;
+import com.example.mcabezas.racomobile.Connect.CertificateManager;
+import com.example.mcabezas.racomobile.Model.UserPreferences;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -62,7 +62,7 @@ public class OAuthFlowApp extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 		prefs = getSharedPreferences(
-				PreferenciesUsuari.getPreferenciesUsuari(), Context.MODE_PRIVATE);
+				UserPreferences.getPreferenciesUsuari(), Context.MODE_PRIVATE);
 		String username = prefs.getString(AndroidUtils.USERNAME, "");
 		String password = prefs.getString(AndroidUtils.PASSWORD, "");
 		if(!username.equals("")) {
@@ -96,7 +96,7 @@ public class OAuthFlowApp extends Activity {
 				boolean isAllOk = check_user(loginUser.getEditText().getText().toString(),loginPass.getEditText().getText().toString());
 				if(isAllOk) {
 					SharedPreferences sp = getSharedPreferences(
-							PreferenciesUsuari.getPreferenciesUsuari(),
+							UserPreferences.getPreferenciesUsuari(),
 							MODE_PRIVATE);
 					SharedPreferences.Editor editor = sp.edit();
 					Intent i = new Intent(getApplicationContext(),MainActivity.class);
@@ -129,7 +129,7 @@ public class OAuthFlowApp extends Activity {
 
 	private boolean check_user(String username, String password) {
 
-		GestorCertificats.allowAllSSL();
+		CertificateManager.allowAllSSL();
 		AndroidUtils au = AndroidUtils.getInstance();
 		/** open connection */
 
@@ -195,7 +195,7 @@ public class OAuthFlowApp extends Activity {
 						.path("/api/unsubscribeNotificationSystem").textValue();
 
 				SharedPreferences sp = getSharedPreferences(
-						PreferenciesUsuari.getPreferenciesUsuari(),
+						UserPreferences.getPreferenciesUsuari(),
 						MODE_PRIVATE);
 				SharedPreferences.Editor editor = sp.edit();
 

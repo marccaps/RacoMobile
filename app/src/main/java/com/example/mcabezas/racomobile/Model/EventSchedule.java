@@ -3,7 +3,7 @@ package com.example.mcabezas.racomobile.Model;
 /**
  * Created by mcabezas on 11/02/16.
  */
-public class EventHorari {
+public class EventSchedule {
 
     private String mAula;
     private String mAssignatura;
@@ -13,7 +13,7 @@ public class EventHorari {
     private int mMes;
     private int mAny;
 
-    public EventHorari (String horaI, String horaF, String assig, String aula, int dia, int mes, int any){
+    public EventSchedule(String horaI, String horaF, String assig, String aula, int dia, int mes, int any){
         this.mAula = aula;
         this.mAssignatura = assig;
         this.mHoraInici = horaI;

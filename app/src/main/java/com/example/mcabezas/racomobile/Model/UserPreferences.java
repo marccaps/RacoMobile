@@ -9,9 +9,9 @@ import com.example.mcabezas.racomobile.R;
 /**
  * Created by mcabezas on 10/02/16.
  */
-public class PreferenciesUsuari extends Activity {
+public class UserPreferences extends Activity {
 
-    private String sTAG = "PreferenciesUsuari";
+    private String sTAG = "UserPreferences";
     private static final String RACO_PREFS = "PREF_USUARI_ANDROID_RACO";
 
     @Override

@@ -1,0 +1,14 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MyActivity">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/log_out"
+            android:title=" "
+            android:icon="@mipmap/logout"
+            android:orderInCategory="100"
+            app:showAsAction="always"/>
+    </group>
+</menu>

@@ -7,12 +7,12 @@ import com.example.mcabezas.racomobile.Model.ItemGeneric;
 
 import java.util.Date;
 
-public class Noticia extends ItemGeneric {
+public class News extends ItemGeneric {
 
-    public final static String mTAG="Noticia";
+    public final static String mTAG="News";
     private String mLink;
 
-    public Noticia(String titol, String descripcio, String imatge, Date pubDate, int tipus, String link) {
+    public News(String titol, String descripcio, String imatge, Date pubDate, int tipus, String link) {
         super(titol, descripcio, imatge, pubDate, tipus);
         this.mLink = link;
     }

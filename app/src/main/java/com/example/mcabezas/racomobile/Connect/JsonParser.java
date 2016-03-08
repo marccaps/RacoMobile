@@ -3,11 +3,10 @@ package com.example.mcabezas.racomobile.Connect;
 /**
  * Created by mcabezas on 17/02/16.
  */
-import com.example.mcabezas.racomobile.LlistesItems;
-import com.example.mcabezas.racomobile.Model.Assignatura;
-import com.example.mcabezas.racomobile.Model.Aula;
-import com.example.mcabezas.racomobile.Model.Correu;
-import com.example.mcabezas.racomobile.Model.Professors;
+import com.example.mcabezas.racomobile.ItemList;
+import com.example.mcabezas.racomobile.Model.Subject;
+import com.example.mcabezas.racomobile.Model.ClassRoom;
+import com.example.mcabezas.racomobile.Model.Mail;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -19,7 +18,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -42,11 +40,11 @@ public class JsonParser {
         return sInstancia;
     }
 
-    public LlistesItems parserData(int tipus, URL url, String username,
+    public ItemList parserData(int tipus, URL url, String username,
                                    String password) {
-        LlistesItems lli = new LlistesItems();
+        ItemList lli = new ItemList();
         switch (tipus) {
-            case AndroidUtils.TIPUS_CORREU:// Correu
+            case AndroidUtils.TIPUS_CORREU:// Mail
                 lli = parserCorreu(url, username, password);
                 break;
 
@@ -62,10 +60,10 @@ public class JsonParser {
         return lli;
     }
 
-    protected LlistesItems parserCorreu(URL url, String username,
+    protected ItemList parserCorreu(URL url, String username,
                                         String password) {
 
-        LlistesItems lli = new LlistesItems();
+        ItemList lli = new ItemList();
         AndroidUtils au = AndroidUtils.getInstance();
         String subjecte, from;
         Date pubDate;
@@ -106,7 +104,7 @@ public class JsonParser {
                     subjecte = node.path("subject").toString(); // title
                     from = node.path("from").toString(); // descripcio
                     pubDate = AndroidUtils.dateJSONStringToDateCorreu(node.path("date").toString());
-                    lli.afegirItemGeneric(new Correu(subjecte, from,
+                    lli.afegirItemGeneric(new Mail(subjecte, from,
                             _urlImatge, pubDate, AndroidUtils.TIPUS_CORREU, Integer
                             .parseInt(numLlegitsNode), Integer
                             .parseInt(numNoLlegitsNode)));
@@ -127,8 +125,8 @@ public class JsonParser {
         return lli;
     }
 
-    protected LlistesItems parserAssig(URL url) {
-        LlistesItems lli = new LlistesItems();
+    protected ItemList parserAssig(URL url) {
+        ItemList lli = new ItemList();
         HttpURLConnection con = null;
         try {
             con = (HttpURLConnection) url.openConnection();
@@ -145,7 +143,7 @@ public class JsonParser {
                         .toString());
                 nom = node.path("nom").textValue().toString();
                 idAssig = node.path("idAssig").textValue().toString();
-                Assignatura a = new Assignatura(codi, nom, idAssig, 0, null,
+                Subject a = new Subject(codi, nom, idAssig, 0, null,
                         null);
                 lli.afegirItemAssig(a);
             }
@@ -159,8 +157,8 @@ public class JsonParser {
     }
 
 
-    protected LlistesItems parseAulesOcupacio(URL url) {
-        LlistesItems lli = new LlistesItems();
+    protected ItemList parseAulesOcupacio(URL url) {
+        ItemList lli = new ItemList();
         AndroidUtils au = AndroidUtils.getInstance();
         HttpURLConnection con = null;
         try {
@@ -170,7 +168,7 @@ public class JsonParser {
             ObjectMapper m = new ObjectMapper();
             JsonNode rootNode = m.readValue(is, JsonNode.class);
             String _aula, _places, _dataUpdate;
-            Aula aula = null;
+            ClassRoom aula = null;
             Date dataUpdate;
             Calendar dataFi = Calendar.getInstance();
             Calendar cDataUpdate = Calendar.getInstance();
@@ -184,7 +182,7 @@ public class JsonParser {
                 int horaAulaFi = cDataUpdate.get(Calendar.HOUR);
                 horaAulaFi++;
                 dataFi.set(Calendar.HOUR, horaAulaFi);
-                aula = new Aula(_aula.toUpperCase().trim(), _places, dataUpdate, dataUpdate, dataFi.getTime(), " ", "false");
+                aula = new ClassRoom(_aula.toUpperCase().trim(), _places, dataUpdate, dataUpdate, dataFi.getTime(), " ", "false");
                 lli.afegirItemAula(aula);
             }
             con.disconnect();

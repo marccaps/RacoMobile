@@ -6,24 +6,22 @@ package com.example.mcabezas.racomobile.Connect;
     import java.lang.ref.WeakReference;
 
     import android.app.Activity;
-    import android.content.Intent;
     import android.os.AsyncTask;
 
-    import com.example.mcabezas.racomobile.LlistesItems;
-    import com.example.mcabezas.racomobile.MainActivity;
-    import com.example.mcabezas.racomobile.Model.Avis;
+    import com.example.mcabezas.racomobile.ItemList;
+    import com.example.mcabezas.racomobile.Model.Notice;
     import com.example.mcabezas.racomobile.Model.BaseDadesManager;
-    import com.example.mcabezas.racomobile.Model.Correu;
-    import com.example.mcabezas.racomobile.Model.Noticia;
+    import com.example.mcabezas.racomobile.Model.Mail;
+    import com.example.mcabezas.racomobile.Model.News;
 
 
-public class GestioConnexions extends AsyncTask<ParserAndUrl, Integer, LlistesItems> {
+public class ConnectionsManager extends AsyncTask<ParserAndUrl, Integer, ItemList> {
 
         WeakReference<Activity> mContext;
         private final String mTAG = "GestioConnexio";
         private BaseDadesManager mBd;
 
-        public GestioConnexions(Activity activity) {
+        public ConnectionsManager(Activity activity) {
             mContext = new WeakReference<Activity>(activity);
             mBd = new BaseDadesManager(activity);
         }
@@ -37,17 +35,17 @@ public class GestioConnexions extends AsyncTask<ParserAndUrl, Integer, LlistesIt
         }
 
         @Override
-        protected LlistesItems doInBackground(ParserAndUrl... urls) {
+        protected ItemList doInBackground(ParserAndUrl... urls) {
 
-            LlistesItems lli = new LlistesItems();
-            LlistesItems tmp = new LlistesItems();
+            ItemList lli = new ItemList();
+            ItemList tmp = new ItemList();
 
             JsonParser json = JsonParser.getInstance();
             XmlParser xml = XmlParser.getInstance();
             IcalParser ics = IcalParser.getInstance();
 
             // Donem accés als certificats de la FIB
-            GestorCertificats.allowAllSSL();
+            CertificateManager.allowAllSSL();
 
             //Així tanquem les connexions segur
             System.setProperty("http.keepAlive", "false");
@@ -59,13 +57,13 @@ public class GestioConnexions extends AsyncTask<ParserAndUrl, Integer, LlistesIt
                         tmp = xml.parserData(urls[i].getTipus(), urls[i].getUrl());
                         insertarItemsGenerics(lli, tmp);
 
-                        Noticia ig;
+                        News ig;
 
                         mBd.open();
                         mBd.deleteTableNoticies();
 
                         for (int j = 0; j < tmp.getLitemsGenerics().size(); j++) {
-                            ig = (Noticia) tmp.getLitemsGenerics().get(j);
+                            ig = (News) tmp.getLitemsGenerics().get(j);
                             mBd.insertItemNoticia(ig.getTitol(), ig.getDescripcio(),
                                     ig.getImatge(), ig.getDataPub().toString(),
                                     ig.getTipus(), ig.getmLink());
@@ -73,17 +71,17 @@ public class GestioConnexions extends AsyncTask<ParserAndUrl, Integer, LlistesIt
                         mBd.close();
                         break;
 
-                    case AndroidUtils.TIPUS_CORREU: // Correu
+                    case AndroidUtils.TIPUS_CORREU: // Mail
                         tmp = json.parserData(urls[i].getTipus(), urls[i].getUrl(),
                                 urls[i].getUsername(), urls[i].getPassword());
                         insertarItemsGenerics(lli, tmp);
 
-                        Correu correu;
+                        Mail correu;
 
                         mBd.open();
                         mBd.deleteTableCorreus();
                         for (int j = 0; j < tmp.getLitemsGenerics().size(); j++) {
-                            correu = (Correu) tmp.getLitemsGenerics().get(j);
+                            correu = (Mail) tmp.getLitemsGenerics().get(j);
                             mBd.insertItemCorreu(correu.getTitol(),correu.getDescripcio(),correu.getImatge(),
                                     correu.getDataPub().toString(),correu.getTipus(),correu.getLlegits(),correu.getNo_llegits());
                         }
@@ -94,14 +92,14 @@ public class GestioConnexions extends AsyncTask<ParserAndUrl, Integer, LlistesIt
                             tmp = xml.parserData(urls[i].getTipus(), urls[i].getUrl());
                             insertarItemsGenerics(lli, tmp);
 
-                            Avis avis;
+                            Notice avis;
 
                             mBd.open();
                             mBd.deleteTableAvisos();
                             mBd.deleteTableAssigRaco();
                             mBd.deleteTableAssigFib();
                             for (int j = 0; j < tmp.getLitemsGenerics().size(); j++) {
-                                avis = (Avis) tmp.getLitemsGenerics().get(j);
+                                avis = (Notice) tmp.getLitemsGenerics().get(j);
                                 mBd.insertItemAvis(avis.getTitol(),avis.getDescripcio(),avis.getImatge(),avis.getDataPub().toString()+ " ",avis.getTipus(),avis.getNomAssig(),avis.getUrl());
                             }
                             mBd.close();
@@ -115,7 +113,7 @@ public class GestioConnexions extends AsyncTask<ParserAndUrl, Integer, LlistesIt
         }
 
         /** Captura les dades parsejades en el doInBackground per a la vista ControladorVistaEvents i NotíciesFIB */
-        private void insertarItemsGenerics(LlistesItems lli, LlistesItems tmp) {
+        private void insertarItemsGenerics(ItemList lli, ItemList tmp) {
             if (tmp != null) {
                 for (int i = 0; i < tmp.getLitemsGenerics().size(); i++) {
                     lli.afegirItemGeneric(tmp.getLitemsGenerics().get(i));
@@ -129,7 +127,7 @@ public class GestioConnexions extends AsyncTask<ParserAndUrl, Integer, LlistesIt
         }
 
         @Override
-        protected void onPostExecute(LlistesItems result) {
+        protected void onPostExecute(ItemList result) {
 
         }
 }

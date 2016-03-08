@@ -3,8 +3,8 @@ package com.example.mcabezas.racomobile;
 /**
  * Created by mcabezas on 11/02/16.
  */
-import com.example.mcabezas.racomobile.Model.Assignatura;
-import com.example.mcabezas.racomobile.Model.Aula;
+import com.example.mcabezas.racomobile.Model.Subject;
+import com.example.mcabezas.racomobile.Model.ClassRoom;
 import com.example.mcabezas.racomobile.Model.EventAgenda;
 import com.example.mcabezas.racomobile.Model.ItemGeneric;
 
@@ -12,21 +12,21 @@ import java.util.ArrayList;
 
 
 
-public class LlistesItems {
+public class ItemList {
 
     private ArrayList<ItemGeneric> mLitems; // items de la llista ResumEvents i NoticiesFib
     private ArrayList<String> mLimatges;	// Imatges dels items de la llista
-    private ArrayList<Assignatura> mLassig;
+    private ArrayList<Subject> mLassig;
     private ArrayList<EventAgenda> mLeventAgenda;
-    private ArrayList<Aula> mLaula;
+    private ArrayList<ClassRoom> mLaula;
 
-    public LlistesItems() {
+    public ItemList() {
         // TODO Es podria passar un identificador per saber quin new s'ha de fer
         mLitems = new ArrayList<ItemGeneric>();
         mLimatges = new ArrayList<String>();
-        mLassig = new ArrayList<Assignatura>();
+        mLassig = new ArrayList<Subject>();
         mLeventAgenda = new ArrayList<EventAgenda>();
-        mLaula = new ArrayList<Aula>();
+        mLaula = new ArrayList<ClassRoom>();
     }
 
     /**GET's*/
@@ -38,7 +38,7 @@ public class LlistesItems {
         return mLimatges;
     }
 
-    public ArrayList<Assignatura> getLassig() {
+    public ArrayList<Subject> getLassig() {
         return mLassig;
     }
 
@@ -46,12 +46,12 @@ public class LlistesItems {
         return mLeventAgenda;
     }
 
-    public ArrayList<Aula> getLaula() {
+    public ArrayList<ClassRoom> getLaula() {
         return mLaula;
     }
 
     /**SET's*/
-    public void setLassig(ArrayList<Assignatura> lassig) {
+    public void setLassig(ArrayList<Subject> lassig) {
         this.mLassig = lassig;
     }
 
@@ -67,7 +67,7 @@ public class LlistesItems {
         this.mLimatges = limatges;
     }
 
-    public void setLaula(ArrayList<Aula> laula) {
+    public void setLaula(ArrayList<ClassRoom> laula) {
         this.mLaula = laula;
     }
 
@@ -84,11 +84,11 @@ public class LlistesItems {
         this.mLimatges.add(im);
     }
 
-    public void afegirItemAssig(Assignatura it) {
+    public void afegirItemAssig(Subject it) {
         this.mLassig.add(it);
     }
 
-    public void afegirItemAula(Aula it) {
+    public void afegirItemAula(ClassRoom it) {
         this.mLaula.add(it);
     }
 

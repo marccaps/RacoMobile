@@ -6,8 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -24,8 +22,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.alamkanak.weekview.DateTimeInterpreter;
@@ -33,22 +29,22 @@ import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 import com.example.mcabezas.racomobile.Connect.AndroidUtils;
-import com.example.mcabezas.racomobile.Connect.GestioActualitzaLlistesActivity;
+import com.example.mcabezas.racomobile.Connect.RefreshListActivity;
 import com.example.mcabezas.racomobile.Connect.IcalParser;
-import com.example.mcabezas.racomobile.LlistesItems;
+import com.example.mcabezas.racomobile.ItemList;
 import com.example.mcabezas.racomobile.Model.BaseDadesManager;
-import com.example.mcabezas.racomobile.Model.EventHorari;
-import com.example.mcabezas.racomobile.Model.PreferenciesUsuari;
+import com.example.mcabezas.racomobile.Model.EventSchedule;
+import com.example.mcabezas.racomobile.Model.UserPreferences;
 import com.example.mcabezas.racomobile.R;
 
 /**
  * Created by mcabezas on 15/02/16.
  */
-public class ControladorHorario extends GestioActualitzaLlistesActivity
+public class ScheduleManager extends RefreshListActivity
         implements Runnable ,WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
 
     private final String mTAG = "ControladorHorari";
-    private static ArrayList<EventHorari> mHorari = new ArrayList<EventHorari>();
+    private static ArrayList<EventSchedule> mHorari = new ArrayList<EventSchedule>();
     private Calendar mDiaActual;
     // volem carregar declarat a AndroidUtils
     private List<Integer> colors;
@@ -68,10 +64,10 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.horario, container, false);
+        View rootView = inflater.inflate(R.layout.schedule, container, false);
 
         sPrefs = getActivity().getSharedPreferences(
-                PreferenciesUsuari.getPreferenciesUsuari(), Context.MODE_PRIVATE);
+                UserPreferences.getPreferenciesUsuari(), Context.MODE_PRIVATE);
 
         colors = new ArrayList<>();
         mAssignatures = new ArrayList<>();
@@ -174,53 +170,53 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
         WeekViewEvent event = null;
         Calendar startTime = Calendar.getInstance();
         Calendar endTime = Calendar.getInstance();
-        if(newYear == mHorari.get(0).getmAny() && newYear == mHorari.get(mHorari.size()-1).getmAny()) {
-            for (int i = 0; (i < mHorari.size()); ++i) {
-                if(mHorari.get(i).getmMes() == newMonth) {
-                    if(dosHoras(mHorari.get(i).getmHoraInici(),mHorari.get(i).getmHoraFi())) {
-                        startTime = Calendar.getInstance();
-                        startTime.set(Calendar.DAY_OF_MONTH, mHorari.get(i).getmDia());
-                        startTime.set(Calendar.HOUR_OF_DAY, getHora(mHorari.get(i).getmHoraInici()));
-                        startTime.set(Calendar.MINUTE, 0);
-                        startTime.set(Calendar.MONTH, newMonth);
-                        startTime.set(Calendar.YEAR, newYear);
-                        endTime = (Calendar) startTime.clone();
-                        endTime.add(Calendar.HOUR_OF_DAY, 2);
-                        event = new WeekViewEvent(4, mHorari.get(i).getmAssignatura() +"\n" +mHorari.get(i).getmAula(), startTime, endTime);
-                        for(int j = 0; j < mAssignatures.size();++j) {
-                            if(mHorari.get(i).getmAssignatura().substring(0,mHorari.get(i).getmAssignatura().length()-2).equals(mAssignatures.get(j))) {
-                                if(j > (colors.size()+1)) {
-                                    int resto = j % colors.size()+1;
-                                    event.setColor(colors.get(resto));
+        if(mHorari.size() > 0) {
+            if (newYear == mHorari.get(0).getmAny() && newYear == mHorari.get(mHorari.size() - 1).getmAny()) {
+                for (int i = 0; (i < mHorari.size()); ++i) {
+                    if (mHorari.get(i).getmMes() == newMonth) {
+                        if (dosHoras(mHorari.get(i).getmHoraInici(), mHorari.get(i).getmHoraFi())) {
+                            startTime = Calendar.getInstance();
+                            startTime.set(Calendar.DAY_OF_MONTH, mHorari.get(i).getmDia());
+                            startTime.set(Calendar.HOUR_OF_DAY, getHora(mHorari.get(i).getmHoraInici()));
+                            startTime.set(Calendar.MINUTE, 0);
+                            startTime.set(Calendar.MONTH, newMonth);
+                            startTime.set(Calendar.YEAR, newYear);
+                            endTime = (Calendar) startTime.clone();
+                            endTime.add(Calendar.HOUR_OF_DAY, 2);
+                            event = new WeekViewEvent(4, mHorari.get(i).getmAssignatura() + "\n" + mHorari.get(i).getmAula(), startTime, endTime);
+                            for (int j = 0; j < mAssignatures.size(); ++j) {
+                                if (mHorari.get(i).getmAssignatura().substring(0, mHorari.get(i).getmAssignatura().length() - 2).equals(mAssignatures.get(j))) {
+                                    if (j >= (colors.size())) {
+                                        int resto = j % colors.size();
+                                        event.setColor(colors.get(resto));
+                                    } else event.setColor(colors.get(j));
                                 }
-                                else event.setColor(colors.get(j));
-                            }
-                        }
-                        events.add(event);
-                    }
-                    else {
-                        startTime = Calendar.getInstance();
-                        startTime.set(Calendar.DAY_OF_MONTH, mHorari.get(i).getmDia());
-                        startTime.set(Calendar.HOUR_OF_DAY, getHora(mHorari.get(i).getmHoraInici()));
-                        startTime.set(Calendar.MINUTE, 0);
-                        startTime.set(Calendar.MONTH, newMonth);
-                        startTime.set(Calendar.YEAR, newYear);
-                        endTime = (Calendar) startTime.clone();
-                        endTime.add(Calendar.HOUR_OF_DAY, 1);
-                        event = new WeekViewEvent(4, mHorari.get(i).getmAssignatura() +"\n" +mHorari.get(i).getmAula(), startTime, endTime);
-                        for(int j = 0; j < mAssignatures.size();++j) {
-                            if (mHorari.get(i).getmAssignatura().equals(mAssignatures.get(j))) {
-                                if (j >= colors.size()) {
-                                    int resto = colors.size() % j;
-                                    event.setColor(colors.get(resto));
-                                } else event.setColor(colors.get(j));
                             }
                             events.add(event);
+                        } else {
+                            startTime = Calendar.getInstance();
+                            startTime.set(Calendar.DAY_OF_MONTH, mHorari.get(i).getmDia());
+                            startTime.set(Calendar.HOUR_OF_DAY, getHora(mHorari.get(i).getmHoraInici()));
+                            startTime.set(Calendar.MINUTE, 0);
+                            startTime.set(Calendar.MONTH, newMonth);
+                            startTime.set(Calendar.YEAR, newYear);
+                            endTime = (Calendar) startTime.clone();
+                            endTime.add(Calendar.HOUR_OF_DAY, 1);
+                            event = new WeekViewEvent(4, mHorari.get(i).getmAssignatura() + "\n" + mHorari.get(i).getmAula(), startTime, endTime);
+                            for (int j = 0; j < mAssignatures.size(); ++j) {
+                                if (mHorari.get(i).getmAssignatura().equals(mAssignatures.get(j))) {
+                                    if (j >= colors.size()) {
+                                        int resto = colors.size() % j;
+                                        event.setColor(colors.get(resto));
+                                    } else event.setColor(colors.get(j));
+                                }
+                                events.add(event);
+                            }
                         }
                     }
                 }
             }
-         }
+        }
         return events;
     }
 
@@ -248,7 +244,7 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
     }
 
     @Override
-    public void actualitzarLlistaBaseDades(LlistesItems lli) {
+    public void actualitzarLlistaBaseDades(ItemList lli) {
         try {
             if (mHorari.size() > 0) {
 
@@ -315,7 +311,7 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
     }
 
     protected void actualitzarTaula() {
-        EventHorari e;
+        EventSchedule e;
         mBdm.open();
         mBdm.deleteTableHorari();
 
@@ -338,7 +334,7 @@ public class ControladorHorario extends GestioActualitzaLlistesActivity
 
     private void ordenarPerData() {
         int minIndex;
-        EventHorari rig, rag;
+        EventSchedule rig, rag;
         int n = mHorari.size();
         String[] horaEventIniciRig;
         String[] horaEventIniciRag;

@@ -14,57 +14,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mcabezas.racomobile.Connect.AndroidUtils;
-import com.example.mcabezas.racomobile.GestorImatges;
+import com.example.mcabezas.racomobile.ImageManager;
 import com.example.mcabezas.racomobile.Model.ItemGeneric;
 import com.example.mcabezas.racomobile.R;
 
 import java.util.ArrayList;
 
 public class PostItemAdapter extends BaseAdapter {
-//    private Activity myContext;
-//    private PostData[] datas;
-//
-//    public PostItemAdapter(Context context, int textViewResourceId,
-//                           PostData[] objects) {
-//        super(context, textViewResourceId, objects);
-//        // TODO Auto-generated constructor stub
-//        myContext = (Activity) context;
-//        datas = objects;
-//    }
-//
-//
-//
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        View rowView;
-//
-//        if(convertView == null) {
-//            LayoutInflater inflater = myContext.getLayoutInflater();
-//            convertView = inflater.inflate(R.layout.post_item, null);
-//        }
-//
-//        rowView = convertView;
-//        ImageView thumbImageView = (ImageView) rowView
-//                .findViewById(R.id.postThumb);
-//        //check if the datas[position].postThumbUrl is null
-//        if (datas[position].postThumbUrl == null) {
-//            thumbImageView.setImageResource(R.mipmap.ic_launcher);
-//        }
-//
-//        TextView postTitleView = (TextView) rowView
-//                .findViewById(R.id.postTitleLabel);
-//        postTitleView.setText(datas[position].postTitle);
-//
-//        TextView postDateView = (TextView) rowView
-//                .findViewById(R.id.postDateLabel);
-//        postDateView.setText(datas[position].postDate);
-//
-//        return rowView;
-//    }
 
     private Activity mActivityAct;
     private String[] mLUrlImatges;
     private LayoutInflater mInflater;
-    public GestorImatges gestorIm;
+    public ImageManager gestorIm;
     private ArrayList<ItemGeneric> mLItems;
 
     public PostItemAdapter(Activity a, String[] im, ArrayList<ItemGeneric> it) {
@@ -75,7 +36,7 @@ public class PostItemAdapter extends BaseAdapter {
         mLItems = it;
         mInflater = (LayoutInflater) mActivityAct
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        gestorIm = new GestorImatges(mActivityAct.getApplicationContext());
+        gestorIm = new ImageManager(mActivityAct.getApplicationContext());
     }
 
     public static class VistaH {
@@ -117,7 +78,7 @@ public class PostItemAdapter extends BaseAdapter {
             vh.titol = (TextView) vi.findViewById(R.id.postTitleLabel);
             vh.image = (ImageView) vi.findViewById(R.id.postThumb);
             vh.data = (TextView) vi.findViewById(R.id.postDateLabel);
-            vh.titol.setTextColor(Color.rgb(12,188,252));
+            vh.titol.setTextColor(Color.rgb(106,152,233));
             vi.setTag(vh);
             vi.setBackgroundColor(Color.WHITE);
 

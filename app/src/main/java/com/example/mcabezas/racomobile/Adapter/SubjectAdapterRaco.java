@@ -3,26 +3,17 @@ package com.example.mcabezas.racomobile.Adapter;
 /**
  * Created by mcabezas on 19/02/16.
  */
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.mcabezas.racomobile.Connect.AndroidUtils;
-import com.example.mcabezas.racomobile.Model.AssignaturesAvisos;
 import com.example.mcabezas.racomobile.Model.ItemGeneric;
-import com.example.mcabezas.racomobile.Model.PreferenciesUsuari;
 import com.example.mcabezas.racomobile.R;
 
 
@@ -32,14 +23,14 @@ import com.example.mcabezas.racomobile.R;
  * Spinner (by implementing the specialized SpinnerAdapter interface
  */
 
-public class AdaptadorAssignaturesRaco extends BaseAdapter {
+public class SubjectAdapterRaco extends BaseAdapter {
 
     private Activity mActivity;
     private LayoutInflater mInflater;
     private ArrayList<ItemGeneric> mLitems;
 
-    public AdaptadorAssignaturesRaco(Activity a,
-                                     ArrayList<ItemGeneric> it) {
+    public SubjectAdapterRaco(Activity a,
+                              ArrayList<ItemGeneric> it) {
         mActivity = a;
         mLitems = it;
         mInflater = (LayoutInflater) mActivity
@@ -68,7 +59,7 @@ public class AdaptadorAssignaturesRaco extends BaseAdapter {
         try {
             View vi = convertView;
             VistaH vh;
-            vi = mInflater.inflate(R.layout.llista_assignatures_raco, null);
+            vi = mInflater.inflate(R.layout.subject_list_raco, null);
             vh = new VistaH();
             vh.titol = (TextView) vi.findViewById(R.id.nomAssigRaco);
             if(mLitems.get(position).getDescripcio().equals("NomAssignatura")) {

@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**Aquesta classe serveix per poder mostrar de manera comuna la llista d'assignatures + avisos en el Racó*/
 
-public class AssignaturesAvisos {
+public class SubjectNotice {
 
     private String mNomAssig;
     private String mTitolAvis;
@@ -17,7 +17,7 @@ public class AssignaturesAvisos {
     private String mIdAssig;
     private String mImatge;
 
-    public AssignaturesAvisos(String nomAssig, int codiAssig, String idAssig, String titolAvis, String descripcioAvis, Date data, String imatge) {
+    public SubjectNotice(String nomAssig, int codiAssig, String idAssig, String titolAvis, String descripcioAvis, Date data, String imatge) {
         this.mNomAssig = nomAssig;
         this.mDescripcioAvis = descripcioAvis;
         this.mData = data;

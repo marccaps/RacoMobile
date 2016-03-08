@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -14,20 +17,23 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 
 import com.example.mcabezas.racomobile.Adapter.NavDrawerListAdapter;
 import com.example.mcabezas.racomobile.Fragments.About;
-import com.example.mcabezas.racomobile.Fragments.ControladorCorreo;
-import com.example.mcabezas.racomobile.Fragments.ControladorHorario;
-import com.example.mcabezas.racomobile.Fragments.ControladorPcLliure;
-import com.example.mcabezas.racomobile.Fragments.ControladorVistaNoticiesFib;
+import com.example.mcabezas.racomobile.Fragments.MailManager;
+import com.example.mcabezas.racomobile.Fragments.NewsManager;
+import com.example.mcabezas.racomobile.Fragments.ScheduleManager;
+import com.example.mcabezas.racomobile.Fragments.FreePCManager;
 import com.example.mcabezas.racomobile.Fragments.HomeFragment;
+import com.example.mcabezas.racomobile.Model.BaseDadesManager;
 import com.example.mcabezas.racomobile.Model.NavDrawerItem;
+import com.example.mcabezas.racomobile.Model.UserPreferences;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,8 +56,12 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
 
+    private BaseDadesManager mBdm;
+
 
     private void init() {
+
+        mBdm = new BaseDadesManager(this);
 
         mTitle = mDrawerTitle = getTitle();
 
@@ -157,16 +167,16 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new HomeFragment();
                 break;
             case 1:
-                fragment = new ControladorVistaNoticiesFib();
+                fragment = new NewsManager();
                 break;
             case 2:
-                fragment = new ControladorHorario();
+                fragment = new ScheduleManager();
                 break;
             case 3:
-                fragment = new ControladorCorreo();
+                fragment = new MailManager();
                 break;
             case 4:
-                fragment = new ControladorPcLliure();
+                fragment = new FreePCManager();
                 break;
             case 5:
                 fragment = new About();
@@ -228,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
             final NiftyDialogBuilder dialogBuilder= NiftyDialogBuilder.getInstance(this);
 
             dialogBuilder
-                    .withDialogColor(Color.rgb(12,188,252))
+                    .withDialogColor(Color.rgb(106,152,233))
                     .withMessageColor(Color.WHITE)
                     .withTitle("Vols tancar l'aplicació?")
                     .withButton1Text("Sí")
@@ -265,4 +275,42 @@ public class MainActivity extends AppCompatActivity {
         android.os.Process.killProcess(id);
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.log_out, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // One of the group items (using the onClick attribute) was clicked
+        // The item parameter passed here indicates which item it is
+        // All other menu item clicks are handled by onOptionsItemSelected()
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.log_out:
+                SharedPreferences sPfres = getSharedPreferences(UserPreferences.getPreferenciesUsuari(),
+                        Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sPfres.edit();
+                editor.clear();
+                editor.commit();
+
+                mBdm.open();
+                mBdm.deleteDB();
+                mBdm.close();
+                mBdm.open();
+                mBdm.deleteTableHorari();
+                mBdm.close();
+
+                Intent intent = new Intent(this, OAuthFlowApp.class);
+                startActivity(intent);
+            break;
+
+            default:
+                break;
+        }
+        return false;
+    }
 }

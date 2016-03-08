@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by mcabezas on 11/02/16.
  */
 
-public class Correu extends ItemGeneric {
+public class Mail extends ItemGeneric {
 
     private String mTo;
     private String mFrom;
@@ -45,7 +45,7 @@ public class Correu extends ItemGeneric {
         this.mFrom = from;
     }
 
-    public Correu(String titol, String descripcio, String imatge, Date pubDate, int tipus, int llegits, int no_llegits) {
+    public Mail(String titol, String descripcio, String imatge, Date pubDate, int tipus, int llegits, int no_llegits) {
         super(titol, descripcio, imatge, pubDate, tipus);
         this.setNo_llegits(no_llegits);
         this.setLlegits(llegits);

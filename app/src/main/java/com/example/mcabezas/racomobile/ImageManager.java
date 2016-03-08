@@ -25,17 +25,17 @@ import android.widget.ImageView;
 
 import com.example.mcabezas.racomobile.Connect.AndroidUtils;
 
-public class GestorImatges {
+public class ImageManager {
 
-    private final static String TAG = "GestorImatges";
+    private final static String TAG = "ImageManager";
 
-    MemoriaCache memoryCache = new MemoriaCache();
+    CacheMemory memoryCache = new CacheMemory();
     FileCache fileCache;
     private Map<ImageView, String> imageViews = Collections
             .synchronizedMap(new WeakHashMap<ImageView, String>());
     ExecutorService executorService;
 
-    public GestorImatges(Context context) {
+    public ImageManager(Context context) {
         fileCache = new FileCache(context);
         executorService = Executors.newFixedThreadPool(5);
     }

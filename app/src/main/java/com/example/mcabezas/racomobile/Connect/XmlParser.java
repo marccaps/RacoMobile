@@ -1,11 +1,10 @@
 package com.example.mcabezas.racomobile.Connect;
 
-import com.example.mcabezas.racomobile.Model.Avis;
-import com.example.mcabezas.racomobile.LlistesItems;
+import com.example.mcabezas.racomobile.Model.Notice;
+import com.example.mcabezas.racomobile.ItemList;
 import com.example.mcabezas.racomobile.Model.ItemGeneric;
-import com.example.mcabezas.racomobile.Model.Noticia;
+import com.example.mcabezas.racomobile.Model.News;
 
-import org.apache.http.HttpConnection;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -44,8 +43,8 @@ public class XmlParser {
         return sInstancia;
     }
 
-    public LlistesItems parserData(int tipus, URL url){
-        LlistesItems lli = new LlistesItems();
+    public ItemList parserData(int tipus, URL url){
+        ItemList lli = new ItemList();
         switch (tipus) {
             case AndroidUtils.TIPUS_NOTICIA:/** Noticies */
                 lli = parserNoticies(url);
@@ -59,8 +58,8 @@ public class XmlParser {
         return lli;
     }
 
-    protected LlistesItems parserAvisos(URL url) {
-        LlistesItems lli = new LlistesItems();
+    protected ItemList parserAvisos(URL url) {
+        ItemList lli = new ItemList();
         AndroidUtils au = AndroidUtils.getInstance();
         HttpURLConnection con = null;
         try {
@@ -101,7 +100,7 @@ public class XmlParser {
                             .getNodeValue());
 
                     nomAssig = title.trim().split("-");
-                    lli.afegirItemGeneric((ItemGeneric) new Avis(title,
+                    lli.afegirItemGeneric((ItemGeneric) new Notice(title,
                             description, urlImatge, pubDate,
                             AndroidUtils.TIPUS_AVISOS, nomAssig[0] ,link));
                     lli.afegirImatge(urlImatge);
@@ -121,8 +120,8 @@ public class XmlParser {
         return lli;
     }
 
-    protected LlistesItems parserNoticies(URL url) {
-        LlistesItems lli = new LlistesItems();
+    protected ItemList parserNoticies(URL url) {
+        ItemList lli = new ItemList();
         AndroidUtils au = AndroidUtils.getInstance();
         HttpURLConnection con = null;
         try {
@@ -166,7 +165,7 @@ public class XmlParser {
                         _urlImatge = _urlImatgeE.getAttribute("url");
                     }
                     /** Cas explicit per les notícies */
-                    lli.afegirItemGeneric((Noticia) new Noticia(_title,
+                    lli.afegirItemGeneric((News) new News(_title,
                             _description, _urlImatge, _pubDate, AndroidUtils.TIPUS_NOTICIA,
                             link));
                     lli.afegirImatge(_urlImatge);

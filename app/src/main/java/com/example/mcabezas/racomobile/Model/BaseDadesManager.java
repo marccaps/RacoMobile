@@ -301,7 +301,7 @@ public class BaseDadesManager {
                 do {
                     Date date = AndroidUtils.dateXMLStringToDateControlador(
                             formatter, mCursor.getString(4));
-                    Noticia n = new Noticia(mCursor.getString(1),
+                    News n = new News(mCursor.getString(1),
                             mCursor.getString(2), mCursor.getString(3), date,
                             mCursor.getInt(5), mCursor.getString(6));
                     list.add(n);
@@ -333,7 +333,7 @@ public class BaseDadesManager {
                 do {
                     Date date = AndroidUtils.dateXMLStringToDateControlador(
                             formatter, mCursor.getString(4));
-                    Avis a = new Avis(mCursor.getString(1),
+                    Notice a = new Notice(mCursor.getString(1),
                             mCursor.getString(2), mCursor.getString(3), date,
                             mCursor.getInt(5), mCursor.getString(6),mCursor.getString(7));
                     list.add(a);
@@ -346,7 +346,7 @@ public class BaseDadesManager {
         }
     }
 
-    public ArrayList<Correu> getAllCorreus() {
+    public ArrayList<Mail> getAllCorreus() {
         try {
             mDb.execSQL(DATABASE_CREATE_TABLE_CORREUS);
             Cursor mCursor = mDb.query(DATABASE_TABLE_CORREUS, new String[] {
@@ -354,14 +354,14 @@ public class BaseDadesManager {
                             COL_TIPUS, COL_LLEGITS, COL_NO_LLEGITS }, null, null, null,
                     null, null);
 
-            ArrayList<Correu> list = new ArrayList<Correu>();
+            ArrayList<Mail> list = new ArrayList<Mail>();
             if (mCursor != null && mCursor.moveToFirst()) {
                 SimpleDateFormat formatter = AndroidUtils
                         .crearSimpleDateFormat();
                 do {
                     Date date = AndroidUtils.dateXMLStringToDateControlador(
                             formatter, mCursor.getString(4));
-                    Correu correu = new Correu(mCursor.getString(1),
+                    Mail correu = new Mail(mCursor.getString(1),
                             mCursor.getString(2), mCursor.getString(3), date,
                             mCursor.getInt(5), mCursor.getInt(6),
                             mCursor.getInt(7));
@@ -375,16 +375,16 @@ public class BaseDadesManager {
         }
     }
 
-    public ArrayList<Assignatura> getAllAssigFib() throws SQLException {
+    public ArrayList<Subject> getAllAssigFib() throws SQLException {
         Cursor mCursor = mDb.rawQuery("SELECT " + COL_ID + ", "
                 + COL_CODI_ASSIG + ", " + COL_NOM_ASSIG + ", " + COL_ID_ASSIG
                 + ", " + COL_CREDITS + " FROM " + DATABASE_TABLE_ASSIG_FIB
                 + " ORDER BY " + COL_ID_ASSIG, null);
 
-        ArrayList<Assignatura> list = new ArrayList<Assignatura>();
+        ArrayList<Subject> list = new ArrayList<Subject>();
         if (mCursor != null && mCursor.moveToFirst()) {
             do {
-                Assignatura a = new Assignatura(mCursor.getInt(1),
+                Subject a = new Subject(mCursor.getInt(1),
                         mCursor.getString(2), mCursor.getString(3),
                         mCursor.getInt(4), null, null);
                 list.add(a);
@@ -426,15 +426,15 @@ public class BaseDadesManager {
         return list;
     }
 
-    public ArrayList<AssignaturesAvisos> getAllAssigRaco() throws SQLException {
+    public ArrayList<SubjectNotice> getAllAssigRaco() throws SQLException {
         Cursor mCursor = mDb.query(DATABASE_TABLE_ASSIG_RACO, new String[] {
                         COL_ID, COL_CODI_ASSIG, COL_NOM_ASSIG, COL_ID_ASSIG }, null,
                 null, null, null, null);
 
-        ArrayList<AssignaturesAvisos> list = new ArrayList<AssignaturesAvisos>();
+        ArrayList<SubjectNotice> list = new ArrayList<SubjectNotice>();
         if (mCursor != null && mCursor.moveToFirst()) {
             do {
-                AssignaturesAvisos a = new AssignaturesAvisos(
+                SubjectNotice a = new SubjectNotice(
                         mCursor.getString(2), mCursor.getInt(1),
                         mCursor.getString(3), null, null, null, null);
                 list.add(a);
@@ -444,13 +444,13 @@ public class BaseDadesManager {
         return list;
     }
 
-    public ArrayList<Aula> getAllAulaOcupacio() throws SQLException {
+    public ArrayList<ClassRoom> getAllAulaOcupacio() throws SQLException {
         Cursor mCursor = mDb.query(DATABASE_TABLE_AULES_OCUPACIO, new String[] {
                         COL_ID, COL_NOM_AULA, COL_PLACES, COL_DATA_ACTUALITZACIO,
                         COL_DATA_INICI, COL_DATA_FI, COL_NOM_ASSIG, COL_HI_HA_CLASSE },
                 null, null, null, null, null);
 
-        ArrayList<Aula> list = new ArrayList<Aula>();
+        ArrayList<ClassRoom> list = new ArrayList<ClassRoom>();
         if (mCursor != null && mCursor.moveToFirst()) {
             SimpleDateFormat formatter = AndroidUtils.crearSimpleDateFormat();
             do {
@@ -460,7 +460,7 @@ public class BaseDadesManager {
                         formatter, mCursor.getString(4));
                 Date fi = AndroidUtils.dateXMLStringToDateControlador(
                         formatter, mCursor.getString(5));
-                Aula aula = new Aula(mCursor.getString(1),
+                ClassRoom aula = new ClassRoom(mCursor.getString(1),
                         mCursor.getString(2), update, inici, fi,
                         mCursor.getString(6), mCursor.getString(7));
                 list.add(aula);
@@ -470,15 +470,15 @@ public class BaseDadesManager {
         return list;
     }
 
-    public ArrayList<EventHorari> getAllHorari() throws SQLException {
+    public ArrayList<EventSchedule> getAllHorari() throws SQLException {
         Cursor mCursor = mDb.query(DATABASE_TABLE_HORARI, new String[] {
                         COL_ID, COL_HORA_INICI, COL_HORA_FI, COL_NOM_ASSIG,
                         COL_NOM_AULA, COL_DIA, COL_MES, COL_ANY }, null, null, null,
                 null, null);
-        ArrayList<EventHorari> mHorari = new ArrayList<EventHorari>();
+        ArrayList<EventSchedule> mHorari = new ArrayList<EventSchedule>();
         if( mCursor != null && mCursor.moveToFirst()) {
             do {
-                EventHorari eventHorari = new EventHorari(mCursor.getString(1), mCursor.getString(2), mCursor.getString(3), mCursor.getString(4),
+                EventSchedule eventHorari = new EventSchedule(mCursor.getString(1), mCursor.getString(2), mCursor.getString(3), mCursor.getString(4),
                         mCursor.getInt(5), mCursor.getInt(6), mCursor.getInt(7));
                 mHorari.add(eventHorari);
             } while (mCursor.moveToNext());
@@ -582,16 +582,16 @@ public class BaseDadesManager {
 	}*/
 
     /** Consultes Concretes */
-    public ArrayList<Professors> getProfessorsAssig(String id)
+    public ArrayList<Teachers> getProfessorsAssig(String id)
             throws SQLException {
         String[] args = new String[] { id };
         Cursor mCursor = mDb.rawQuery("SELECT " + COL_NOM_PROF + ", "
                 + COL_EMAIL + " FROM " + DATABASE_TABLE_PROFESSORS + " WHERE "
                 + COL_CODI_ASSIG + "=?", args);
-        ArrayList<Professors> list = new ArrayList<Professors>();
+        ArrayList<Teachers> list = new ArrayList<Teachers>();
         if (mCursor != null && mCursor.moveToFirst()) {
             do {
-                Professors p = new Professors(mCursor.getString(0), mCursor.getString(1), Integer.valueOf(id));
+                Teachers p = new Teachers(mCursor.getString(0), mCursor.getString(1), Integer.valueOf(id));
                 list.add(p);
             } while (mCursor.moveToNext());
         }
@@ -669,7 +669,7 @@ public class BaseDadesManager {
         mCursor.close();
     }
 
-    public ArrayList<AssignaturesAvisos> getAvisAssig(String nom)
+    public ArrayList<SubjectNotice> getAvisAssig(String nom)
             throws SQLException {
         String[] args = new String[] { nom };
         Cursor mCursor = mDb.rawQuery("SELECT " + COL_TITOL + ", "
@@ -677,13 +677,13 @@ public class BaseDadesManager {
                 + ", " + COL_IMATGE + COL_URL + ", " + " FROM " + DATABASE_TABLE_AVISOS
                 + " WHERE " + COL_ID_ASSIG + "=?", args);
 
-        ArrayList<AssignaturesAvisos> list = new ArrayList<AssignaturesAvisos>();
+        ArrayList<SubjectNotice> list = new ArrayList<SubjectNotice>();
         if (mCursor != null && mCursor.moveToFirst()) {
             SimpleDateFormat formatter = AndroidUtils.crearSimpleDateFormat();
             do {
                 Date date = AndroidUtils.dateXMLStringToDateControlador(
                         formatter, mCursor.getString(2));
-                AssignaturesAvisos a = new AssignaturesAvisos(
+                SubjectNotice a = new SubjectNotice(
                         mCursor.getString(3), 0, mCursor.getString(3),
                         mCursor.getString(0), mCursor.getString(1), date,
                         mCursor.getString(4));
@@ -694,7 +694,7 @@ public class BaseDadesManager {
         return list;
     }
 
-    public ArrayList<EventHorari> getDiaHorari(String dia, String mes,
+    public ArrayList<EventSchedule> getDiaHorari(String dia, String mes,
                                                String any) throws SQLException {
         String[] args = new String[] { dia, mes, any };
         Cursor mCursor = mDb.rawQuery("SELECT " + COL_HORA_INICI + ", "
@@ -702,10 +702,10 @@ public class BaseDadesManager {
                 + ", " + COL_DIA + ", " + COL_MES + ", " + COL_ANY + " FROM "
                 + DATABASE_TABLE_HORARI + " WHERE " + COL_DIA + "=? AND "
                 + COL_MES + "=? AND " + COL_ANY + "=?", args);
-        ArrayList<EventHorari> list = new ArrayList<EventHorari>();
+        ArrayList<EventSchedule> list = new ArrayList<EventSchedule>();
         if (mCursor != null&& mCursor.moveToFirst()) {
             do {
-                EventHorari e = new EventHorari(mCursor.getString(0), mCursor.getString(1),
+                EventSchedule e = new EventSchedule(mCursor.getString(0), mCursor.getString(1),
                         mCursor.getString(2), mCursor.getString(3), mCursor.getInt(4),
                         mCursor.getInt(5), mCursor.getInt(6));
                 list.add(e);
