@@ -107,8 +107,6 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.mipmap.ic_drawer);
 
-//        actionBar.setIcon(R.drawable.ic_drawer);
-
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.mipmap.ic_drawer, //nav main toggle icon
                 R.string.app_name, // nav drawer open - description for accessibility
@@ -289,6 +287,9 @@ public class MainActivity extends AppCompatActivity {
         // The item parameter passed here indicates which item it is
         // All other menu item clicks are handled by onOptionsItemSelected()
         int id = item.getItemId();
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
         switch (id) {
             case R.id.log_out:
                 SharedPreferences sPfres = getSharedPreferences(UserPreferences.getPreferenciesUsuari(),
@@ -309,8 +310,11 @@ public class MainActivity extends AppCompatActivity {
             break;
 
             default:
-                break;
+                // Handle action bar actions click
+                return super.onOptionsItemSelected(item);
         }
         return false;
     }
+
+
 }
