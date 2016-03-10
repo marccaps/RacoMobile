@@ -1,5 +1,10 @@
 package com.example.mcabezas.racomobile.Fragments;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -9,10 +14,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.graphics.RectF;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.TypedValue;
@@ -36,6 +44,12 @@ import com.example.mcabezas.racomobile.Model.BaseDadesManager;
 import com.example.mcabezas.racomobile.Model.EventSchedule;
 import com.example.mcabezas.racomobile.Model.UserPreferences;
 import com.example.mcabezas.racomobile.R;
+import com.liulishuo.filedownloader.FileDownloader;
+
+import net.fortuna.ical4j.data.CalendarBuilder;
+import net.fortuna.ical4j.model.Component;
+import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.property.DtStart;
 
 /**
  * Created by mcabezas on 15/02/16.
@@ -44,7 +58,6 @@ public class ScheduleManager extends RefreshListActivity
         implements Runnable ,WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
 
     private final String mTAG = "ControladorHorari";
-    private static ArrayList<EventSchedule> mHorari = new ArrayList<EventSchedule>();
     private Calendar mDiaActual;
     // volem carregar declarat a AndroidUtils
     private List<Integer> colors;
@@ -56,6 +69,16 @@ public class ScheduleManager extends RefreshListActivity
     private int mWeekViewType = TYPE_THREE_DAY_VIEW;
     private WeekView mWeekView;
     private SharedPreferences sPrefs;
+
+
+    // Progress Dialog
+    private ProgressDialog pDialog;
+
+    private static ArrayList<EventSchedule> mHorari = new ArrayList<EventSchedule>();
+
+    // Progress dialog type (0 - for Horizontal progress bar)
+    public static final int progress_bar_type = 0;
+
 
 
     //Fragment heredado
@@ -71,6 +94,8 @@ public class ScheduleManager extends RefreshListActivity
 
         colors = new ArrayList<>();
         mAssignatures = new ArrayList<>();
+
+        FileDownloader.init(getActivity().getApplication());
 
         colors.add(getResources().getColor(R.color.event_color_01));
         colors.add(getResources().getColor(R.color.event_color_02));
@@ -282,6 +307,7 @@ public class ScheduleManager extends RefreshListActivity
             not = au.crearURL(au.URL_HORARI_RACO + keyURL);
             IcalParser ip = IcalParser.getInstance();
             mHorari = ip.parserHorariComplet(not);
+//            new DownloadFileFromURL().execute(not.toString());
             mBdm.open();
             for(int i = 0; i < mHorari.size();++i) {
                 mBdm.insertItemHorari(mHorari.get(i).getmHoraInici(),mHorari.get(i).getmHoraFi(),mHorari.get(i).getmAssignatura(),
@@ -422,4 +448,112 @@ public class ScheduleManager extends RefreshListActivity
 
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     * Showing Dialog
+     * */
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case progress_bar_type:
+                pDialog = new ProgressDialog(getActivity());
+                pDialog.setMessage("Downloading file. Please wait...");
+                pDialog.setIndeterminate(false);
+                pDialog.setMax(100);
+                pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                pDialog.setCancelable(true);
+                pDialog.show();
+                return pDialog;
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Background Async Task to download file
+     * */
+    class DownloadFileFromURL extends AsyncTask<String, ArrayList<EventSchedule>, ArrayList<EventSchedule>> {
+
+        ArrayList<EventSchedule> lli = new ArrayList<EventSchedule>();
+
+        @Override
+        protected ArrayList<EventSchedule> doInBackground(String... params) {
+            HttpURLConnection con = null;
+
+            try {
+                URL url = new URL(params[0]);
+                con = (HttpURLConnection) url.openConnection();
+                // Així tanquem les connexions segur
+                System.setProperty("http.keepAlive", "false");
+                InputStream fin = con.getInputStream();
+
+                Reader reader = new BufferedReader(new InputStreamReader(fin,
+                        "UTF-8"));
+                CalendarBuilder builder = new CalendarBuilder();
+                net.fortuna.ical4j.model.Calendar calendar = builder.build(reader);
+                net.fortuna.ical4j.model.Date data;
+                java.util.Calendar cal = java.util.Calendar.getInstance();
+                String hora_i, hora_f, assig, aula;
+                DtStart DtStart;
+                for (Object event : calendar.getComponents(Component.VEVENT)) {
+                    DtStart = (((VEvent) event).getStartDate());
+                    data = DtStart.getDate();
+                    hora_i = DtStart.getDate().getHours() + ":"
+                            + DtStart.getDate().getMinutes() + "0";
+                    hora_f = ((VEvent) event).getEndDate().getDate().getHours()
+                            + ":"
+                            + ((VEvent) event).getStartDate().getDate()
+                            .getMinutes() + "0";
+                    assig = ((VEvent) event).getSummary().getValue();
+                    aula = ((VEvent) event).getLocation().getValue();
+
+                    cal.setTimeInMillis(data.getTime());
+
+                    EventSchedule eh = new EventSchedule(hora_i, hora_f, assig, aula,
+                            cal.get(java.util.Calendar.DAY_OF_MONTH),
+                            cal.get(java.util.Calendar.MONTH),
+                            cal.get(java.util.Calendar.YEAR));
+                    lli.add(eh);
+                }
+                con.disconnect();
+                mHorari = new ArrayList<>(lli);
+                return lli;
+            } catch (Exception e) {
+                con.disconnect();
+                return null;
+            }
+
+        }
+
+        /**
+         * Before starting background thread
+         * Show Progress Bar Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            getActivity().showDialog(progress_bar_type);
+        }
+
+        /**
+         * Updating progress bar
+         * */
+        protected void onProgressUpdate(String... progress) {
+            // setting progress percentage
+            pDialog.setProgress(Integer.parseInt(progress[0]));
+        }
+
+        /**
+         * After completing background task
+         * Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog after the file was downloaded
+            getActivity().dismissDialog(progress_bar_type);
+
+            // Displaying downloaded image into image view
+            // Reading image path from sdcard
+        }
+
+    }
+
 }

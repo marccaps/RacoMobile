@@ -1,16 +1,32 @@
 package com.example.mcabezas.racomobile;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 
@@ -23,8 +39,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.mcabezas.racomobile.Adapter.NavDrawerListAdapter;
+import com.example.mcabezas.racomobile.Connect.AndroidUtils;
+import com.example.mcabezas.racomobile.Connect.IcalParser;
 import com.example.mcabezas.racomobile.Fragments.About;
 import com.example.mcabezas.racomobile.Fragments.MailManager;
 import com.example.mcabezas.racomobile.Fragments.NewsManager;
@@ -32,9 +51,17 @@ import com.example.mcabezas.racomobile.Fragments.ScheduleManager;
 import com.example.mcabezas.racomobile.Fragments.FreePCManager;
 import com.example.mcabezas.racomobile.Fragments.HomeFragment;
 import com.example.mcabezas.racomobile.Model.BaseDadesManager;
+import com.example.mcabezas.racomobile.Model.EventSchedule;
 import com.example.mcabezas.racomobile.Model.NavDrawerItem;
 import com.example.mcabezas.racomobile.Model.UserPreferences;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
+
+import net.fortuna.ical4j.data.CalendarBuilder;
+import net.fortuna.ical4j.model.Calendar;
+import net.fortuna.ical4j.model.Component;
+import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.property.DtStart;
+import net.fortuna.ical4j.model.property.Url;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
@@ -57,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
     private NavDrawerListAdapter adapter;
 
     private BaseDadesManager mBdm;
+
+    private SharedPreferences sPrefs;
+
 
 
     private void init() {
@@ -124,6 +154,10 @@ public class MainActivity extends AppCompatActivity {
                 invalidateOptionsMenu();
             }
         };
+
+        sPrefs = this.getSharedPreferences(
+                UserPreferences.getPreferenciesUsuari(), Context.MODE_PRIVATE);
+
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
@@ -299,10 +333,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.commit();
 
                 mBdm.open();
-                mBdm.deleteDB();
-                mBdm.close();
-                mBdm.open();
-                mBdm.deleteTableHorari();
+                mBdm.deleteTablesLogout();
                 mBdm.close();
 
                 Intent intent = new Intent(this, OAuthFlowApp.class);
@@ -315,6 +346,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-
 
 }

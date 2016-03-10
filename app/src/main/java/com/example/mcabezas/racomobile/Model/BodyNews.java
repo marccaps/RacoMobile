@@ -1,11 +1,16 @@
 package com.example.mcabezas.racomobile.Model;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.mcabezas.racomobile.OAuthFlowApp;
 import com.example.mcabezas.racomobile.R;
 import com.thefinestartist.finestwebview.FinestWebView;
 
@@ -31,6 +36,12 @@ public class BodyNews extends AppCompatActivity{
         descripcion.setText(getIntent().getStringExtra("DESCRIPCION").toString());
         titulo.setText(getIntent().getStringExtra("TITULO").toString());
 
+        final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+
+
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.mipmap.back);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,5 +53,22 @@ public class BodyNews extends AppCompatActivity{
         });
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // One of the group items (using the onClick attribute) was clicked
+        // The item parameter passed here indicates which item it is
+        // All other menu item clicks are handled by onOptionsItemSelected()
+        int id = item.getItemId();
+        switch (id) {
+            default:
+                // Handle action bar actions click
+                onBackPressed();
+                return true;
+
+        }
+    }
+
+
 
 }

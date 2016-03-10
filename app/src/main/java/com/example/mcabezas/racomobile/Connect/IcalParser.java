@@ -7,6 +7,7 @@ import com.example.mcabezas.racomobile.ItemList;
 import com.example.mcabezas.racomobile.Model.ClassRoom;
 import com.example.mcabezas.racomobile.Model.EventAgenda;
 import com.example.mcabezas.racomobile.Model.EventSchedule;
+import com.liulishuo.filedownloader.FileDownloader;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -112,6 +113,7 @@ public class IcalParser {
             // Així tanquem les connexions segur
             System.setProperty("http.keepAlive", "false");
             InputStream fin = con.getInputStream();
+
             Reader reader = new BufferedReader(new InputStreamReader(fin,
                     "UTF-8"));
             CalendarBuilder builder = new CalendarBuilder();

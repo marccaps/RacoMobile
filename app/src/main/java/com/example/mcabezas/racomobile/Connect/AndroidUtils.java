@@ -34,9 +34,9 @@ public class AndroidUtils {
     public String URL_CORREU = "https://webmail.fib.upc.edu/horde/imp/check_mail/resum_mail_json.php";
     public String URL_AVISOS = "https://raco.fib.upc.edu/extern/rss_avisos.jsp?KEY=";
 
-    public String URL_AULA_A5 = "http://www.fib.upc.edu/mapa.php?mod=a5";
-    public String URL_AULA_B5 = "http://www.fib.upc.edu/mapa.php?mod=b5";
-    public String URL_AULA_C6 = "http://www.fib.upc.edu/mapa.php?mod=c6";
+    public String URL_AULA_A5 = "https://raco.fib.upc.edu/mapa_ocupades.php?mod=a5";
+    public String URL_AULA_B5 = "https://raco.fib.upc.edu/mapa_ocupades.php?mod=b5";
+    public String URL_AULA_C6 = "https://raco.fib.upc.edu/mapa_ocupades.php?mod=c6";
     public String URL_HORARI_RACO = "https://raco.fib.upc.edu/ical/horari.ics?KEY=";
 
     // Per saber si en tenim de pendents o no
