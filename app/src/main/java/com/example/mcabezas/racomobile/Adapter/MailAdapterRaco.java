@@ -6,6 +6,7 @@ package com.example.mcabezas.racomobile.Adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,10 +80,10 @@ public class MailAdapterRaco extends BaseAdapter {
         vh.item_image.setImageDrawable(textDrawable);
 
         if(mLitems.get(position).getTitol().equals(" ")) {
-            vh.item_titol.setText("Sense assumpte"+"\n"+mLitems.get(position).getDescripcio().replace("&","").replace("&lt","").replace(":","").replace("gt",""));
+            vh.item_titol.setText("Sense assumpte" + "\n" + Html.fromHtml(mLitems.get(position).getDescripcio()));
         }
         else {
-            vh.item_titol.setText(mLitems.get(position).getTitol().replace("\"", "") +"\n" +mLitems.get(position).getDescripcio().replace("&","").replace("&lt","").replace(";"," ").replace("gt",""));
+            vh.item_titol.setText(Html.fromHtml(mLitems.get(position).getTitol()+"\n" +mLitems.get(position).getDescripcio()));
         }
         vh.item_titol.setTextColor(Color.rgb(106,152,233));
 

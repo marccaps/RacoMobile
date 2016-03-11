@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Locale;
 
 import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -78,6 +81,9 @@ public class ScheduleManager extends RefreshListActivity
 
     // Progress dialog type (0 - for Horizontal progress bar)
     public static final int progress_bar_type = 0;
+
+    ProgressDialog prog = null;
+
 
 
 
@@ -306,14 +312,8 @@ public class ScheduleManager extends RefreshListActivity
 
             not = au.crearURL(au.URL_HORARI_RACO + keyURL);
             IcalParser ip = IcalParser.getInstance();
-            mHorari = ip.parserHorariComplet(not);
-//            new DownloadFileFromURL().execute(not.toString());
-            mBdm.open();
-            for(int i = 0; i < mHorari.size();++i) {
-                mBdm.insertItemHorari(mHorari.get(i).getmHoraInici(),mHorari.get(i).getmHoraFi(),mHorari.get(i).getmAssignatura(),
-                        mHorari.get(i).getmAula(),mHorari.get(i).getmDia(),mHorari.get(i).getmMes(),mHorari.get(i).getmAny());
-            }
-            mBdm.close();
+//            mHorari = ip.parserHorariComplet(not);
+            new DownloadFileFromURL().execute(not.toString());
 
 
         } catch (MalformedURLException e) {
@@ -471,7 +471,7 @@ public class ScheduleManager extends RefreshListActivity
     /**
      * Background Async Task to download file
      * */
-    class DownloadFileFromURL extends AsyncTask<String, ArrayList<EventSchedule>, ArrayList<EventSchedule>> {
+    class DownloadFileFromURL extends AsyncTask<String, String, ArrayList<EventSchedule>> {
 
         ArrayList<EventSchedule> lli = new ArrayList<EventSchedule>();
 
@@ -516,6 +516,13 @@ public class ScheduleManager extends RefreshListActivity
                 }
                 con.disconnect();
                 mHorari = new ArrayList<>(lli);
+                mBdm.open();
+                for(int i = 0; i < mHorari.size();++i) {
+                    mBdm.insertItemHorari(mHorari.get(i).getmHoraInici(),mHorari.get(i).getmHoraFi(),mHorari.get(i).getmAssignatura(),
+                            mHorari.get(i).getmAula(),mHorari.get(i).getmDia(),mHorari.get(i).getmMes(),mHorari.get(i).getmAny());
+                }
+                mBdm.close();
+                getActivity().recreate();
                 return lli;
             } catch (Exception e) {
                 con.disconnect();
@@ -531,7 +538,14 @@ public class ScheduleManager extends RefreshListActivity
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            getActivity().showDialog(progress_bar_type);
+            prog = new ProgressDialog(getActivity());
+            prog.setTitle("Espere por favor");
+            prog.setMessage("Descargando Horario");
+            prog.setCancelable(false);
+            prog.setIndeterminate(true);
+            prog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            prog.show();
+//            getActivity().showDialog(progress_bar_type);
         }
 
         /**
@@ -539,19 +553,22 @@ public class ScheduleManager extends RefreshListActivity
          * */
         protected void onProgressUpdate(String... progress) {
             // setting progress percentage
-            pDialog.setProgress(Integer.parseInt(progress[0]));
+//            pDialog.setProgress(Integer.parseInt(progress[0]));
         }
 
         /**
          * After completing background task
          * Dismiss the progress dialog
          * **/
-        protected void onPostExecute(String file_url) {
+        @Override
+        protected void onPostExecute(ArrayList<EventSchedule> eventSchedules) {
+            prog.cancel();
+            Fragment fragment = new ScheduleManager();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.frame_container, fragment).commit();
             // dismiss the dialog after the file was downloaded
-            getActivity().dismissDialog(progress_bar_type);
 
-            // Displaying downloaded image into image view
-            // Reading image path from sdcard
         }
 
     }

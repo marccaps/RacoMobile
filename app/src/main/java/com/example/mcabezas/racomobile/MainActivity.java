@@ -302,9 +302,9 @@ public class MainActivity extends AppCompatActivity {
     public void onDestroy()
     {
         super.onDestroy();
-
-        int id= android.os.Process.myPid();
-        android.os.Process.killProcess(id);
+        System.exit(0);
+//        int id= android.os.Process.myPid();
+//        android.os.Process.killProcess(id);
     }
 
 
@@ -313,6 +313,18 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.log_out, menu);
         return true;
+    }
+
+    public void showhorario() {
+        // update the main content by replacing fragments
+        Fragment fragment = null;
+        fragment = new ScheduleManager();
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.frame_container, fragment).commit();
+        }
     }
 
     @Override

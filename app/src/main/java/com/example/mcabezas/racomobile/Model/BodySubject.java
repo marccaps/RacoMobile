@@ -13,6 +13,8 @@ import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.io.UnsupportedEncodingException;
 
+import me.grantland.widget.AutofitHelper;
+
 /**
  * Created by mcabezas on 25/02/16.
  */
@@ -40,6 +42,9 @@ public class BodySubject extends AppCompatActivity {
 
         mDescripcionAviso.setText(Html.fromHtml(descripcion_aviso));
         mTituloAviso.setText(getIntent().getStringExtra("TITULO_AVISO").toString());
+
+        AutofitHelper.create(mTituloAviso);
+
 
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
 

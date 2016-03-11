@@ -14,6 +14,8 @@ import com.example.mcabezas.racomobile.OAuthFlowApp;
 import com.example.mcabezas.racomobile.R;
 import com.thefinestartist.finestwebview.FinestWebView;
 
+import me.grantland.widget.AutofitHelper;
+
 /**
  * Created by mcabezas on 23/02/16.
  */
@@ -32,9 +34,10 @@ public class BodyNews extends AppCompatActivity{
         titulo.setMovementMethod(new ScrollingMovementMethod());
         descripcion.setMovementMethod(new ScrollingMovementMethod());
 
-
         descripcion.setText(getIntent().getStringExtra("DESCRIPCION").toString());
         titulo.setText(getIntent().getStringExtra("TITULO").toString());
+
+        AutofitHelper.create(titulo);
 
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
 

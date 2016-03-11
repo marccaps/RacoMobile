@@ -47,4 +47,5 @@ dependencies {
     compile 'com.pnikosis:materialish-progress:1.7'
     compile 'com.github.championswimmer:Android-SocialButtons:1.0'
     compile 'com.liulishuo.filedownloader:library:0.2.0'
+    compile 'com.github.grantland:android-autofittextview:0.2.1'
 }
