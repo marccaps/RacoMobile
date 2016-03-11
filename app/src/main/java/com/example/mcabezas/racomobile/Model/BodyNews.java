@@ -3,6 +3,7 @@ package com.example.mcabezas.racomobile.Model;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
@@ -25,6 +26,9 @@ public class BodyNews extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.body_news);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
         TextView titulo = (TextView) findViewById(R.id.titulo_noticia);
         TextView descripcion = (TextView) findViewById(R.id.descripcion_noticia);

@@ -3,6 +3,7 @@ package com.example.mcabezas.racomobile;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ public class SplashScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         final ProgressWheel wheel = (ProgressWheel) findViewById(R.id.progress_wheel);
         wheel.setBarColor(Color.rgb(252, 207, 116));

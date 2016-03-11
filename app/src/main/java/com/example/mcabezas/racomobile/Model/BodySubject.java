@@ -1,5 +1,6 @@
 package com.example.mcabezas.racomobile.Model;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -25,6 +26,9 @@ public class BodySubject extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.body_subject);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
         TextView mTituloAviso = (TextView) findViewById(R.id.titulo_aviso);
         TextView mDescripcionAviso = (TextView) findViewById(R.id.descripcion_aviso);

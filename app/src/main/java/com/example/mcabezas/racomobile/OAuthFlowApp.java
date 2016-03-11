@@ -20,7 +20,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -76,7 +78,10 @@ public class OAuthFlowApp extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.user_login);
-        this.prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+		this.prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
 
 
