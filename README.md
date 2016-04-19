@@ -15,5 +15,5 @@ Funcionalidades principales realizadas:
 Funcionalidades a realizar:  
   -Un loadScreen en el inicio de la aplicación que muestre que no hay conexion si no la hay. O que si la hay que haya un wheel que muestre que algo esta cargando.  
   -Una mejora significativa del apartado de correo. Lectura y contestación de mensajes(?).  
-  -Una mejora de los avisos en el racó , poder descargar ficheros adjutnos desde la app.  
+  -Una mejora de los avisos en el racó , poder descargar ficheros adjuntos desde la app.  
   -Mejoras de diseño(?).  
