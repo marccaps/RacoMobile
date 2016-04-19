@@ -6,39 +6,5 @@
     android:layout_height="match_parent"
     android:background="@color/finestWhite">
 
-    <com.mikhaellopez.circularimageview.CircularImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="54dp"
-        android:id="@+id/view"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-
-    <in.championswimmer.libsocialbuttons.fabs.FABLinkedin
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="76dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Created by Marc Cabezas Guzman"
-        android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Todos los derechos reservados"
-        android:id="@+id/textView2"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
 
 </RelativeLayout>

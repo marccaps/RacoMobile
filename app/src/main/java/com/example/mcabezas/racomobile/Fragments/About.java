@@ -25,23 +25,6 @@ public class About extends Fragment {
 
         View rootView = inflater.inflate(R.layout.about, container, false);
 
-        ImageView mPictureCaps = (ImageView) rootView.findViewById(R.id.view);
-
-        Picasso.with(getActivity())
-                .load("https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAALQAAAAJGEyZjUyNDAzLTZmMzMtNDI2Mi1hZWRkLTQyMzFlZjU1NGE0OQ.jpg")
-                .into(mPictureCaps, new com.squareup.picasso.Callback() {
-
-                    @Override
-                    public void onSuccess() {
-
-                    }
-
-                    @Override
-                    public void onError() {
-                        Log.d(TAG, "Error");
-                    }
-                });
-
         return rootView;
 
     }
