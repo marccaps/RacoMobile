@@ -5,8 +5,8 @@ Quien quiera formar parte del proyecto que se ponga en contacto conmigo a traves
 Estas es lo que actualmente hay hecho del proyecto.
 
 Funcionalidades principales realizadas:
-  -Login.
-  -El meu Racó.
+  -Login.  
+  -El meu Racó.  
   -Horari.
   -Correu.
   -Pc Lliure.
