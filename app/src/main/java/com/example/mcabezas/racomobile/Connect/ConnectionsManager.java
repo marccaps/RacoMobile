@@ -82,7 +82,7 @@ public class ConnectionsManager extends AsyncTask<ParserAndUrl, Integer, ItemLis
                         mBd.deleteTableCorreus();
                         for (int j = 0; j < tmp.getLitemsGenerics().size(); j++) {
                             correu = (Mail) tmp.getLitemsGenerics().get(j);
-                            mBd.insertItemCorreu(correu.getTitol(),correu.getDescripcio(),correu.getImatge(),
+                            mBd.insertItemCorreu(correu.getTitol(),correu.getDescripcio(),correu.getUrl(),correu.getImatge(),
                                     correu.getDataPub().toString(),correu.getTipus(),correu.getLlegits(),correu.getNo_llegits());
                         }
                         mBd.close();

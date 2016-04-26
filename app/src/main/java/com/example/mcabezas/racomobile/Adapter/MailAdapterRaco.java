@@ -44,6 +44,7 @@ public class MailAdapterRaco extends BaseAdapter {
     public static class VistaH {
         public ImageView item_image;
         public TextView item_titol;
+        public TextView item_nombre;
     }
 
     @Override
@@ -68,10 +69,11 @@ public class MailAdapterRaco extends BaseAdapter {
         vh = new VistaH();
         vh.item_image = (ImageView) vi.findViewById(R.id.item_correo_imagen);
         vh.item_titol = (TextView) vi.findViewById(R.id.item_correo_titulo);
+        vh.item_nombre =(TextView) vi.findViewById(R.id.item_correo_nombre);
         TextDrawable textDrawable;
         if(mLitems.get(position).getDescripcio() != null) {
             textDrawable = (TextDrawable) TextDrawable.builder().
-                    beginConfig().width(60).height(60).endConfig().buildRoundRect(mLitems.get(position).getDescripcio().replace("\"", "").replace("&","").replace("=","").substring(0, 1).toUpperCase(), color1, 10);
+                    beginConfig().width(60).height(60).endConfig().buildRoundRect(Html.fromHtml(mLitems.get(position).getDescripcio()).subSequence(1,2).toString().toUpperCase(), color1, 10);
         }
         else {
             textDrawable = (TextDrawable) TextDrawable.builder().
@@ -80,13 +82,13 @@ public class MailAdapterRaco extends BaseAdapter {
         vh.item_image.setImageDrawable(textDrawable);
 
         if(mLitems.get(position).getTitol().equals(" ")) {
-            vh.item_titol.setText("Sense assumpte" + "\n" + Html.fromHtml(mLitems.get(position).getDescripcio()));
+            vh.item_titol.setText("Sense assumpte");
         }
         else {
-            vh.item_titol.setText(Html.fromHtml(mLitems.get(position).getTitol()+"\n" +mLitems.get(position).getDescripcio()));
+            vh.item_titol.setText(Html.fromHtml(mLitems.get(position).getTitol()));
         }
-        vh.item_titol.setTextColor(Color.rgb(106,152,233));
-
+        vh.item_titol.setTextColor(Color.GRAY);
+        vh.item_nombre.setText(Html.fromHtml(mLitems.get(position).getDescripcio()));
         vi.setTag(vh);
         vi.setBackgroundColor(Color.WHITE);
 

@@ -10,17 +10,42 @@
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:id="@+id/item_correo_imagen"/>
+        android:id="@+id/item_correo_imagen"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <TextView
-        android:padding="15dp"
-        android:text="Hola"
-        android:textSize="10dp"
-        android:id="@+id/item_correo_titulo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/item_correo_imagen"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/item_correo_imagen"
         android:layout_toRightOf="@+id/item_correo_imagen"
-        android:layout_toEndOf="@+id/item_correo_imagen" />
+        android:layout_toEndOf="@+id/item_correo_imagen">
+
+        <TextView
+            android:text="Nombre"
+            android:paddingLeft="15dp"
+            android:id="@+id/item_correo_nombre"
+            android:textColor="@color/finestBlack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:paddingLeft="15dp"
+            android:text="Titulo Mensaje"
+            android:textSize="12dp"
+            android:id="@+id/item_correo_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>

@@ -65,7 +65,7 @@ public class JsonParser {
 
         ItemList lli = new ItemList();
         AndroidUtils au = AndroidUtils.getInstance();
-        String subjecte, from;
+        String subjecte, from,direccio;
         Date pubDate;
 
         JsonNode rootNode;
@@ -103,8 +103,10 @@ public class JsonParser {
                 for (JsonNode node : rootNode.path("mails")) {
                     subjecte = node.path("subject").toString(); // title
                     from = node.path("from").toString(); // descripcio
+                    direccio=node.path("url").toString();
                     pubDate = AndroidUtils.dateJSONStringToDateCorreu(node.path("date").toString());
-                    lli.afegirItemGeneric(new Mail(subjecte, from,
+
+                    lli.afegirItemGeneric(new Mail(subjecte, from,direccio,
                             _urlImatge, pubDate, AndroidUtils.TIPUS_CORREU, Integer
                             .parseInt(numLlegitsNode), Integer
                             .parseInt(numNoLlegitsNode)));

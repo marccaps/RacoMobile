@@ -31,6 +31,7 @@ public class BaseDadesManager {
     public static final String COL_DATAPUB = "dataPub"; // agenda
     public static final String COL_TIPUS = "tipus";
     public static final String COL_URL = "url";
+    //public static final String COL_DIR=
 
     /** taula:NOTICIES PARTICULAR */
     public static final String COL_LINK = "link";
@@ -83,7 +84,7 @@ public class BaseDadesManager {
     /** SQL PER CREAR LES TAULES */
     private static final String DATABASE_CREATE_TABLE_NOTICIES = "create table if not exists noticies (_id integer primary key autoincrement, titol text not null, descripcio text not null, imatge text not null, dataPub text not null, tipus text integer not null, link text);";
     private static final String DATABASE_CREATE_TABLE_AVISOS = "create table if not exists avisos (_id integer primary key autoincrement, titol text not null, descripcio text, imatge text not null, dataPub text not null, tipus text integer not null, idAssig text, url text not null);";
-    private static final String DATABASE_CREATE_TABLE_CORREUS = "create table if not exists correus (_id integer primary key autoincrement, titol text not null, descripcio text not null, imatge text not null, dataPub text not null, tipus text integer not null, llegits text integer, no_llegits text integer);";
+    private static final String DATABASE_CREATE_TABLE_CORREUS = "create table if not exists correus (_id integer primary key autoincrement, titol text not null, descripcio text not null,url text not null, imatge text not null, dataPub text not null, tipus text integer not null, llegits text integer, no_llegits text integer);";
     private static final String DATABASE_CREATE_TABLE_ASSIGNATURES_FIB = "create table assigFib (_id integer primary key autoincrement, codi text integer not null , nomAssig text not null, idAssig text not null, credits text integer);";
     private static final String DATABASE_CREATE_TABLE_ASSIGNATURES_RACO = "create table assigRaco (_id integer primary key autoincrement, codi text integer not null , nomAssig text not null, idAssig text not null);";
     private static final String DATABASE_CREATE_TABLE_PROFESSORS = "create table professors (_id integer primary key autoincrement, nom text not null, email text integer not null, codi text not null);";
@@ -140,12 +141,13 @@ public class BaseDadesManager {
         return mDb.insert(DATABASE_TABLE_AVISOS, null, initialValues);
     }
 
-    public long insertItemCorreu(String titol, String descripcio,
+    public long insertItemCorreu(String titol, String descripcio,String direccio,
                                  String imatge, String dataPub, int tipus, int llegits,
                                  int no_llegits) throws SQLException {
         ContentValues initialValues = new ContentValues();
         initialValues.put(COL_TITOL, titol);
         initialValues.put(COL_DESCRIP, descripcio);
+        initialValues.put(COL_URL,direccio);
         initialValues.put(COL_IMATGE, imatge);
         initialValues.put(COL_DATAPUB, dataPub);
         initialValues.put(COL_TIPUS, tipus);
@@ -350,7 +352,7 @@ public class BaseDadesManager {
         try {
             mDb.execSQL(DATABASE_CREATE_TABLE_CORREUS);
             Cursor mCursor = mDb.query(DATABASE_TABLE_CORREUS, new String[] {
-                            COL_ID, COL_TITOL, COL_DESCRIP, COL_IMATGE, COL_DATAPUB,
+                            COL_ID, COL_TITOL, COL_DESCRIP, COL_URL,COL_IMATGE, COL_DATAPUB,
                             COL_TIPUS, COL_LLEGITS, COL_NO_LLEGITS }, null, null, null,
                     null, null);
 
@@ -362,7 +364,7 @@ public class BaseDadesManager {
                     Date date = AndroidUtils.dateXMLStringToDateControlador(
                             formatter, mCursor.getString(4));
                     Mail correu = new Mail(mCursor.getString(1),
-                            mCursor.getString(2), mCursor.getString(3), date,
+                            mCursor.getString(2), mCursor.getString(3), mCursor.getString(4), date,
                             mCursor.getInt(5), mCursor.getInt(6),
                             mCursor.getInt(7));
                     list.add(correu);

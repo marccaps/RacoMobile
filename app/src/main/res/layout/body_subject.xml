@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"
         android:maxLines="1000"
         android:scrollbars="vertical"
+        android:autoLink="all"
         android:text="@string/lorem"
         android:textColor="@color/finestBlack"
         app:font_name="Roboto"

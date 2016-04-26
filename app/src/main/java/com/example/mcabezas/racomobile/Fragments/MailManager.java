@@ -134,7 +134,7 @@ public class MailManager extends RefreshListActivity {
 
         for (int i = 0; i < lCorreu.size(); i++) {
             correu = (Mail) lCorreu.get(i);
-            mBdm.insertItemCorreu(correu.getTitol(), correu.getDescripcio(),
+            mBdm.insertItemCorreu(correu.getTitol(), correu.getDescripcio(),correu.getDireccio(),
                     correu.getImatge(), correu.getDataPub().toString(),
                     correu.getTipus(), correu.getLlegits(),
                     correu.getNo_llegits());
